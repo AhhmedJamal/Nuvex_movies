@@ -6,7 +6,7 @@ function NavBar() {
   const user = auth.currentUser;
 
   return (
-    <div className="h-[60px] flex items-center justify-between px-4 fixed w-full z-10 bg-[#1c1c1ce2]">
+    <div className="h-[60px] flex items-center justify-between px-4 w-full z-10 bg-[#1c1c1ce2]">
       <div className="flex justify-center items-center gap-2 ">
         {user && user.photoURL ? (
           <img
@@ -26,9 +26,12 @@ function NavBar() {
       </div>
       <Link
         to="/"
-        className="before:content-['']  before:bg-white before: text-[25px] font-['Righteous',_sans-serif] font-semibold not-italic text-primary "
+        className="relative text-[25px] font-['Righteous',_sans-serif] font-semibold not-italic text-primary overflow-hidden z-10"
       >
         NUVEX
+        
+          <div className="absolute top-[20px] left-0 bg-[#ffffff0c] [box-shadow:0_4px_30px_#00000005] backdrop-filter backdrop-blur-[2px] w-full h-[10px]"></div>
+        
       </Link>
     </div>
   );

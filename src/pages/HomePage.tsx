@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { CardMovieProps } from "../types/CardMovieProps";
 import CardMovie from "../components/CardMovie";
 import CarouselMovie from "../components/CarouselMovie";
+import NavBar from "../components/NavBar";
 
 export default function Home() {
   const [popular, setPopular] = useState([]);
@@ -70,6 +71,7 @@ export default function Home() {
 
   return (
     <main>
+      <NavBar />
       <CarouselMovie />
       <div className="p-2 ">
         <h1 className="text-[18px] font-bold mb-2">Popular on Nuvex</h1>
