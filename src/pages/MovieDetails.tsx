@@ -82,7 +82,7 @@ function MovieDetails() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Params]);
   return (
-    <div className="w-full mb-[60px] h-screen overflow-hidden ">
+    <div className="w-full h-screen overflow-hidden ">
       <div className="relative ">
         <img
           src={pathPhoto(movieVideo?.backdrop_path)}
@@ -104,7 +104,7 @@ function MovieDetails() {
             </div>
             <iframe
               src={`https://www.youtube.com/embed/${movieVideo?.videos.results[0]?.key}`}
-              className={`w-[90%] md:h-[400px] sm:mt-[70px] md:mt-[100px] lg:mt-0 mt-[30px] h-[300px] m-auto`}
+              className={`w-[90%] md:h-[400px] sm:mt-[70px] md:mt-[100px] lg:mt-0 mt-[70px] h-[300px] m-auto`}
               allowFullScreen={true}
             />
           </div>
@@ -119,14 +119,16 @@ function MovieDetails() {
 
           <button
             onClick={handleClick}
-            className="bg-sky-500 active:bg-sky-300 transition-all w-[48%] flex justify-center items-center gap-2 py-1 rounded-md text-[13px] font-bold"
+            className="bg-primary active:bg-orange-300 transition-all w-[48%] flex justify-center items-center gap-2 py-1 rounded-md text-[13px] font-bold"
           >
             <FaPlay size={17} />
             Play
           </button>
         </div>
         <div className="mt-4">
-          <h1 className="font-bold text-[20px]">{movieVideo?.title}</h1>
+          <h1 className="font-bold text-[20px] text-primary">
+            {movieVideo?.title}
+          </h1>
           <p className="text-zinc-400 text-[12px] mb-3">
             {movieVideo?.overview}
           </p>

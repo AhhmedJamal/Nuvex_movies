@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { CardMovieProps } from "../types/CardMovieProps";
-import BottomBar from "./BottomBar";
-import CardMovie from "./CardMovie";
-// import MovieTrailer from "./CarouselMovie";
-
+import CardMovie from "../components/CardMovie";
+import CarouselMovie from "../components/CarouselMovie";
 
 export default function Home() {
   const [popular, setPopular] = useState([]);
@@ -71,65 +69,62 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <main className="mb-[60px]">
-        {/* <MovieTrailer /> */}
-        <div className="p-2 ">
-          <h1 className="text-[18px] font-bold mb-2">Popular on Nuvex</h1>
-          <div
-            className="flex overflow-auto gap-3 containerMovies"
-            onMouseDown={startDragging}
-            onMouseUp={stopDragging}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={stopDragging}
-          >
-            {popular.map((movie: CardMovieProps) => {
-              return (
-                <div key={movie.id}>
-                  <CardMovie data={movie} />
-                </div>
-              );
-            })}
-          </div>
+    <main>
+      <CarouselMovie />
+      <div className="p-2 ">
+        <h1 className="text-[18px] font-bold mb-2">Popular on Nuvex</h1>
+        <div
+          className="flex overflow-auto gap-3 containerMovies"
+          onMouseDown={startDragging}
+          onMouseUp={stopDragging}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={stopDragging}
+        >
+          {popular.map((movie: CardMovieProps) => {
+            return (
+              <div key={movie.id}>
+                <CardMovie data={movie} />
+              </div>
+            );
+          })}
         </div>
-        <div className="p-2">
-          <h1 className="text-[18px] font-bold mb-2">Top Rated</h1>
-          <div
-            className="flex overflow-auto gap-3 containerMovies"
-            onMouseDown={startDragging}
-            onMouseUp={stopDragging}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={stopDragging}
-          >
-            {topRated.map((topRate: CardMovieProps) => {
-              return (
-                <div key={topRate.id}>
-                  <CardMovie data={topRate} />
-                </div>
-              );
-            })}
-          </div>
+      </div>
+      <div className="p-2">
+        <h1 className="text-[18px] font-bold mb-2">Top Rated</h1>
+        <div
+          className="flex overflow-auto gap-3 containerMovies"
+          onMouseDown={startDragging}
+          onMouseUp={stopDragging}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={stopDragging}
+        >
+          {topRated.map((topRate: CardMovieProps) => {
+            return (
+              <div key={topRate.id}>
+                <CardMovie data={topRate} />
+              </div>
+            );
+          })}
         </div>
-        <div className="p-2 ">
-          <h1 className="text-[18px] font-bold mb-2">TV Dramas</h1>
-          <div
-            className="flex overflow-auto gap-3 containerMovies"
-            onMouseDown={startDragging}
-            onMouseUp={stopDragging}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={stopDragging}
-          >
-            {popular2.map((popular2: CardMovieProps) => {
-              return (
-                <div key={popular2.id}>
-                  <CardMovie data={popular2} />
-                </div>
-              );
-            })}
-          </div>
+      </div>
+      <div className="p-2 ">
+        <h1 className="text-[18px] font-bold mb-2">TV Dramas</h1>
+        <div
+          className="flex overflow-auto gap-3 containerMovies"
+          onMouseDown={startDragging}
+          onMouseUp={stopDragging}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={stopDragging}
+        >
+          {popular2.map((popular2: CardMovieProps) => {
+            return (
+              <div key={popular2.id}>
+                <CardMovie data={popular2} />
+              </div>
+            );
+          })}
         </div>
-      </main>
-      <BottomBar />
-    </div>
+      </div>
+    </main>
   );
 }

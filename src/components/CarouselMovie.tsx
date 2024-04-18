@@ -3,15 +3,14 @@ import { Carousel } from "react-responsive-carousel";
 import { useEffect, useState } from "react";
 import { CardMovieProps } from "../types/CardMovieProps";
 
-async function CarouselMovie() {
-  const [dataMovie, setDataMovie] = useState<CardMovieProps[]>([]);
+function CarouselMovie() {
+  const [dataMovie, setDataMovie] = useState([]);
   const getMovieTrailer = async () => {
     const res = await fetch(
       "https://api.themoviedb.org/3/movie/upcoming?api_key=b9fcb57ad4b325613192f31c8cd77d8c&language=en-Us&page=2"
     );
     const data = await res.json();
-    setDataMovie(data);
-    
+    setDataMovie(data.results);
   };
   useEffect(() => {
     getMovieTrailer();
@@ -23,7 +22,7 @@ async function CarouselMovie() {
   };
 
   return (
-    <div className=" h-[280px]  w-full  sm:mb-[60px] px-3 mb-[25px] ">
+    <div className=" h-[280px] w-full  sm:mb-[60px] px-3 mb-[25px] ">
       <h1 className="text-[18px] font-bold mb-2">Upcoming</h1>
       <Carousel
         autoPlay={true}
@@ -33,7 +32,7 @@ async function CarouselMovie() {
         showStatus={false}
         interval={3000}
       >
-        {dataMovie.map((data) => {
+        {dataMovie.map((data: CardMovieProps) => {
           return (
             <div key={data.id} className="relative">
               <img
@@ -41,7 +40,7 @@ async function CarouselMovie() {
                 alt="Image Get Upcoming"
                 className="h-[250px] sm:h-[300px] object-cover overflow-hidden"
               />
-              <p className="absolute font-['Madimi_One',_sans-serif] font-normal not-italic text-[30px] text-neutral-200 bottom-0 h-[250px] w-full flex items-end bg-gradient-to-t p-2 from-[#1c1c1c]">
+              <p className="absolute font-['Madimi_One',_sans-serif] font-normal not-italic text-[30px] text-neutral-200 bottom-[-2px] h-[250px] w-full flex items-end bg-gradient-to-t p-2 from-[#1c1c1c]">
                 {data.title}
               </p>
             </div>

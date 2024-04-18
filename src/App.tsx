@@ -3,11 +3,13 @@ import NavBar from "./components/NavBar";
 import BottomBar from "./components/BottomBar";
 function App() {
   return (
-    <div className="h-screen">
+    <>
       <NavBar />
-      <Outlet />
+      <div className="h-screen overflow-y-scroll py-[70px]">
+        <Outlet />
+      </div>
       <BottomBar />
-    </div>
+    </>
   );
 }
 

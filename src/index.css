@@ -16,17 +16,15 @@
   margin: 0;
 }
 *::selection {
-  background-color: #0ea5e9;
+  background-color: #f59e0b;
   color: black;
 }
 *::-webkit-scrollbar {
   display: none;
 }
 
-html,body{
+html,
+body {
   background-color: #00000097;
   color: white;
-}
-.containerMovies {
-  cursor: grab;
 }

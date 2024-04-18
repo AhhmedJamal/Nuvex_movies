@@ -1,8 +1,9 @@
-import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Auth from "../pages/Auth";
-import Home from "../components/HomePage";
+import Home from "../pages/HomePage";
 import MovieDetails from "../pages/MovieDetails";
+import MyListPage from "../pages/MyListPage";
+import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/myList",
-        element: <h1>myList</h1>,
+        element: <MyListPage />,
       },
       {
         path: "/Profile",
