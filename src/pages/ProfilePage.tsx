@@ -12,7 +12,9 @@ function ProfilePage() {
   };
   return (
     <div className="flex flex-col justify-center items-center">
-      <button onClick={handleLogOut} className="bg-primary">LogOut</button>
+      <button onClick={handleLogOut} className="bg-primary">
+        LogOut
+      </button>
     </div>
   );
 }

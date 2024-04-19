@@ -1,10 +1,18 @@
 import { FaUserCircle } from "react-icons/fa";
 import { auth } from "../config/firebase";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { UserData } from "../types/UserProps";
 
 function NavBar() {
-  const user = auth.currentUser;
+  const [user, setUser] = useState<UserData | null>({});
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+  }, []);
   return (
     <div className="h-[60px] flex items-center justify-between px-4 w-full z-10 border-b [box-shadow:0_4px_15px_#212121] border-zinc-800">
       <div className="flex justify-center items-center gap-2 ">
