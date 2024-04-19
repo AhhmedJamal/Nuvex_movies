@@ -24,7 +24,7 @@ function Login() {
       signInWithEmailAndPassword(auth, email, pass)
         .then(async ({ user }) => {
           // Store user token in local storage
-          localStorage.setItem("token", user.uid);
+          localStorage.setItem(`token=${user?.uid}`, user.uid);
           // Navigate to the home page
           router("/");
           // Reset email and password fields
@@ -68,9 +68,9 @@ function Login() {
           })
           .catch((err) => console.log("error: " + err));
 
-        localStorage.setItem("token", user?.uid || "");
+        localStorage.setItem(`token=${user?.uid}`, user?.uid || "");
 
-        router("/");
+        router("/", { replace: true });
       })
       .catch((error) => {
         console.error("Error signing in with Google:", error.message);
@@ -100,6 +100,7 @@ function Login() {
     } catch (error: unknown) {
       console.error(error);
     }
+    router("/", { replace: true });
   };
   return (
     <div className="flex h-[40vh] justify-center items-center flex-col overflow-hidden w-full">
@@ -131,7 +132,7 @@ function Login() {
         </Link>
         <button
           type="submit"
-          className="bg-sky-500 text-light rounded-md p-2 font-bold items-center flex justify-center"
+          className="bg-primary text-light rounded-md p-2 font-bold items-center flex justify-center"
         >
           {loading ? (
             <span className="w-[30px] h-[30px] border-[5px] border-[solid] border-[#FFF] [border-bottom-color:transparent] rounded-[50%] inline-block box-border  animate-spin"></span>

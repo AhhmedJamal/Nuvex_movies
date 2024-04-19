@@ -7,6 +7,7 @@ import { CardMovieProps } from "../types/CardMovieProps";
 import CardMovie from "../components/CardMovie";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import Shimmer from "../components/Shimmer";
+import { auth } from "../config/firebase";
 
 function MovieDetails() {
   const [movieVideo, setMovieVideo] = useState<MovieProps | null>(null);
@@ -91,16 +92,21 @@ function MovieDetails() {
   const pathPhoto = (path: string | null | undefined) => {
     return `https://image.tmdb.org/t/p/original${path}`;
   };
-  const handleClick = () => {
+  const handleClickShowMovie = () => {
     setShowModel((pre) => !pre);
   };
+  const handleAddMyList = () => {
+    const user = auth.currentUser;
+    console.log(user);
+  };
+
   useEffect(() => {
     SuggestedMovies();
     fetchDataVideo();
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 500);
+    }, 800);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Params]);
   return (
@@ -125,7 +131,7 @@ function MovieDetails() {
           {showModel && (
             <div className="fixed top-0 z-10 w-full h-screen  bg-[rgba(33,_33,_33,_0.8)]">
               <div className="p-5 w-full flex justify-end">
-                <IoCloseCircleSharp size={45} onClick={handleClick} />
+                <IoCloseCircleSharp size={45} onClick={handleClickShowMovie} />
               </div>
               <iframe
                 src={`https://www.youtube.com/embed/${movieVideo?.videos.results[0]?.key}`}
@@ -138,13 +144,16 @@ function MovieDetails() {
       )}
       <div className="p-2 mt-2">
         <div className="flex justify-between ">
-          <button className="border border-zinc-600 transition-all active:bg-zinc-500 w-[48%] flex justify-center items-center gap-2 py-2  rounded-md text-[12px] font-bold">
+          <button
+            onClick={handleAddMyList}
+            className="border border-zinc-600 transition-all active:bg-zinc-500 w-[48%] flex justify-center items-center gap-2 py-2  rounded-md text-[12px] font-bold"
+          >
             <BsBookmarkPlus size={17} />
             My List
           </button>
 
           <button
-            onClick={handleClick}
+            onClick={handleClickShowMovie}
             className="bg-primary active:bg-orange-300 transition-all w-[48%] flex justify-center items-center gap-2 py-2 rounded-md text-[13px] font-bold"
           >
             <FaPlay size={17} />

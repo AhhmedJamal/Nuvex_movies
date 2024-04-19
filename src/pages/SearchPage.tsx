@@ -1,13 +1,33 @@
 import CardMovie from "../components/CardMovie";
 import { CardMovieProps } from "../types/CardMovieProps";
-import ImageMovie from "../../public/Film rolls-rafiki.svg";
+import ImageMovie from "../../public/assets/Film rolls-rafiki.svg";
 import { useState } from "react";
+import Shimmer from "../components/Shimmer";
 
 function SearchPage() {
   const [search, setSearch] = useState<[]>([]);
   const [title, setTitle] = useState<string>("");
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dataShimmer = [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ];
   const fetchData = () => {
+    setIsLoading(true);
+    setTimeout(() => {}, 2000);
     fetch(
       `https://api.themoviedb.org/3/search/movie?query=${title.replace(
         /\s/g,
@@ -51,22 +71,34 @@ function SearchPage() {
           Search
         </button>
       </form>
-      <div className="grid grid-cols-3 gap-3 mt-10 relative">
-        {search.length !== 0 ? (
-          search.map((movie: CardMovieProps) => (
-            <CardMovie key={movie.id} data={movie} />
-          ))
-        ) : (
-          <div className="flex flex-col justify-center items-center w-full absolute  text-neutral-200 font-bold">
-            <img
-              src={ImageMovie}
-              alt="Image not found Movies"
-              className="w-[60%] mt-[30px] m-auto"
-            />
-            No results Movies !!
-          </div>
-        )}
-      </div>
+      {isLoading ? (
+        <div className="grid grid-cols-3 place-items-center gap-3 mt-10 relative">
+          {dataShimmer.map((_, i) => {
+            return (
+              <div key={i}>
+                <Shimmer width={110} height={160} />
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 place-items-center gap-3 mt-10 relative">
+          {search.length !== 0 ? (
+            search.map((movie: CardMovieProps) => (
+              <CardMovie key={movie.id} data={movie} />
+            ))
+          ) : (
+            <div className="flex flex-col justify-center items-center w-full top-0 absolute text-neutral-200 font-bold">
+              <img
+                src={ImageMovie}
+                alt="Image not found Movies"
+                className="w-[60%] mt-[50px] m-auto "
+              />
+              No results Movies !!
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -4,32 +4,62 @@ import { useState } from "react";
 
 function Auth() {
   const [choose, setChoose] = useState<boolean>(true);
+  
   return (
-    <div className="flex h-[90vh]  w-full justify-center items-center flex-col">
-      <h1 className=" text-[50px] font-['Righteous',_sans-serif] font-semibold not-italic text-sky-500 mb-[20px]">
-        Nuvex
-      </h1>
-      <div className="flex gap-3 font-bold justify-between w-[80%] mb-4">
-        <button
-          onClick={() => setChoose(true)}
-          className={`border border-zinc-500 py-1 px-3 w-[48%] ${
-            choose ? "bg-sky-500 text-white border-none" : ""
-          }`}
-        >
-          Login
-        </button>
-        <button
-          onClick={() => setChoose(false)}
-          className={`border border-zinc-500 py-1 px-3 w-[48%] ${
-            !choose ? "bg-sky-500 text-white border-none " : ""
-          }`}
-        >
-          Sign up
-        </button>
+    <div className="bg-[url('../public/assets/backGroundAuth.jpg')] bg-cover">
+      <div className="flex h-screen  w-full justify-center items-center pt-14 flex-col bg-gradient-to-t from-black via-zinc-900 to-transparent">
+        <h1 className=" text-[50px] font-['Righteous',_sans-serif] font-semibold not-italic text-primary mb-[20px]">
+          Nuvex
+        </h1>
+        <div className="flex gap-3 font-bold justify-between w-[80%] mb-4">
+          <button
+            onClick={() => setChoose(true)}
+            className={`border border-zinc-500 py-1 px-3 w-[48%] ${
+              choose ? "bg-primary text-white border-none" : ""
+            }`}
+          >
+            Login
+          </button>
+          <button
+            onClick={() => setChoose(false)}
+            className={`border border-zinc-500 py-1 px-3 w-[48%] ${
+              !choose ? "bg-primary text-white border-none " : ""
+            }`}
+          >
+            Sign up
+          </button>
+        </div>
+        {choose ? <Login /> : <SignUp />}
       </div>
-      {choose ? <Login /> : <SignUp />}
     </div>
   );
 }
 
 export default Auth;
+
+/*
+  const addFavorite = async () => {
+    const user = auth.currentUser;
+    if (user) {
+      try {
+        const dataFromCollection = await getDocs(collectionsRef);
+        const data = dataFromCollection.docs.map((doc) => doc.data());
+        const filteredData = data.find((item) => item.id === user.uid) || [];
+        const docRef = doc(db, "users", user.email);
+        const newFavorites = {
+          favorite: [...filteredData.favorite, { ...product, favorite: true }],
+        };
+        await updateDoc(docRef, newFavorites)
+          .then(() => {
+            console.log("updateDoc successfully");
+          })
+          .catch((error) => {
+            console.error("Error updateDoc document:", error);
+          });
+      } catch (error) {
+        console.error("Error getting or updateDoc document:", error);
+      }
+    }
+    getBooleanIconFavorite();
+  };
+ */

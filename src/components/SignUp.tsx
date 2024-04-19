@@ -32,9 +32,8 @@ function SignUp() {
                 try {
                   await addDoc(collection(db, "/users"), {
                     id: user?.uid,
-                    name: user?.displayName,
+                    name: name,
                     email: user?.email,
-                    photoURL: user?.photoURL,
                     myList: [],
                   });
                   console.log("Document added successfully");
@@ -45,14 +44,12 @@ function SignUp() {
             })
             .catch((err) => console.log("error: " + err));
 
-          localStorage.setItem("token", user.uid || "");
+          localStorage.setItem(`token=${user?.uid}`, user?.uid || "");
           toast.success("Successfully Create Account");
           setTimeout(() => {
             // Navigate to the home page
-            router("/");
+            router("/", { replace: true });
           }, 1600);
-          // Store user token in local storage
-          localStorage.setItem("token", user.uid);
 
           // Reset email and password fields
           setEmail("");
@@ -113,7 +110,7 @@ function SignUp() {
 
         <button
           type="submit"
-          className="bg-sky-500 text-light rounded-md p-2 font-bold items-center flex justify-center mt-3"
+          className="bg-primary text-light rounded-md p-2 font-bold items-center flex justify-center mt-3"
         >
           {loading ? (
             <span className="w-[30px] h-[30px] border-[5px] border-[solid] border-[#FFF] [border-bottom-color:transparent] rounded-[50%] inline-block box-border  animate-spin"></span>
