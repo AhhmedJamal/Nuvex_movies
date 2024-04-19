@@ -9,10 +9,26 @@ export default function Home() {
   const [popular, setPopular] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [mouseDown, setMouseDown] = useState<boolean>(false);
-  const [setLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [startX, setStartX] = useState<number>(0);
   const [scrollLeft, setScrollLeft] = useState<number>(0);
-
+  const dataShimmer = [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ];
   const startDragging = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setMouseDown(true);
     setStartX(e.pageX - (e.currentTarget.offsetLeft || 0));
@@ -48,25 +64,34 @@ export default function Home() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 500);
+    }, 200);
   }, []);
 
   return (
     <main>
       <NavBar />
       <CarouselMovie />
-
-      <div className="p-2 ">
+      <div className="p-2">
         <h1 className="text-[18px] font-bold mb-2">Popular on Nuvex</h1>
-        {setLoading ? (
-          <div className="flex gap-3">
-            <Shimmer width={110} height={150} />
-            <Shimmer width={110} height={150} />
-            <Shimmer width={110} height={150} />
+        {isLoading ? (
+          <div
+            className="flex overflow-auto gap-3"
+            onMouseDown={startDragging}
+            onMouseUp={stopDragging}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={stopDragging}
+          >
+            {dataShimmer.map((_, i) => {
+              return (
+                <div key={i}>
+                  <Shimmer width={110} height={160} />
+                </div>
+              );
+            })}
           </div>
         ) : (
           <div
-            className="flex overflow-auto gap-3 containerMovies"
+            className="flex overflow-auto gap-3"
             onMouseDown={startDragging}
             onMouseUp={stopDragging}
             onMouseMove={handleMouseMove}
@@ -84,15 +109,25 @@ export default function Home() {
       </div>
       <div className="p-2">
         <h1 className="text-[18px] font-bold mb-2">Top Rated</h1>
-        {setLoading ? (
-          <div className="flex gap-3">
-            <Shimmer width={110} height={150} />
-            <Shimmer width={110} height={150} />
-            <Shimmer width={110} height={150} />
+        {isLoading ? (
+          <div
+            className="flex overflow-auto gap-3"
+            onMouseDown={startDragging}
+            onMouseUp={stopDragging}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={stopDragging}
+          >
+            {dataShimmer.map((_, i) => {
+              return (
+                <div key={i}>
+                  <Shimmer width={110} height={160} />
+                </div>
+              );
+            })}
           </div>
         ) : (
           <div
-            className="flex overflow-auto gap-3 containerMovies"
+            className="flex overflow-auto gap-3"
             onMouseDown={startDragging}
             onMouseUp={stopDragging}
             onMouseMove={handleMouseMove}

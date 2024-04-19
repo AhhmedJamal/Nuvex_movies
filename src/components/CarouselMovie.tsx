@@ -15,7 +15,6 @@ function CarouselMovie() {
   };
   useEffect(() => {
     getMovieTrailer();
-   
   }, []);
 
   const pathPoster = (path: string) => {
@@ -25,32 +24,33 @@ function CarouselMovie() {
   return (
     <div className=" h-[280px] w-full  sm:mb-[60px] px-3 my-[25px] ">
       <h1 className="text-[18px] font-bold mb-2">Upcoming</h1>
-      {
-        dataMovie.length == 0 ?   <Shimmer height={250} width={0}/> :   <Carousel
-        autoPlay={true}
-        infiniteLoop={true}
-        showThumbs={false}
-        showIndicators={false}
-        showStatus={false}
-        interval={3000}
-      >
-        {dataMovie.map((data) => {
-          return (
-            <div key={data.id} className="relative">
-              <img
-                src={pathPoster(data.backdrop_path)}
-                alt="Image Get Upcoming"
-                className="h-[250px] sm:h-[300px] object-cover overflow-hidden"
-              />
-              <p className="absolute font-['Madimi_One',_sans-serif] font-normal not-italic text-[30px] text-neutral-200 bottom-[-2px] h-[250px] w-full flex items-end bg-gradient-to-t p-2 from-[#1c1c1c]">
-                {data.title}
-              </p>
-            </div>
-          );
-        })}
-      </Carousel>
-      }
-   
+      {dataMovie.length == 0 ? (
+        <Shimmer height={250} width={0} />
+      ) : (
+        <Carousel
+          autoPlay={true}
+          infiniteLoop={true}
+          showThumbs={false}
+          showIndicators={false}
+          showStatus={false}
+          interval={3000}
+        >
+          {dataMovie.map((data) => {
+            return (
+              <div key={data.id} className="relative">
+                <img
+                  src={pathPoster(data.backdrop_path)}
+                  alt="Image Get Upcoming"
+                  className="h-[250px] sm:h-[300px] object-cover overflow-hidden"
+                />
+                <p className="absolute font-['Madimi_One',_sans-serif] font-normal not-italic text-[30px] text-neutral-200 bottom-[-2px] h-[250px] w-full flex items-end bg-gradient-to-t p-2 from-[#1c1c1c]">
+                  {data.title}
+                </p>
+              </div>
+            );
+          })}
+        </Carousel>
+      )}
     </div>
   );
 }

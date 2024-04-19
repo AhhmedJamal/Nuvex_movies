@@ -6,6 +6,7 @@ import { FaPlay } from "react-icons/fa";
 import { CardMovieProps } from "../types/CardMovieProps";
 import CardMovie from "../components/CardMovie";
 import { IoCloseCircleSharp } from "react-icons/io5";
+import Shimmer from "../components/Shimmer";
 
 function MovieDetails() {
   const [movieVideo, setMovieVideo] = useState<MovieProps | null>(null);
@@ -17,8 +18,25 @@ function MovieDetails() {
   const [mouseDown, setMouseDown] = useState<boolean>(false);
   const [startX, setStartX] = useState<number>(0);
   const [scrollLeft, setScrollLeft] = useState<number>(0);
-  const [show, setShow] = useState<boolean>(false);
-
+  const [showModel, setShowModel] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dataShimmer = [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ];
   const startDragging = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setMouseDown(true);
     setStartX(e.pageX - (e.currentTarget.offsetLeft || 0));
@@ -74,42 +92,50 @@ function MovieDetails() {
     return `https://image.tmdb.org/t/p/original${path}`;
   };
   const handleClick = () => {
-    setShow((pre) => !pre);
+    setShowModel((pre) => !pre);
   };
   useEffect(() => {
     SuggestedMovies();
     fetchDataVideo();
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Params]);
   return (
     <div className="w-full overflow-hidden pb-s2">
-      <div className="relative ">
-        <img
-          src={pathPhoto(movieVideo?.backdrop_path)}
-          alt="backdrop_path"
-          className="w-full object-cover"
-        />
-        <div className="absolute top-0 flex pl-2 items-center  bg-gradient-to-r from-[#1c1c1c] w-full h-[100%]">
+      {isLoading ? (
+        <Shimmer width={0} height={350} />
+      ) : (
+        <div className="relative">
           <img
-            src={pathPhoto(movieVideo?.poster_path)}
-            alt="poster_path"
-            className="w-[30%] rounded-lg "
+            src={pathPhoto(movieVideo?.backdrop_path)}
+            alt="backdrop_path"
+            className="w-full h-[350px] object-cover"
           />
-        </div>
-
-        {show && (
-          <div className="fixed top-0 z-10 w-full h-screen  bg-[rgba(33,_33,_33,_0.8)]">
-            <div className="p-5 w-full flex justify-end">
-              <IoCloseCircleSharp size={45} onClick={handleClick} />
-            </div>
-            <iframe
-              src={`https://www.youtube.com/embed/${movieVideo?.videos.results[0]?.key}`}
-              className={`w-[90%] md:h-[400px] sm:mt-[70px] md:mt-[100px] lg:mt-0 mt-[70px] h-[300px] m-auto`}
-              allowFullScreen={true}
+          <div className="absolute top-0 flex pl-2 items-center  bg-gradient-to-r from-[#1c1c1c] w-full h-[100%]">
+            <img
+              src={pathPhoto(movieVideo?.poster_path)}
+              alt="poster_path"
+              className="mix-w-[30%] rounded-lg max-h-[250px]"
             />
           </div>
-        )}
-      </div>
+
+          {showModel && (
+            <div className="fixed top-0 z-10 w-full h-screen  bg-[rgba(33,_33,_33,_0.8)]">
+              <div className="p-5 w-full flex justify-end">
+                <IoCloseCircleSharp size={45} onClick={handleClick} />
+              </div>
+              <iframe
+                src={`https://www.youtube.com/embed/${movieVideo?.videos.results[0]?.key}`}
+                className={`w-[90%] md:h-[400px] sm:mt-[70px] md:mt-[100px] lg:mt-0 mt-[70px] h-[300px] m-auto`}
+                allowFullScreen={true}
+              />
+            </div>
+          )}
+        </div>
+      )}
       <div className="p-2 mt-2">
         <div className="flex justify-between ">
           <button className="border border-zinc-600 transition-all active:bg-zinc-500 w-[48%] flex justify-center items-center gap-2 py-2  rounded-md text-[12px] font-bold">
@@ -148,20 +174,41 @@ function MovieDetails() {
       </div>
       <div className="bg-zinc-700 w-full h-[1px] my-3"></div>
       <h1 className="text-[14px] font-bold mb-2 pl-3">More Like This</h1>
-      <div
-        className="flex overflow-auto gap-3 containerMovies px-3"
-        onMouseDown={startDragging}
-        onMouseUp={stopDragging}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={stopDragging}
-      >
-        {popular.map((movie: CardMovieProps) => {
-          return (
-            <div key={movie.id} className="">
-              <CardMovie data={movie} />
-            </div>
-          );
-        })}
+      <div className="p-2">
+        <h1 className="text-[18px] font-bold mb-2">Popular on Nuvex</h1>
+        {isLoading ? (
+          <div
+            className="flex overflow-auto gap-3"
+            onMouseDown={startDragging}
+            onMouseUp={stopDragging}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={stopDragging}
+          >
+            {dataShimmer.map((_, i) => {
+              return (
+                <div key={i}>
+                  <Shimmer width={110} height={160} />
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div
+            className="flex overflow-auto gap-3"
+            onMouseDown={startDragging}
+            onMouseUp={stopDragging}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={stopDragging}
+          >
+            {popular.map((movie: CardMovieProps) => {
+              return (
+                <div key={movie.id}>
+                  <CardMovie data={movie} />
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
