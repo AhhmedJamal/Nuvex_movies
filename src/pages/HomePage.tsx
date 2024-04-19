@@ -6,7 +6,6 @@ import NavBar from "../components/NavBar";
 
 export default function Home() {
   const [popular, setPopular] = useState([]);
-  const [popular2, setPopular2] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [mouseDown, setMouseDown] = useState<boolean>(false);
   const [startX, setStartX] = useState<number>(0);
@@ -31,6 +30,16 @@ export default function Home() {
       e.currentTarget.scrollLeft = scrollLeft - scroll;
     }
   };
+  const getPopular = () => {
+    fetch(
+      "https://api.themoviedb.org/3/movie/popular?api_key=b9fcb57ad4b325613192f31c8cd77d8c&&language=en-Us&page=8"
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        setPopular(response.results);
+      })
+      .catch((err) => console.error(err));
+  };
   const getTopRated = () => {
     fetch(
       "https://api.themoviedb.org/3/movie/top_rated?api_key=b9fcb57ad4b325613192f31c8cd77d8c&language=en-Us&page=1"
@@ -42,37 +51,16 @@ export default function Home() {
       .catch((err) => console.error(err));
   };
 
-  const getPopular = () => {
-    fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=b9fcb57ad4b325613192f31c8cd77d8c&language=en-Us&page=2"
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        setPopular(response.results);
-      })
-      .catch((err) => console.error(err));
-  };
-  const getPopular2 = () => {
-    fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=b9fcb57ad4b325613192f31c8cd77d8c&&language=en-Us&page=8"
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        setPopular2(response.results);
-      })
-      .catch((err) => console.error(err));
-  };
-
   useEffect(() => {
     getPopular();
-    getPopular2();
     getTopRated();
   }, []);
 
   return (
-    <main>
+    <main className="mb-[100kx]">
       <NavBar />
       <CarouselMovie />
+
       <div className="p-2 ">
         <h1 className="text-[18px] font-bold mb-2">Popular on Nuvex</h1>
         <div
@@ -104,24 +92,6 @@ export default function Home() {
             return (
               <div key={topRate.id}>
                 <CardMovie data={topRate} />
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <div className="p-2 ">
-        <h1 className="text-[18px] font-bold mb-2">TV Dramas</h1>
-        <div
-          className="flex overflow-auto gap-3 containerMovies"
-          onMouseDown={startDragging}
-          onMouseUp={stopDragging}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={stopDragging}
-        >
-          {popular2.map((popular2: CardMovieProps) => {
-            return (
-              <div key={popular2.id}>
-                <CardMovie data={popular2} />
               </div>
             );
           })}

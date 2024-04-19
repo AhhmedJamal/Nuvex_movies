@@ -110,26 +110,26 @@ function MovieDetails() {
           </div>
         )}
       </div>
-      <div className="p-2">
+      <div className="p-2 mt-2">
         <div className="flex justify-between ">
-          <button className="border border-zinc-600 transition-all active:bg-zinc-500 w-[48%] flex justify-center items-center gap-2 py-1  rounded-md text-[12px] font-bold">
+          <button className="border border-zinc-600 transition-all active:bg-zinc-500 w-[48%] flex justify-center items-center gap-2 py-2  rounded-md text-[12px] font-bold">
             <BsBookmarkPlus size={17} />
             My List
           </button>
 
           <button
             onClick={handleClick}
-            className="bg-primary active:bg-orange-300 transition-all w-[48%] flex justify-center items-center gap-2 py-1 rounded-md text-[13px] font-bold"
+            className="bg-primary active:bg-orange-300 transition-all w-[48%] flex justify-center items-center gap-2 py-2 rounded-md text-[13px] font-bold"
           >
             <FaPlay size={17} />
             Play
           </button>
         </div>
-        <div className="mt-4">
-          <h1 className="font-bold text-[20px] text-primary">
+        <div className="mt-5">
+          <h1 className="font-bold text-[22px] text-primary">
             {movieVideo?.title}
           </h1>
-          <p className="text-zinc-400 text-[12px] mb-3">
+          <p className="text-zinc-400 text-[13px] my-3">
             {movieVideo?.overview}
           </p>
         </div>
