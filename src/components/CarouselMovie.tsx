@@ -2,9 +2,10 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useEffect, useState } from "react";
 import { CardMovieProps } from "../types/CardMovieProps";
+import Shimmer from "./Shimmer";
 
 function CarouselMovie() {
-  const [dataMovie, setDataMovie] = useState([]);
+  const [dataMovie, setDataMovie] = useState<CardMovieProps[]>([]);
   const getMovieTrailer = async () => {
     const res = await fetch(
       "https://api.themoviedb.org/3/movie/upcoming?api_key=b9fcb57ad4b325613192f31c8cd77d8c&language=en-Us&page=2"
@@ -14,7 +15,7 @@ function CarouselMovie() {
   };
   useEffect(() => {
     getMovieTrailer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, []);
 
   const pathPoster = (path: string) => {
@@ -24,7 +25,8 @@ function CarouselMovie() {
   return (
     <div className=" h-[280px] w-full  sm:mb-[60px] px-3 my-[25px] ">
       <h1 className="text-[18px] font-bold mb-2">Upcoming</h1>
-      <Carousel
+      {
+        dataMovie.length == 0 ?   <Shimmer height={250} width={0}/> :   <Carousel
         autoPlay={true}
         infiniteLoop={true}
         showThumbs={false}
@@ -32,7 +34,7 @@ function CarouselMovie() {
         showStatus={false}
         interval={3000}
       >
-        {dataMovie.map((data: CardMovieProps) => {
+        {dataMovie.map((data) => {
           return (
             <div key={data.id} className="relative">
               <img
@@ -47,6 +49,8 @@ function CarouselMovie() {
           );
         })}
       </Carousel>
+      }
+   
     </div>
   );
 }

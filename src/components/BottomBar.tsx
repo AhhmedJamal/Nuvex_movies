@@ -7,7 +7,7 @@ function BottomBar() {
   const { pathname } = useLocation();
 
   return (
-    <div className="sm:hidden z-10 fixed w-full rounded-md h-[60px] bg-[#1c1c1ceb] bottom-[-1px] flex justify-around items-center [box-shadow:0px_-1px_10px_0px_rgba(22,_22,_22,_1)] border-t border-zinc-800">
+    <div className="sm:hidden z-10  w-full rounded-md h-[60px] bg-[#1c1c1cca] flex justify-around items-center [box-shadow:0px_-1px_10px_0px_rgba(22,_22,_22,_1)] border-t border-zinc-800">
       <Link to={"/"} className={pathname === "/" ? "text-primary" : ""}>
         <GoHomeFill size={30} />
       </Link>

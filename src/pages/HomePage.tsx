@@ -3,11 +3,13 @@ import { CardMovieProps } from "../types/CardMovieProps";
 import CardMovie from "../components/CardMovie";
 import CarouselMovie from "../components/CarouselMovie";
 import NavBar from "../components/NavBar";
+import Shimmer from "../components/Shimmer";
 
 export default function Home() {
   const [popular, setPopular] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [mouseDown, setMouseDown] = useState<boolean>(false);
+  const [setLoading, setIsLoading] = useState<boolean>(false);
   const [startX, setStartX] = useState<number>(0);
   const [scrollLeft, setScrollLeft] = useState<number>(0);
 
@@ -30,64 +32,70 @@ export default function Home() {
       e.currentTarget.scrollLeft = scrollLeft - scroll;
     }
   };
-  const getPopular = () => {
-    fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=b9fcb57ad4b325613192f31c8cd77d8c&&language=en-Us&page=8"
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        setPopular(response.results);
-      })
-      .catch((err) => console.error(err));
-  };
-  const getTopRated = () => {
-    fetch(
-      "https://api.themoviedb.org/3/movie/top_rated?api_key=b9fcb57ad4b325613192f31c8cd77d8c&language=en-Us&page=1"
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        setTopRated(response.results);
-      })
-      .catch((err) => console.error(err));
+
+  const getDataMovie = async (url: string) => {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/movie/${url}?api_key=b9fcb57ad4b325613192f31c8cd77d8c&language=en-Us&page=2`
+    );
+    const dataMovie = await res.json();
+    if (url === "popular") setPopular(dataMovie.results);
+    else if (url === "top_rated") setTopRated(dataMovie.results);
   };
 
   useEffect(() => {
-    getPopular();
-    getTopRated();
+    getDataMovie("popular");
+    getDataMovie("top_rated");
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
   }, []);
 
   return (
-    <main className="mb-[100kx]">
+    <main>
       <NavBar />
       <CarouselMovie />
 
       <div className="p-2 ">
         <h1 className="text-[18px] font-bold mb-2">Popular on Nuvex</h1>
-        <div
-          className="flex overflow-auto gap-3 containerMovies"
-          onMouseDown={startDragging}
-          onMouseUp={stopDragging}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={stopDragging}
-        >
-          {popular.map((movie: CardMovieProps) => {
-            return (
-              <div key={movie.id}>
-                <CardMovie data={movie} />
-              </div>
-            );
-          })}
-        </div>
+        {setLoading ? (
+          <div className="flex gap-3">
+          <Shimmer width={110} height={150} />
+          <Shimmer width={110} height={150} />
+          <Shimmer width={110} height={150} />
+          </div>
+        ) : (
+          <div
+            className="flex overflow-auto gap-3 containerMovies"
+            onMouseDown={startDragging}
+            onMouseUp={stopDragging}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={stopDragging}
+          >
+            {popular.map((movie: CardMovieProps) => {
+              return (
+                <div key={movie.id}>
+                  <CardMovie data={movie} />
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
       <div className="p-2">
         <h1 className="text-[18px] font-bold mb-2">Top Rated</h1>
-        <div
+         {setLoading ?   <div className="flex gap-3">
+          <Shimmer width={110} height={150} />
+          <Shimmer width={110} height={150} />
+          <Shimmer width={110} height={150} />
+          </div>:<div
           className="flex overflow-auto gap-3 containerMovies"
           onMouseDown={startDragging}
           onMouseUp={stopDragging}
           onMouseMove={handleMouseMove}
           onMouseLeave={stopDragging}
         >
+          
           {topRated.map((topRate: CardMovieProps) => {
             return (
               <div key={topRate.id}>
@@ -95,7 +103,9 @@ export default function Home() {
               </div>
             );
           })}
-        </div>
+        </div>}
+        
+        
       </div>
     </main>
   );

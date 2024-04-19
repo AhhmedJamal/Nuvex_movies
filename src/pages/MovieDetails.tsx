@@ -10,6 +10,7 @@ import { IoCloseCircleSharp } from "react-icons/io5";
 function MovieDetails() {
   const [movieVideo, setMovieVideo] = useState<MovieProps | null>(null);
   const [popular, setPopular] = useState<[]>([]);
+
   const Params = useParams();
   const number = Params.id;
   const numberPart = number?.match(/\d+/);
@@ -60,7 +61,7 @@ function MovieDetails() {
     const data = await response.json();
     setMovieVideo(data);
   };
-  const getPopular = () => {
+  const SuggestedMovies = () => {
     fetch(
       "https://api.themoviedb.org/3/movie/popular?api_key=b9fcb57ad4b325613192f31c8cd77d8c&language=en-Us&page=7"
     )
@@ -77,12 +78,12 @@ function MovieDetails() {
     setShow((pre) => !pre);
   };
   useEffect(() => {
-    getPopular();
+    SuggestedMovies();
     fetchDataVideo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Params]);
   return (
-    <div className="w-full h-screen overflow-hidden ">
+    <div className="w-full overflow-hidden pb-s2">
       <div className="relative ">
         <img
           src={pathPhoto(movieVideo?.backdrop_path)}
@@ -125,11 +126,14 @@ function MovieDetails() {
             Play
           </button>
         </div>
-        <div className="mt-5">
+        <div className="mt-5  mb-3">
           <h1 className="font-bold text-[22px] text-primary">
             {movieVideo?.title}
           </h1>
-          <p className="text-zinc-400 text-[13px] my-3">
+          <p
+            onClick={() => setMoreOverview((pre) => !pre)}
+            className={`text-zinc-400 text-[12px] mt-3`}
+          >
             {movieVideo?.overview}
           </p>
         </div>
