@@ -60,9 +60,9 @@ export default function Home() {
         <h1 className="text-[18px] font-bold mb-2">Popular on Nuvex</h1>
         {setLoading ? (
           <div className="flex gap-3">
-          <Shimmer width={110} height={150} />
-          <Shimmer width={110} height={150} />
-          <Shimmer width={110} height={150} />
+            <Shimmer width={110} height={150} />
+            <Shimmer width={110} height={150} />
+            <Shimmer width={110} height={150} />
           </div>
         ) : (
           <div
@@ -84,28 +84,29 @@ export default function Home() {
       </div>
       <div className="p-2">
         <h1 className="text-[18px] font-bold mb-2">Top Rated</h1>
-         {setLoading ?   <div className="flex gap-3">
-          <Shimmer width={110} height={150} />
-          <Shimmer width={110} height={150} />
-          <Shimmer width={110} height={150} />
-          </div>:<div
-          className="flex overflow-auto gap-3 containerMovies"
-          onMouseDown={startDragging}
-          onMouseUp={stopDragging}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={stopDragging}
-        >
-          
-          {topRated.map((topRate: CardMovieProps) => {
-            return (
-              <div key={topRate.id}>
-                <CardMovie data={topRate} />
-              </div>
-            );
-          })}
-        </div>}
-        
-        
+        {setLoading ? (
+          <div className="flex gap-3">
+            <Shimmer width={110} height={150} />
+            <Shimmer width={110} height={150} />
+            <Shimmer width={110} height={150} />
+          </div>
+        ) : (
+          <div
+            className="flex overflow-auto gap-3 containerMovies"
+            onMouseDown={startDragging}
+            onMouseUp={stopDragging}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={stopDragging}
+          >
+            {topRated.map((topRate: CardMovieProps) => {
+              return (
+                <div key={topRate.id}>
+                  <CardMovie data={topRate} />
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </main>
   );

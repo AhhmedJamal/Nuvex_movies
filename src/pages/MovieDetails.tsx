@@ -10,7 +10,6 @@ import { IoCloseCircleSharp } from "react-icons/io5";
 function MovieDetails() {
   const [movieVideo, setMovieVideo] = useState<MovieProps | null>(null);
   const [popular, setPopular] = useState<[]>([]);
-
   const Params = useParams();
   const number = Params.id;
   const numberPart = number?.match(/\d+/);
@@ -130,10 +129,7 @@ function MovieDetails() {
           <h1 className="font-bold text-[22px] text-primary">
             {movieVideo?.title}
           </h1>
-          <p
-            onClick={() => setMoreOverview((pre) => !pre)}
-            className={`text-zinc-400 text-[12px] mt-3`}
-          >
+          <p className={`text-zinc-400 text-[12px] mt-3`}>
             {movieVideo?.overview}
           </p>
         </div>
