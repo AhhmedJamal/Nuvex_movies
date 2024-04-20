@@ -7,6 +7,7 @@ import { auth } from "../config/firebase";
 function BottomBar() {
   const { pathname } = useLocation();
   const user = auth.currentUser;
+
   return (
     <footer className="sm:hidden z-10 fixed bottom-0  w-full  h-[75px] bg-[#2A2A2A] flex justify-around items-center [box-shadow:0px_-1px_10px_0px_rgba(22,_22,_22,_1)] border-t border-zinc-800">
       <Link to={"/"} className={pathname === "/" ? "text-primary" : ""}>
