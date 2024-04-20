@@ -6,4 +6,3 @@ export interface UserData {
   displayName?: string | null;
   myList?: [] | null;
 }
-

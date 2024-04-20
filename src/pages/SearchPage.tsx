@@ -27,7 +27,6 @@ function SearchPage() {
   ];
   const fetchData = () => {
     setIsLoading(true);
-    setTimeout(() => {}, 2000);
     fetch(
       `https://api.themoviedb.org/3/search/movie?query=${title.replace(
         /\s/g,
@@ -42,6 +41,9 @@ function SearchPage() {
       })
       .then((data) => {
         setSearch(data.results);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
       })
       .catch((error) => {
         console.error("There was a problem with your fetch operation:", error);
@@ -64,7 +66,6 @@ function SearchPage() {
           required
           onChange={(e) => {
             setTitle(e.target.value);
-            fetchData();
           }}
         />
         <button type="submit" className="bg-primary font-bold h-8 w-[28%]  ">
