@@ -71,8 +71,11 @@ function SearchPage() {
           Search
         </button>
       </form>
+      {search.length !== 0 && (
+        <h1 className="mt-4 font-bold">Results For ' {title} '</h1>
+      )}
       {isLoading ? (
-        <div className="grid grid-cols-3 place-items-center gap-3 mt-10 relative">
+        <div className="grid grid-cols-3 place-items-center gap-3 mt-5 relative">
           {dataShimmer.map((_, i) => {
             return (
               <div key={i}>

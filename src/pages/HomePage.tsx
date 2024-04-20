@@ -4,6 +4,10 @@ import CardMovie from "../components/CardMovie";
 import CarouselMovie from "../components/CarouselMovie";
 import NavBar from "../components/NavBar";
 import Shimmer from "../components/Shimmer";
+import { auth } from "../config/firebase";
+import { onAuthStateChanged } from "firebase/auth";
+
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [popular, setPopular] = useState([]);
@@ -12,6 +16,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [startX, setStartX] = useState<number>(0);
   const [scrollLeft, setScrollLeft] = useState<number>(0);
+  const router = useNavigate();
   const dataShimmer = [
     "",
     "",
@@ -59,12 +64,29 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // Prevent navigating back in the browser
+    const handleBackButton = () => history.pushState(null, "", document.URL);
+    window.addEventListener("popstate", handleBackButton);
+
+    // Check if a user is found
+    onAuthStateChanged(auth, (user) => {
+      if (localStorage.getItem(`token=${user?.uid}`) !== user?.uid) {
+        setTimeout(() => router("/auth"), 4000);
+      }
+    });
+
     getDataMovie("popular");
     getDataMovie("top_rated");
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
     }, 200);
+
+    // Unsubscribe when the component is removed
+    return () => {
+      window.removeEventListener("popstate", handleBackButton);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

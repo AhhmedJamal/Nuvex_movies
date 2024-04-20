@@ -12,13 +12,12 @@ function CardMovie({ data }: { data: CardMovieProps }) {
         onClick={() => {
           router(`/movie/${data.id}-${data?.title.replace(/[\s#-]/g, "_")}`);
         }}
-        className="w-[110px] min-h-[160px] relative flex flex-col justify-center items-center border border-zinc-600 cursor-grab "
+        className="w-[110px] min-h-[160px] rounded-xl overflow-hidden relative flex flex-col justify-center items-center  border border-zinc-600 cursor-grab "
       >
         <img
           src={pathPoster(data.poster_path)}
           alt="movie-poster"
-          width={120}
-          height={100}
+          className="object-cover w-[110px] h-[160px]"
         />
       </button>
     </>

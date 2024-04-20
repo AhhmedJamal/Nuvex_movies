@@ -7,7 +7,9 @@ import { CardMovieProps } from "../types/CardMovieProps";
 import CardMovie from "../components/CardMovie";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import Shimmer from "../components/Shimmer";
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
+import toast, { Toaster } from "react-hot-toast";
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 
 function MovieDetails() {
   const [movieVideo, setMovieVideo] = useState<MovieProps | null>(null);
@@ -21,6 +23,7 @@ function MovieDetails() {
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [showModel, setShowModel] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const collectionsRef = collection(db, "users");
   const dataShimmer = [
     "",
     "",
@@ -95,9 +98,35 @@ function MovieDetails() {
   const handleClickShowMovie = () => {
     setShowModel((pre) => !pre);
   };
-  const handleAddMyList = () => {
+
+  const handleAddMyList = async () => {
     const user = auth.currentUser;
-    console.log(user);
+    if (user) {
+      try {
+        const dataFromCollection = await getDocs(collectionsRef);
+        const data = dataFromCollection.docs.map((doc) => doc.data());
+        const filteredData = data.find((item) => item.id === user.uid);
+        if (filteredData) {
+          const docRef = doc(db, "users", user.email || "");
+          const newMovies = {
+            myList: [...filteredData.myList, movieVideo],
+          };
+
+          await updateDoc(docRef, newMovies)
+            .then(() => {
+              console.log("updateDoc successfully");
+            })
+            .catch((error) => {
+              console.error("Error updating document:", error);
+            });
+        } else {
+          console.log("No matching data found.");
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
+    }
+    toast.success("Done Add To List");
   };
 
   useEffect(() => {
@@ -111,6 +140,7 @@ function MovieDetails() {
   }, [Params]);
   return (
     <div className="w-full overflow-hidden pb-s2">
+      <Toaster position="top-center" reverseOrder={false} />
       {isLoading ? (
         <Shimmer width={0} height={350} />
       ) : (

@@ -1,16 +1,13 @@
 import { FormEvent, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
-import { auth, db, facebookProvider } from "../config/firebase";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import {
-  fetchSignInMethodsForEmail,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { auth, db, facebookProvider, googleProvider } from "../config/firebase";
+import { fetchSignInMethodsForEmail, signInWithPopup } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { UserData } from "../types/UserProps";
+
 function Login() {
   const [email, setEmail] = useState<string>("");
   const [pass, setPass] = useState<string>("");
@@ -26,55 +23,48 @@ function Login() {
           // Store user token in local storage
           localStorage.setItem(`token=${user?.uid}`, user.uid);
           // Navigate to the home page
-          router("/");
+          router("/", { replace: true });
           // Reset email and password fields
           setEmail("");
           setPass("");
         })
         .catch(() => {
-          toast.error("This didn't work.");
+          toast.error("Check Email and Password!");
         })
         .finally(() => {
           setLoading(false);
         });
     } else {
-      toast.error("This didn't work.");
+      toast.error("Invalid Email or Password!");
       setLoading(false);
     }
   };
 
-  const handleGoogle = () => {
-    const googleProvider = new GoogleAuthProvider();
-    signInWithPopup(auth, googleProvider)
-      .then(async ({ user }: { user: UserData | null | undefined }) => {
-        await fetchSignInMethodsForEmail(auth, user?.email || "")
-          .then(async (signInMethods) => {
-            if (signInMethods.length > 0) {
-              console.log(signInMethods);
-            } else {
-              try {
-                await addDoc(collection(db, "/users"), {
-                  id: user?.uid,
-                  name: user?.displayName,
-                  email: user?.email,
-                  photoURL: user?.photoURL,
-                  myList: [],
-                });
-                console.log("Document added successfully");
-              } catch (e) {
-                console.error("Error adding document: ", e);
-              }
-            }
-          })
-          .catch((err) => console.log("error: " + err));
-
-        localStorage.setItem(`token=${user?.uid}`, user?.uid || "");
-
-        router("/", { replace: true });
-      })
-      .catch((error) => {
-        console.error("Error signing in with Google:", error.message);
-      });
+  const handleGoogle = async () => {
+    try {
+      const { user } = await signInWithPopup(auth, googleProvider);
+      const userDocRef = doc(db, "users", user.email || "");
+      const userDocSnapshot = await getDoc(userDocRef);
+      if (userDocSnapshot.exists()) {
+        // User exists, do something (e.g., set user info in local storage)
+        localStorage.setItem(`token=${user.uid}`, user.uid);
+        router("/", { replace: true }); // Assuming you have 'router' imported and it's used for navigation
+      } else {
+        // User doesn't exist, create a new document for the user
+        await setDoc(userDocRef, {
+          id: user?.uid,
+          name: user?.displayName,
+          email: user?.email,
+          photoURL: user?.photoURL,
+          myList: [],
+        });
+        localStorage.setItem("token", user.uid);
+        console.log("New user added successfully");
+        router("/", { replace: true }); // Navigate to a different route after creating the user document
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleFacebook = async () => {
@@ -82,25 +72,37 @@ function Login() {
       const result = await signInWithPopup(auth, facebookProvider);
       const user = result.user;
       try {
-        try {
-          await addDoc(collection(db, "users"), {
-            id: user.uid,
-            name: user.displayName,
-            email: user.email,
-            photoURL: user.photoURL,
-            myList: [],
-          });
-          console.log("Document added successfully");
-        } catch (e) {
-          console.error("Error adding document: ", e);
+        const signInMethods = await fetchSignInMethodsForEmail(
+          auth,
+          user.email || ""
+        );
+
+        if (!signInMethods) {
+          try {
+            await setDoc(doc(db, "users", user?.email || ""), {
+              id: user.uid,
+              name: user.displayName,
+              email: user.email,
+              photoURL: user.photoURL,
+              favorite: [],
+              cart: [],
+            });
+
+            console.log("Document added successfully");
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
         }
       } catch (error) {
         console.error(error);
       }
-    } catch (error: unknown) {
-      console.error(error);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error("An unknown error occurred");
+      }
     }
-    router("/", { replace: true });
   };
   return (
     <div className="flex h-[40vh] justify-center items-center flex-col overflow-hidden w-full">
@@ -162,3 +164,4 @@ function Login() {
 }
 
 export default Login;
+

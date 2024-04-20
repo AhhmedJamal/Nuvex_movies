@@ -22,7 +22,7 @@ function CarouselMovie() {
   };
 
   return (
-    <div className=" h-[280px] w-full  sm:mb-[60px] px-3 my-[25px] ">
+    <div className=" h-[280px] w-full  sm:mb-[60px] px-3 mb-[25px] mt-3 ">
       <h1 className="text-[18px] font-bold mb-2">Upcoming</h1>
       {dataMovie.length == 0 ? (
         <Shimmer height={250} width={0} />

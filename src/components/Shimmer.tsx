@@ -6,8 +6,9 @@ function Shimmer({ width, height }: ShimmerProps) {
       style={{
         height: `${height}px`,
         width: `${width == 0 ? "100%" : `${width}px`}`,
+        borderRadius: `${width == 0 ? "0px" : "12px"}`,
       }}
-      className={`animate-pulse bg-zinc-600 `}
+      className={`animate-pulse bg-zinc-600 rounded-xl`}
     ></div>
   );
 }

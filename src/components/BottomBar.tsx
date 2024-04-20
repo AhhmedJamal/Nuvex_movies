@@ -3,11 +3,12 @@ import { GoHomeFill } from "react-icons/go";
 import { IoSearch } from "react-icons/io5";
 import { FaBookmark } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
+import { auth } from "../config/firebase";
 function BottomBar() {
   const { pathname } = useLocation();
-
+  const user = auth.currentUser;
   return (
-    <div className="sm:hidden z-10  w-full rounded-md h-[60px] bg-[#1c1c1cca] flex justify-around items-center [box-shadow:0px_-1px_10px_0px_rgba(22,_22,_22,_1)] border-t border-zinc-800">
+    <footer className="sm:hidden z-10 fixed bottom-0  w-full  h-[75px] bg-[#1c1c1cca] flex justify-around items-center [box-shadow:0px_-1px_10px_0px_rgba(22,_22,_22,_1)] border-t border-zinc-800">
       <Link to={"/"} className={pathname === "/" ? "text-primary" : ""}>
         <GoHomeFill size={30} />
       </Link>
@@ -28,9 +29,17 @@ function BottomBar() {
         to={"/profile"}
         className={pathname === "/profile" ? "text-primary" : ""}
       >
-        <FaUserCircle size={30} />
+        {user !== null ? (
+          <img
+            src={user.photoURL || ""}
+            alt="img user"
+            className="rounded-full w-[30px]"
+          />
+        ) : (
+          <FaUserCircle size={30} />
+        )}
       </Link>
-    </div>
+    </footer>
   );
 }
 

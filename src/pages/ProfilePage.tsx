@@ -3,16 +3,17 @@ import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 
 function ProfilePage() {
-  const user = auth.currentUser;
   const router = useNavigate();
   const handleLogOut = () => {
     signOut(auth);
-    localStorage.removeItem(`token=${user?.uid}`);
     router("/auth", { replace: true });
   };
   return (
-    <div className="flex flex-col justify-center items-center">
-      <button onClick={handleLogOut} className="bg-primary">
+    <div className="flex flex-col justify-center items-center h-screen">
+      <button
+        onClick={handleLogOut}
+        className="bg-primary p-2 font-bold rounded-md w-[150px]"
+      >
         LogOut
       </button>
     </div>
