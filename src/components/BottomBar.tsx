@@ -2,11 +2,10 @@ import { Link, useLocation } from "react-router-dom";
 import { GoHomeFill } from "react-icons/go";
 import { IoSearch } from "react-icons/io5";
 import { FaBookmark } from "react-icons/fa";
-import { FaUserCircle } from "react-icons/fa";
-import { auth } from "../config/firebase";
+import { IoSettingsSharp } from "react-icons/io5";
+
 function BottomBar() {
   const { pathname } = useLocation();
-  const user = auth.currentUser;
 
   return (
     <footer className="sm:hidden z-10 fixed bottom-0  w-full  h-[75px] bg-[#2A2A2A] flex justify-around items-center [box-shadow:0px_-1px_10px_0px_rgba(22,_22,_22,_1)] border-t border-zinc-800">
@@ -27,18 +26,10 @@ function BottomBar() {
         <FaBookmark size={25} />
       </Link>
       <Link
-        to={"/profile"}
-        className={pathname === "/profile" ? "text-primary" : ""}
+        to={"/settings"}
+        className={pathname === "/settings" ? "text-primary" : ""}
       >
-        {user !== null ? (
-          <img
-            src={user.photoURL || ""}
-            alt="img user"
-            className="rounded-full w-[30px]"
-          />
-        ) : (
-          <FaUserCircle size={30} />
-        )}
+        <IoSettingsSharp size={29} />
       </Link>
     </footer>
   );

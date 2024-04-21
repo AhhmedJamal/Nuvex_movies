@@ -8,9 +8,9 @@ import Shimmer from "../components/Shimmer";
 function MyListPage() {
   const [dataMyList, setDataMyList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const user = auth.currentUser;
   const getMyList = async () => {
     try {
-      const user = auth.currentUser;
       if (user) {
         const docRef = doc(db, "users", user.email || "");
         const docSnapshot = await getDoc(docRef);
@@ -38,6 +38,7 @@ function MyListPage() {
   }, []);
   return (
     <div className="p-4 ">
+      <h1 className="font-bold text-[23px] self-start pl-3 my-3">My List</h1>
       {!isLoading ? (
         <div className="flex flex-col gap-5 ">
           {dataMyList.map((movie: MovieProps) => {

@@ -14,7 +14,7 @@ function NavBar() {
     });
   }, []);
   return (
-    <div className="h-[60px] flex items-center justify-between px-4 w-full z-10 border-b [box-shadow:0_4px_15px_#212121] border-zinc-800">
+    <header className="h-[60px] flex items-center justify-between px-4 w-full z-10 border-b [box-shadow:0_4px_15px_#212121] border-zinc-800">
       <div className="flex justify-center items-center gap-2 ">
         {user && user.photoURL ? (
           <img
@@ -39,7 +39,7 @@ function NavBar() {
         NUVEX
         <div className="absolute top-[24px] right-[-1px] bg-[#ffffff0c] [box-shadow:0_4px_30px_#00000005] backdrop-filter backdrop-blur-[2px] w-full h-[10px]"></div>
       </Link>
-    </div>
+    </header>
   );
 }
 

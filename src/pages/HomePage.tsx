@@ -90,7 +90,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
+    <section>
       <NavBar />
       <CarouselMovie />
       <div className="p-2">
@@ -165,6 +165,6 @@ export default function Home() {
           </div>
         )}
       </div>
-    </main>
+    </section>
   );
 }

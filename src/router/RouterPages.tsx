@@ -4,7 +4,7 @@ import Home from "../pages/HomePage";
 import MovieDetails from "../pages/MovieDetails";
 import MyListPage from "../pages/MyListPage";
 import { createBrowserRouter } from "react-router-dom";
-import ProfilePage from "../pages/ProfilePage";
+import SettingsPage from "../pages/SettingsPage";
 import SearchPage from "../pages/SearchPage";
 
 export const router = createBrowserRouter([
@@ -31,8 +31,8 @@ export const router = createBrowserRouter([
         element: <MyListPage />,
       },
       {
-        path: "/Profile",
-        element: <ProfilePage />,
+        path: "/settings",
+        element: <SettingsPage />,
       },
     ],
   },
