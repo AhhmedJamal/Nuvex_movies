@@ -6,10 +6,17 @@ import { FaPlay } from "react-icons/fa";
 import { CardMovieProps } from "../types/CardMovieProps";
 import CardMovie from "../components/CardMovie";
 import { IoCloseCircleSharp } from "react-icons/io5";
+import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import Shimmer from "../components/Shimmer";
 import { auth, db } from "../config/firebase";
 import toast, { Toaster } from "react-hot-toast";
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 
 function MovieDetails() {
   const [movieVideo, setMovieVideo] = useState<MovieProps | null>(null);
@@ -23,7 +30,9 @@ function MovieDetails() {
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [showModel, setShowModel] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isMyList, setIsMyList] = useState<boolean>(false);
   const collectionsRef = collection(db, "users");
+  const user = auth.currentUser;
   const dataShimmer = [
     "",
     "",
@@ -98,7 +107,6 @@ function MovieDetails() {
   const handleClickShowMovie = () => {
     setShowModel((pre) => !pre);
   };
-
   const handleAddMyList = async () => {
     const user = auth.currentUser;
     if (user) {
@@ -128,14 +136,31 @@ function MovieDetails() {
     }
     toast.success("Done Add To List");
   };
-
+  const getMyList = async () => {
+    try {
+      if (user) {
+        const docRef = doc(db, "users", user.email || "");
+        const docSnapshot = await getDoc(docRef);
+        const userData = docSnapshot.data() ?? {};
+        userData.myList.map((item: { id: number | undefined }) => {
+          item.id === movieVideo?.id && setIsMyList(true);
+        });
+      } else {
+        console.log("User is not authenticated");
+      }
+    } catch (error) {
+      console.error("Error fetching document:", error);
+    }
+  };
   useEffect(() => {
+    getMyList();
     SuggestedMovies();
     fetchDataVideo();
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 800);
+    }, 1000);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Params]);
   return (
@@ -178,8 +203,16 @@ function MovieDetails() {
             onClick={handleAddMyList}
             className="border border-zinc-600 transition-all active:bg-zinc-500 w-[48%] flex justify-center items-center gap-2 py-2  rounded-md text-[12px] font-bold"
           >
-            <BsBookmarkPlus size={17} />
-            My List
+            {isMyList ? (
+              <>
+                <BsFillBookmarkCheckFill size={17} />
+                Remove From List
+              </>
+            ) : (
+              <>
+                <BsBookmarkPlus size={17} /> My List
+              </>
+            )}
           </button>
 
           <button

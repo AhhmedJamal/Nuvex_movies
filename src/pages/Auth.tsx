@@ -1,10 +1,22 @@
+import { onAuthStateChanged } from "firebase/auth";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { auth } from "../config/firebase";
+import { useNavigate } from "react-router-dom";
 
 function Auth() {
   const [choose, setChoose] = useState<boolean>(true);
-
+  const router = useNavigate();
+  useEffect(() => {
+    // Check if a user is found
+    onAuthStateChanged(auth, (user) => {
+      if (localStorage.getItem(`token=${user?.uid}`) === user?.uid) {
+        router("/");
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className="bg-[url('../public/assets/backGroundAuth.jpg')] bg-cover">
       <div className="flex h-screen  w-full justify-center items-center pt-16 flex-col bg-gradient-to-t from-black via-zinc-900 to-transparent">
@@ -29,7 +41,7 @@ function Auth() {
             Sign up
           </button>
         </div>
-        {choose ? <Login /> : <SignUp />}
+        {choose ? <Login /> : <SignUp setChoose={setChoose} />}
       </div>
     </div>
   );

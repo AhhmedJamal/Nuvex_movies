@@ -3,7 +3,7 @@ import { auth } from "../config/firebase";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { UserData } from "../types/UserProps";
+import { UserData } from "../types/UserData";
 
 function NavBar() {
   const [user, setUser] = useState<UserData | null>({});

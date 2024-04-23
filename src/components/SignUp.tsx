@@ -1,66 +1,73 @@
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { auth, db } from "../config/firebase";
 import toast, { Toaster } from "react-hot-toast";
-import { addDoc, collection } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   fetchSignInMethodsForEmail,
 } from "firebase/auth";
+import LoaderButton from "./LoaderButton";
 
-function SignUp() {
+interface SignUpProps {
+  setChoose: React.Dispatch<React.SetStateAction<boolean>>;
+}
+function SignUp({ setChoose }: SignUpProps) {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [pass, setPass] = useState<string>("");
   const [passConfirmation, setPassConfirmation] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const router = useNavigate();
 
   const handleSignUp = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     if (name && email && pass && passConfirmation) {
-      // Authenticate user and handle success
-      createUserWithEmailAndPassword(auth, email, pass)
-        .then(async ({ user }) => {
-          console.log(user);
-          await fetchSignInMethodsForEmail(auth, user?.email || "")
-            .then(async (signInMethods) => {
-              if (signInMethods.length > 0) {
-                console.log(signInMethods);
-              } else {
-                try {
-                  await addDoc(collection(db, "/users"), {
-                    id: user?.uid,
-                    name: name,
-                    email: user?.email,
-                    myList: [],
-                  });
-                  console.log("Document added successfully");
-                } catch (e) {
-                  console.error("Error adding document: ", e);
+      if (pass === passConfirmation) {
+        createUserWithEmailAndPassword(auth, email, pass)
+          .then(async ({ user }) => {
+            await fetchSignInMethodsForEmail(auth, user?.email || "")
+              .then(async (signInMethods) => {
+                if (signInMethods.length > 0) {
+                  console.log(signInMethods);
+                } else {
+                  try {
+                    await setDoc(doc(db, "users", user.email || ""), {
+                      photoURL: "",
+                      id: user?.uid,
+                      name: name,
+                      email: user?.email,
+                      myList: [],
+                    });
+                  } catch (e) {
+                    console.error("Error adding document: ", e);
+                  }
                 }
-              }
-            })
-            .catch((err) => console.log("error: " + err));
+              })
+              .catch((err) => console.log("error: " + err));
 
-          localStorage.setItem(`token=${user?.uid}`, user?.uid || "");
-          toast.success("Successfully Create Account");
-          setTimeout(() => {
-            // Navigate to the home page
-            router("/", { replace: true });
-          }, 1600);
+            // localStorage.setItem(`token=${user?.uid}`, user?.uid || "");
+            toast.success("Successfully Create Account");
+            setTimeout(() => {
+              // Navigate to the home page
+              setChoose(true);
+            }, 1500);
 
-          // Reset email and password fields
-          setEmail("");
-          setPass("");
-        })
-        .catch(() => {
-          toast.error("This didn't work.");
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+            // Reset email and password fields
+            setName("");
+            setEmail("");
+            setPass("");
+            setPassConfirmation("");
+          })
+          .catch(() => {
+            toast.error("This didn't work.");
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      } else {
+        toast.error("The password does not match !");
+        setLoading(false);
+      }
     } else {
       toast.error("Check Email address or Password");
       setLoading(false);
@@ -112,11 +119,7 @@ function SignUp() {
           type="submit"
           className="bg-primary text-light rounded-md p-2 font-bold items-center flex justify-center mt-3"
         >
-          {loading ? (
-            <span className="w-[30px] h-[30px] border-[5px] border-[solid] border-[#FFF] [border-bottom-color:transparent] rounded-[50%] inline-block box-border  animate-spin"></span>
-          ) : (
-            "Sign up"
-          )}
+          {loading ? <LoaderButton /> : "Sign up"}
         </button>
       </form>
     </div>

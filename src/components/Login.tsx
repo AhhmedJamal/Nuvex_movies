@@ -7,12 +7,14 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import LoaderButton from "./LoaderButton";
 
 function Login() {
   const [email, setEmail] = useState<string>("");
   const [pass, setPass] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const router = useNavigate();
+
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -104,6 +106,7 @@ function Login() {
       }
     }
   };
+
   return (
     <div className="flex h-[40vh] justify-center items-center flex-col overflow-hidden w-full">
       <Toaster position="top-center" reverseOrder={false} />
@@ -136,11 +139,7 @@ function Login() {
           type="submit"
           className="bg-primary text-light rounded-md p-2 font-bold items-center flex justify-center"
         >
-          {loading ? (
-            <span className="w-[30px] h-[30px] border-[5px] border-[solid] border-[#FFF] [border-bottom-color:transparent] rounded-[50%] inline-block box-border  animate-spin"></span>
-          ) : (
-            "Login"
-          )}
+          {loading ? <LoaderButton /> : "Login"}
         </button>
       </form>
       <div className="flex justify-center gap-2 mt-[20px]">
@@ -164,4 +163,3 @@ function Login() {
 }
 
 export default Login;
-

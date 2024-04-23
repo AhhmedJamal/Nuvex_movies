@@ -71,7 +71,7 @@ export default function Home() {
     // Check if a user is found
     onAuthStateChanged(auth, (user) => {
       if (localStorage.getItem(`token=${user?.uid}`) !== user?.uid) {
-        setTimeout(() => router("/auth"), 4000);
+        router("/auth");
       }
     });
 
@@ -80,7 +80,7 @@ export default function Home() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 200);
+    }, 1000);
 
     // Unsubscribe when the component is removed
     return () => {
