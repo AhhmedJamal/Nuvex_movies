@@ -7,11 +7,22 @@ import Shimmer from "./Shimmer";
 function CarouselMovie() {
   const [dataMovie, setDataMovie] = useState<CardMovieProps[]>([]);
   const getMovieTrailer = async () => {
-    const res = await fetch(
-      "https://api.themoviedb.org/3/movie/upcoming?api_key=b9fcb57ad4b325613192f31c8cd77d8c&language=en-Us&page=2"
-    );
-    const data = await res.json();
-    setDataMovie(data.results);
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOWZjYjU3YWQ0YjMyNTYxMzE5MmYzMWM4Y2Q3N2Q4YyIsInN1YiI6IjY1ZGJkYWY2ZjZmZDE4MDE3YzU3OGRiNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pkBdaOyihwle0Psel6KkEipw5gATt0ZhgEzIoj2uR9w",
+      },
+    };
+
+    fetch(
+      "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc",
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => setDataMovie(response.results))
+      .catch((err) => console.error(err));
   };
   useEffect(() => {
     getMovieTrailer();
@@ -22,8 +33,7 @@ function CarouselMovie() {
   };
 
   return (
-    <div className=" h-[280px] w-full  sm:mb-[60px] px-3 mb-[25px] mt-3 ">
-      <h1 className="text-[18px] font-bold mb-2">Upcoming</h1>
+    <div className=" h-[250px] w-full sm:mb-[60px] px-2 mb-[20px] mt-2">
       {dataMovie.length == 0 ? (
         <Shimmer height={250} width={0} />
       ) : (

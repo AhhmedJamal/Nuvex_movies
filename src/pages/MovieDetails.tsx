@@ -91,9 +91,18 @@ function MovieDetails() {
     const data = await response.json();
     setMovieVideo(data);
   };
+  function getRandomNumber() {
+    // Generate a random decimal between 0 and 1
+    const randomDecimal = Math.random();
+    // Scale the random decimal to be between 1 and 100
+    const randomNumber = Math.floor(randomDecimal * 300) + 1;
+    return randomNumber;
+  }
   const SuggestedMovies = () => {
+    const randomNumber = getRandomNumber();
+
     fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=b9fcb57ad4b325613192f31c8cd77d8c&language=en-Us&page=7"
+      `https://api.themoviedb.org/3/movie/popular?api_key=b9fcb57ad4b325613192f31c8cd77d8c&language=en-Us&page=${randomNumber}`
     )
       .then((response) => response.json())
       .then((response) => {
@@ -235,7 +244,7 @@ function MovieDetails() {
           <div className="text-[14px] font-bold text-slate-400 mt-1">
             Original Language:{" "}
             <div className="font-normal ">
-              {movieVideo?.spoken_languages[0].english_name}
+              {movieVideo?.spoken_languages[0]?.english_name}
             </div>
           </div>
           <div className="text-slate-400 font-bold text-[14px]">
