@@ -24,7 +24,9 @@ export default function Home() {
   const getDataMovie = async (url: string) => {
     const randomNumber = getRandomNumber();
     const res = await fetch(
-      `https://api.themoviedb.org/3/movie/${url}?api_key=b9fcb57ad4b325613192f31c8cd77d8c&language=en-Us&page=${randomNumber}`
+      `https://api.themoviedb.org/3/movie/${url}?api_key=b9fcb57ad4b325613192f31c8cd77d8c&language=en-Us&page=${
+        url == "popular" ? randomNumber : "2"
+      }`
     );
     const dataMovie = await res.json();
     if (url === "now_playing") setNowPlaying(dataMovie.results);

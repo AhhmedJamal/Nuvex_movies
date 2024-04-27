@@ -21,7 +21,11 @@ function CarouselMovie() {
       options
     )
       .then((response) => response.json())
-      .then((response) => setDataMovie(response.results))
+      .then((response) => {
+        setTimeout(() => {
+          setDataMovie(response.results);
+        }, 1000);
+      })
       .catch((err) => console.error(err));
   };
   useEffect(() => {

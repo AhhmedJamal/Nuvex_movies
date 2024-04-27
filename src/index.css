@@ -103,3 +103,13 @@ body {
 .theme-checkbox:checked {
   background-position: 100%;
 }
+
+/* sor shimmer */
+@keyframes shimmerAnimation {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
