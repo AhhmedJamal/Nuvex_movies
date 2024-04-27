@@ -1,4 +1,4 @@
 export interface ShimmerProps {
-    width:number,
-     height:number
-   }
+  width: string;
+  height: number;
+}

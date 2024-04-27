@@ -64,7 +64,7 @@ function SearchPage() {
           {search.map((_, i) => {
             return (
               <div key={i} className="overflow-hidden">
-                <Shimmer width={110} height={160} />
+                <Shimmer width={"110px"} height={160} />
               </div>
             );
           })}
@@ -80,7 +80,7 @@ function SearchPage() {
               <img
                 src={ImageMovie}
                 alt="Image not found Movies"
-                className="w-[60%] mt-[50px] m-auto "
+                className="w-[65%] mt-[50px] m-auto "
               />
               No results Movies !!
             </div>

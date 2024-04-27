@@ -39,7 +39,7 @@ function CarouselMovie() {
   return (
     <div className=" h-[250px] w-full sm:mb-[60px] px-2 mb-[20px] mt-2">
       {dataMovie.length == 0 ? (
-        <Shimmer height={250} width={0} />
+        <Shimmer height={250} width={"100%"} />
       ) : (
         <Carousel
           autoPlay={true}

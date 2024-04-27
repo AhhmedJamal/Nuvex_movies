@@ -52,12 +52,24 @@ function CardMyList({ dataMovie, getMyList }: CardMyListProps) {
   }, []);
   return (
     <>
-      {!isLoading ? (
-        <div className="flex justify-between w-full">
-          <Shimmer height={150} width={110} />
-          <div className="flex flex-col">
-            <Shimmer height={150} width={110} />
-            <Shimmer height={140} width={110} />
+      {isLoading ? (
+        <div className="flex gap-4 w-full h-[150px] p-3 rounded-xl bg-[#0000005a]">
+          <Shimmer height={125} width={"90px"} />
+          <div className="flex flex-col justify-between items-start w-[70%] pt-1 ">
+            <Shimmer height={25} width={"100px"} />
+            <div className="flex gap-6">
+              <Shimmer height={25} width={"40px"} />
+              <Shimmer height={25} width={"40px"} />
+              <Shimmer height={25} width={"40px"} />
+            </div>
+
+            <div className="flex w-full justify-between items-end">
+              <div className="flex gap-4 h-fit">
+                <Shimmer height={20} width={"35px"} />
+                <Shimmer height={20} width={"55px"} />
+              </div>
+              <Shimmer height={30} width={"55px"} />
+            </div>
           </div>
         </div>
       ) : (
@@ -74,15 +86,15 @@ function CardMyList({ dataMovie, getMyList }: CardMyListProps) {
             loading="lazy"
             src={pathPhoto()}
             alt="path photo movie"
-            className="w-24 h-28 object-cover  rounded-xl"
+            className="w-[110px] h-[125px] object-cover  rounded-xl"
           />
           <div className="w-full text-left">
             <h1 className="font-bold text-[16px] ">{title}</h1>
             <div className="flex flex-col justify-between gap-5 h-[80%] ">
-              <p className="grid grid-cols-3 gap-2  text-[12px] mt-2">
+              <p className="grid grid-cols-3 gap-2 text-[11px] mt-2">
                 {genres?.map((item: { id: number; name: string }) => {
                   return (
-                    <h2 className="text-gray-400  text-center bg-[#00000048] rounded-lg py-[2px]">
+                    <h2 className="text-gray-400 flex items-center justify-center text-center bg-[#00000048] rounded-lg py-[2px]">
                       {item.name}
                     </h2>
                   );
