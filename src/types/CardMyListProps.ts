@@ -5,5 +5,7 @@ export interface CardMyListProps {
     title: string;
     runtime: number;
     genres: { id: number; name: string }[];
+    vote_average: number;
   };
+  getMyList: () => Promise<void>;
 }

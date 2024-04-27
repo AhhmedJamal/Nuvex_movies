@@ -32,6 +32,7 @@ function CardMovie({ data }: { data: CardMovieProps }) {
         >
           {data.poster_path !== null ? (
             <img
+              loading="lazy"
               src={pathPoster(data.poster_path)}
               alt="movie-poster"
               className="object-cover w-[110px] h-[160px]"

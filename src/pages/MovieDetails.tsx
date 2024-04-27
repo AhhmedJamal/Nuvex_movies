@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MovieProps } from "../types/MovieDetailsProps";
 import { BsBookmarkPlus } from "react-icons/bs";
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaStar } from "react-icons/fa";
 import { CardMovieProps } from "../types/CardMovieProps";
 import CardMovie from "../components/CardMovie";
 import { IoCloseCircleSharp } from "react-icons/io5";
@@ -184,12 +184,16 @@ function MovieDetails() {
             alt="backdrop_path"
             className="w-full h-[350px] object-cover"
           />
-          <div className="absolute top-0 flex pl-2 items-center  bg-gradient-to-r from-[#1c1c1c] w-full h-[100%]">
+          <div className="absolute top-0 flex pl-2 items-center justify-between  bg-gradient-to-r from-[#1c1c1c] w-full h-[100%]">
             <img
               src={pathPhoto(movieVideo?.poster_path)}
               alt="poster_path"
               className="mix-w-[30%] rounded-lg max-h-[250px]"
             />
+            <p className="flex items-center gap-1 text-[13px] font-bold self-end py-1 px-2 m-3 bg-[#18181889] rounded-2xl">
+              {movieVideo?.vote_average.toFixed(1)}{" "}
+              <FaStar className="text-primary" />
+            </p>
           </div>
 
           {showModel && (

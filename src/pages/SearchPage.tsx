@@ -7,8 +7,10 @@ import Shimmer from "../components/Shimmer";
 function SearchPage() {
   const [search, setSearch] = useState<[]>([]);
   const [title, setTitle] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchData = () => {
+    setIsLoading(true);
     fetch(
       `https://api.themoviedb.org/3/search/movie?query=${title.replace(
         /\s/g,
@@ -22,8 +24,9 @@ function SearchPage() {
         return response.json();
       })
       .then((data) => {
+        setSearch(data.results);
         setTimeout(() => {
-          setSearch(data.results);
+          setIsLoading(false);
         }, 2000);
       })
       .catch((error) => {
@@ -56,18 +59,18 @@ function SearchPage() {
       {search.length !== 0 && (
         <h1 className="mt-4 font-bold">Results For ' {title} '</h1>
       )}
-      {search.length == 0 ? (
-        <div className="grid grid-cols-3 place-items-center gap-3 mt-5 relative">
+      {isLoading ? (
+        <div className="grid grid-cols-3 place-items-center gap-x-2 gap-y-1.5 mt-5 relative ">
           {search.map((_, i) => {
             return (
-              <div key={i}>
+              <div key={i} className="overflow-hidden">
                 <Shimmer width={110} height={160} />
               </div>
             );
           })}
         </div>
       ) : (
-        <div className="grid grid-cols-3 place-items-center gap-3 mt-10 relative">
+        <div className="grid grid-cols-3 place-items-center gap-x-2 gap-y-1.5 mt-10 relative">
           {search.length !== 0 ? (
             search.map((movie: CardMovieProps) => (
               <CardMovie key={movie.id} data={movie} />
