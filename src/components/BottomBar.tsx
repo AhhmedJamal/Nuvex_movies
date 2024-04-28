@@ -8,7 +8,9 @@ function BottomBar() {
   const { pathname } = useLocation();
 
   return (
-    <footer className="sm:hidden z-10 fixed bottom-0  w-full  h-[75px]  flex justify-around items-center [box-shadow:0px_-1px_10px_0px_rgba(22,_22,_22,_1)] ">
+    <footer
+      className={`sm:hidden z-10 fixed bottom-0 w-full h-[75px] flex justify-around items-center [box-shadow:0px_-1px_10px_0px_rgba(12,_12,_12,_0.5)]`}
+    >
       <Link to={"/"} className={pathname === "/" ? "text-primary" : ""}>
         <GoHomeFill size={30} />
       </Link>

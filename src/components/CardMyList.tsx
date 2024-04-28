@@ -52,8 +52,8 @@ function CardMyList({ dataMovie, getMyList }: CardMyListProps) {
   }, []);
   return (
     <>
-      {isLoading ? (
-        <div className="flex gap-4 w-full h-[150px] p-3 rounded-xl bg-[#0000005a]">
+      {!isLoading ? (
+        <div className="flex gap-4 w-full h-[150px] p-3 rounded-xl bg-[#00000033]">
           <Shimmer height={125} width={"90px"} />
           <div className="flex flex-col justify-between items-start w-[65%] pt-1 ">
             <Shimmer height={25} width={"100px"} />
@@ -73,7 +73,7 @@ function CardMyList({ dataMovie, getMyList }: CardMyListProps) {
           </div>
         </div>
       ) : (
-        <div className="flex justify-between gap-5 w-full h-[150px] bg-[#0000005a] rounded-xl p-3">
+        <div className="flex justify-between gap-5 w-full h-[150px] bg-[#00000033] rounded-xl p-3">
           <img
             onClick={() => {
               router(
