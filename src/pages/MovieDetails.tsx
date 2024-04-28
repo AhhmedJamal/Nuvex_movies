@@ -33,23 +33,7 @@ function MovieDetails() {
   const [isMyList, setIsMyList] = useState<boolean>(false);
   const collectionsRef = collection(db, "users");
   const user = auth.currentUser;
-  const dataShimmer = [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-  ];
+
   const startDragging = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setMouseDown(true);
     setStartX(e.pageX - (e.currentTarget.offsetLeft || 0));
@@ -176,7 +160,7 @@ function MovieDetails() {
     <div className="w-full overflow-hidden pb-s2">
       <Toaster position="top-center" reverseOrder={false} />
       {isLoading ? (
-        <Shimmer width={0} height={350} />
+        <Shimmer width={"100%"} height={350} />
       ) : (
         <div className="relative">
           <img
@@ -261,23 +245,7 @@ function MovieDetails() {
       <h1 className="text-[14px] font-bold mb-2 pl-3">More Like This</h1>
       <div className="p-2">
         <h1 className="text-[18px] font-bold mb-2">Popular on Nuvex</h1>
-        {isLoading ? (
-          <div
-            className="flex overflow-auto gap-3"
-            onMouseDown={startDragging}
-            onMouseUp={stopDragging}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={stopDragging}
-          >
-            {dataShimmer.map((_, i) => {
-              return (
-                <div key={i}>
-                  <Shimmer width={110} height={160} />
-                </div>
-              );
-            })}
-          </div>
-        ) : (
+       
           <div
             className="flex overflow-auto gap-3"
             onMouseDown={startDragging}
@@ -293,7 +261,7 @@ function MovieDetails() {
               );
             })}
           </div>
-        )}
+       
       </div>
     </div>
   );

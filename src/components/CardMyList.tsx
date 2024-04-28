@@ -91,7 +91,7 @@ function CardMyList({ dataMovie, getMyList }: CardMyListProps) {
           <div className="w-full text-left ">
             <h1 className="font-bold text-[16px] h-[45px]">{title}</h1>
             <div className="flex flex-col justify-between h-[65%] ">
-              <p className="grid grid-cols-3 gap-2 text-[11px] mt-2">
+              <p className="grid grid-cols-3 gap-1 text-[11px] mt-2">
                 {genres?.map((item: { id: number; name: string }) => {
                   return (
                     <h2
