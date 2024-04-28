@@ -86,15 +86,18 @@ function CardMyList({ dataMovie, getMyList }: CardMyListProps) {
             loading="lazy"
             src={pathPhoto()}
             alt="path photo movie"
-            className="w-[110px] h-[125px] object-cover  rounded-xl"
+            className="w-[90px]  object-cover rounded-xl"
           />
-          <div className="w-full text-left">
-            <h1 className="font-bold text-[16px] ">{title}</h1>
-            <div className="flex flex-col justify-between gap-5 h-[80%] ">
+          <div className="w-full text-left ">
+            <h1 className="font-bold text-[16px] h-[45px]">{title}</h1>
+            <div className="flex flex-col justify-between h-[65%] ">
               <p className="grid grid-cols-3 gap-2 text-[11px] mt-2">
                 {genres?.map((item: { id: number; name: string }) => {
                   return (
-                    <h2 className="text-gray-400 flex items-center justify-center text-center bg-[#00000048] rounded-lg py-[2px]">
+                    <h2
+                      key={item.id}
+                      className="text-gray-400 flex items-center justify-center text-center bg-[#00000048] rounded-lg py-[2px]"
+                    >
                       {item.name}
                     </h2>
                   );
