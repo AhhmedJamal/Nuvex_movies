@@ -32,11 +32,17 @@ function SettingsPage() {
 
         <div
           onClick={toggleMode}
-          className={`w-11 h-6 bg-white rounded-2xl flex items-center ${
-            mode ? "justify-end" : "justify-start"
-          } p-1`}
+          className={`w-11 h-6 transition-all ${
+            mode ? "bg-gray-100" : "bg-zinc-800"
+          } rounded-2xl flex items-center p-1`}
         >
-          <span className="w-3 h-3 bg-red-500 rounded-full"></span>
+          <span
+            className={`w-3 h-3 transition-all ${
+              mode
+                ? "bg-zinc-800 translate-x-[25px]"
+                : "bg-gray-100 translate-x-[0px]"
+            } rounded-full`}
+          ></span>
         </div>
       </div>
 
