@@ -52,23 +52,23 @@ function CardMyList({ dataMovie, getMyList }: CardMyListProps) {
   }, []);
   return (
     <>
-      {isLoading ? (
+      {!isLoading ? (
         <div className="flex gap-4 w-full h-[150px] p-3 rounded-xl bg-[#0000005a]">
           <Shimmer height={125} width={"90px"} />
-          <div className="flex flex-col justify-between items-start w-[70%] pt-1 ">
+          <div className="flex flex-col justify-between items-start w-[65%] pt-1 ">
             <Shimmer height={25} width={"100px"} />
-            <div className="flex gap-6">
-              <Shimmer height={25} width={"40px"} />
-              <Shimmer height={25} width={"40px"} />
-              <Shimmer height={25} width={"40px"} />
+            <div className="flex justify-between w-full">
+              <Shimmer height={20} width={"55px"} />
+              <Shimmer height={20} width={"55px"} />
+              <Shimmer height={20} width={"55px"} />
             </div>
 
             <div className="flex w-full justify-between items-end">
-              <div className="flex gap-4 h-fit">
-                <Shimmer height={20} width={"35px"} />
+              <div className="flex gap-6 h-fit">
                 <Shimmer height={20} width={"55px"} />
+                <Shimmer height={20} width={"35px"} />
               </div>
-              <Shimmer height={30} width={"55px"} />
+              <Shimmer height={30} width={"35px"} />
             </div>
           </div>
         </div>

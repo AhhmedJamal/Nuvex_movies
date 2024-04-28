@@ -14,7 +14,7 @@ function NavBar() {
     });
   }, []);
   return (
-    <header className="h-[60px] flex items-center justify-between px-4 w-full z-10 border-b [box-shadow:0_4px_15px_#212121] border-zinc-800">
+    <header className="h-[60px] flex items-center justify-between px-4 w-full z-10  [box-shadow:0_1px_15px_#212121] border-zinc-800">
       <div className="flex justify-center items-center gap-2 ">
         {user && user.photoURL ? (
           <img

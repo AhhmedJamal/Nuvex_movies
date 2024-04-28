@@ -46,7 +46,8 @@ function SearchPage() {
         <input
           type="text"
           value={title}
-          className="h-8 w-[70%] bg-zinc-600 outline-none text-white font-bold pl-2"
+          placeholder="Type Name Movie..."
+          className="h-8 w-[70%] bg-zinc-400 outline-none  font-bold pl-2 placeholder:text-zinc-700"
           required
           onChange={(e) => {
             setTitle(e.target.value);
@@ -76,7 +77,7 @@ function SearchPage() {
               <CardMovie key={movie.id} data={movie} />
             ))
           ) : (
-            <div className="flex flex-col justify-center items-center w-full top-0 absolute text-neutral-200 font-bold">
+            <div className="flex flex-col justify-center items-center w-full top-0 absolute font-bold">
               <img
                 src={ImageMovie}
                 alt="Image not found Movies"

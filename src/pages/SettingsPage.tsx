@@ -1,35 +1,43 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function SettingsPage() {
   const router = useNavigate();
-  const [mode, setMode] = useState(Boolean);
+  const [mode, setMode] = useState<boolean>(false);
+
   const handleLogOut = () => {
     signOut(auth);
     router("/auth", { replace: true });
   };
-  const handleSwitch = () => {
-    setMode((pre) => !pre);
-    if (mode) {
-      document.body.style.backgroundColor = "whiteSmoke";
-      document.body.style.color = " black";
-    } else {
-      document.body.style.backgroundColor = " #00000097";
-      document.body.style.color = "white";
-    }
+  const toggleMode = () => {
+    localStorage.setItem("theme", mode.toString());
+    document.body.classList.toggle("dark", mode);
+    setMode(!mode);
   };
+  useEffect(() => {
+    const storedDarkMode = localStorage.getItem("theme");
+    setMode(Boolean(storedDarkMode));
+    if (storedDarkMode === "true") {
+      document.body.classList.add("dark");
+    }
+  }, []);
+
   return (
     <section className="flex flex-col justify-between items-center h-[90%] gap-4 pt-[40px]">
       <h1 className="font-bold text-[23px] self-start pl-3">Settings</h1>
       <div className="flex items-center justify-between gap-4 bg-[#00000067] p-3  w-[90%] font-bold rounded-xl">
-        Light{" "}
-        <input
-          onClick={handleSwitch}
-          type="checkbox"
-          className="theme-checkbox"
-        />
+        {!mode ? "Dark" : "Light"}
+
+        <div
+          onClick={toggleMode}
+          className={`w-11 h-6 bg-white rounded-2xl flex items-center ${
+            mode ? "justify-end" : "justify-start"
+          } p-1`}
+        >
+          <span className="w-3 h-3 bg-red-500 rounded-full"></span>
+        </div>
       </div>
 
       <button
