@@ -11,7 +11,7 @@ function BottomBar() {
     <footer
       className={`sm:hidden z-10 fixed bottom-3 w-full    [box-shadow:0px_-1px_10px_0px_rgba(12,_12,_12,_0.5)] `}
     >
-      <div className="w-[90%] h-[75px] rounded-2xl flex justify-around items-center m-auto bg-primary">
+      <div className="w-[90%] h-[60px] mb-2 rounded-2xl flex justify-around items-center m-auto bg-primary">
         <Link to={"/"} className={pathname === "/" ? "text-black" : ""}>
           <GoHomeFill size={30} />
         </Link>
