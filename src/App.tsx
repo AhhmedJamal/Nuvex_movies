@@ -16,10 +16,8 @@ function App() {
       {start ? (
         <SplashScreen />
       ) : (
-        <div className="container m-auto overflow-y-scroll sm-h-[90vh] h-screen  sm:pb-0">
-          {/* <div className=" sm:h-screen h-[90vh] overflow-y-scroll pb-2"> */}
+        <div className="container m-auto overflow-y-scroll sm-h-[90vh] h-screen pb-[70px]  sm:pb-0">
           <Outlet />
-          {/* </div> */}
           <BottomBar />
         </div>
       )}

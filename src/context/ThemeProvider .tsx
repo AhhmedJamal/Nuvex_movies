@@ -14,20 +14,21 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
     localStorage.setItem("theme", theme === "light" ? "dark" : "light");
+    document.body.classList.toggle("light");
     // Rest of the code to toggle classes based on theme
   };
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    document.body.classList.toggle("light");
-    if (storedTheme !== "dark") {
-      footer?.classList.add("footer");
-      footer?.classList.remove("light");
-    } else {
-      footer?.classList.remove("footer");
-      footer?.classList.add("light");
-    }
-    setTheme(storedTheme || "");
-  }, [footer?.classList, theme]);
+  // useEffect(() => {
+  //   const storedTheme = localStorage.getItem("theme");
+  //   // document.body.classList.toggle("light");
+  //   if (storedTheme === "light") {
+  //     footer?.classList.add("footer");
+  //     footer?.classList.remove("light");
+  //   } else {
+  //     footer?.classList.remove("footer");
+  //     footer?.classList.add("light");
+  //   }
+  //   setTheme(storedTheme || "");
+  // }, [footer?.classList, theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
