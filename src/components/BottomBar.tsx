@@ -9,9 +9,7 @@ function BottomBar() {
 
   return (
     <footer
-      className={`sm:hidden z-10 fixe bottom-[0px]  w-full  h-[70px] mb-2  flex justify-around items-center [box-shadow:0px_-1px_10px_0px_rgba(12,_12,_12,_0.5)] ${
-        localStorage.getItem("theme") === "dark" && "bg-[#1b1b1]"
-      }`}
+      className={`sm:hidden z-10 fixed bottom-[0px]  w-full  h-[70px]  flex justify-around items-center [box-shadow:0px_-1px_10px_0px_rgba(12,_12,_12,_0.5)] `}
     >
       <Link to={"/"} className={pathname === "/" ? "text-primary" : ""}>
         <GoHomeFill size={30} />

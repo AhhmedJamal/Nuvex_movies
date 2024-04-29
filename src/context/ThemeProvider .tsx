@@ -12,28 +12,22 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const footer = document.querySelector("footer");
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme == "light" ? "dark" : "light"));
-    localStorage.setItem("theme", theme);
-    if (theme === "light") {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    localStorage.setItem("theme", theme === "light" ? "dark" : "light");
+    // Rest of the code to toggle classes based on theme
+  };
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme === "light") {
       document.body.classList.add("light");
       footer?.classList.add("light");
     } else {
       document.body.classList.remove("light");
       footer?.classList.remove("light");
     }
-  };
-  useEffect(() => {
-    if (localStorage.getItem("theme") === "light") {
-      document.body.classList.toggle("light");
-      footer?.classList.toggle("light");
-      setTheme("dark");
-    } else {
-      setTheme("light");
-      document.body.classList.remove("light");
-      footer?.classList.remove("light");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setTheme(storedTheme || "dark");
+  }, [theme]); // Only re-run if theme state changes
+
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}

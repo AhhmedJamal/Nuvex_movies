@@ -23,8 +23,7 @@
   display: none;
 }
 
-html,
-body {
+.dark {
   background-color: #1b1b1b;
   color: white;
 }
@@ -33,7 +32,6 @@ body {
   background-color: #e0e0e0;
   color: #1b1b1b;
 }
-
 
 /* animation for button */
 @keyframes grow {

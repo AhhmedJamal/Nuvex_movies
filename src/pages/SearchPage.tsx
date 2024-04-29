@@ -47,7 +47,7 @@ function SearchPage() {
           type="text"
           value={title}
           placeholder="Type Name Movie..."
-          className="h-8 w-[70%] bg-zinc-400 outline-none  font-bold pl-2 placeholder:text-zinc-700"
+          className="h-8 w-[70%] bg-zinc-300 outline-none  font-bold pl-2 placeholder:text-zinc-700 "
           required
           onChange={(e) => {
             setTitle(e.target.value);
