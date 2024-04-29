@@ -16,7 +16,7 @@ function App() {
       {start ? (
         <SplashScreen />
       ) : (
-        <div className="container flex flex-col justify-between m-auto overflow-y-scroll h-screen">
+        <div className="container flex flex-col justify-between m-auto overflow-y-scroll h-[95vh]">
           <div className=" sm:h-screen h-[90vh] overflow-y-scroll pb-2">
             <Outlet />
           </div>
