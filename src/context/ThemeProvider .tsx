@@ -18,15 +18,16 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   };
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "light") {
-      document.body.classList.add("light");
-      footer?.classList.add("light");
-    } else {
-      document.body.classList.remove("light");
+    document.body.classList.toggle("light");
+    if (storedTheme !== "dark") {
+      footer?.classList.add("footer");
       footer?.classList.remove("light");
+    } else {
+      footer?.classList.remove("footer");
+      footer?.classList.add("light");
     }
-    setTheme(storedTheme || "dark");
-  }, [theme]); // Only re-run if theme state changes
+    setTheme(storedTheme || "");
+  }, [footer?.classList, theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

@@ -23,7 +23,8 @@
   display: none;
 }
 
-.dark {
+html,
+body {
   background-color: #1b1b1b;
   color: white;
 }
@@ -31,6 +32,10 @@
 .light {
   background-color: #e0e0e0;
   color: #1b1b1b;
+}
+.footer {
+  background-color: #1b1b1b;
+  color: white;
 }
 
 /* animation for button */
