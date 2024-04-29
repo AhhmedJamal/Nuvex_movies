@@ -21,7 +21,7 @@ function SettingsPage() {
     <section className="flex flex-col justify-between items-center h-[90%] gap-4 pt-[40px]">
       <h1 className="font-bold text-[23px] self-start pl-3">Settings</h1>
       <div className="flex items-center justify-between gap-4 bg-[#00000067] p-3  w-[90%] font-bold rounded-xl">
-        {theme !== "dark" ? "Dark" : "Light"}
+        {theme == "dark" ? "Dark" : "Light"}
 
         <div
           onClick={toggleTheme}

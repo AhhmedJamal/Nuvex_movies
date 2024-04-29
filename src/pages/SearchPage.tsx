@@ -71,7 +71,7 @@ function SearchPage() {
           })}
         </div>
       ) : (
-        <div className="grid grid-cols-3 place-items-center gap-x-2 gap-y-1.5 mt-10 relative">
+        <div className="grid grid-cols-3 sm:grid-cols-5  md:grid-cols-6 md:gap-y-5 place-items-center gap-x-2 gap-y-1.5 mt-10 relative">
           {search.length !== 0 ? (
             search.map((movie: CardMovieProps) => (
               <CardMovie key={movie.id} data={movie} />
@@ -81,7 +81,7 @@ function SearchPage() {
               <img
                 src={ImageMovie}
                 alt="Image not found Movies"
-                className="w-[65%] mt-[50px] m-auto "
+                className="w-[60%] sm:w-[20%] mt-[50px] m-auto "
               />
               No results Movies !!
             </div>

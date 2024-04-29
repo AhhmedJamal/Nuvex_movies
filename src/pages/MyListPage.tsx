@@ -40,7 +40,7 @@ function MyListPage() {
         <TbMovie size={24} />
       </h1>
 
-      <div className="flex flex-col gap-5 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2  flex-col gap-5 ">
         {dataMyList.length == 0 ? (
           <div className="flex flex-col justify-center items-center mt-[110px]">
             <img src={ImageMovie} alt="" className="w-[65%]" />

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import CarouselMovie from "../components/CarouselMovie";
-import NavBar from "../components/NavBar";
 import { auth } from "../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -60,8 +59,7 @@ export default function Home() {
   }, []);
 
   return (
-    <section>
-      <NavBar />
+    <section >
       <CarouselMovie />
       <MovieList dataMovie={nowPlaying} title={"Now Playing"} />
       <MovieList dataMovie={popular} title={"Popular"} />

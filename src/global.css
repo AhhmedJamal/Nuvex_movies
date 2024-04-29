@@ -27,6 +27,7 @@ html,
 body {
   background-color: #1b1b1b;
   color: white;
+  transition: all 0.3s;
 }
 
 .light {
