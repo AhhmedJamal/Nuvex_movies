@@ -16,8 +16,8 @@ function App() {
       {start ? (
         <SplashScreen />
       ) : (
-        <div className="container m-auto overflow-y-scroll h-screen">
-          <div className=" sm:h-screen h-[90vh] overflow-y-scroll pb-6">
+        <div className="container m-auto overflow-y-scroll h-[90vh]">
+          <div className=" sm:h-screen overflow-y-scroll pb-6">
             <Outlet />
           </div>
           <BottomBar />
