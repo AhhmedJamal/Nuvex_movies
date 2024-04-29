@@ -6,7 +6,6 @@ import { useContext } from "react";
 
 function SettingsPage() {
   const themeContext = useContext(ThemeContext);
-
   if (!themeContext)
     throw new Error("useTheme must be used within a ThemeProvider");
 
@@ -22,17 +21,17 @@ function SettingsPage() {
     <section className="flex flex-col justify-between items-center h-[90%] gap-4 pt-[40px]">
       <h1 className="font-bold text-[23px] self-start pl-3">Settings</h1>
       <div className="flex items-center justify-between gap-4 bg-[#00000067] p-3  w-[90%] font-bold rounded-xl">
-        {theme == "dark" ? "Dark" : "Light"}
+        {theme !== "dark" ? "Dark" : "Light"}
 
         <div
           onClick={toggleTheme}
           className={`w-11 h-6 transition-all ${
-            theme == "dark" ? "bg-gray-100" : "bg-zinc-800"
+            theme !== "dark" ? "bg-gray-100" : "bg-zinc-800"
           } rounded-2xl flex items-center p-1`}
         >
           <span
             className={`w-3 h-3 transition-all ${
-              theme == "dark"
+              theme !== "dark"
                 ? "bg-zinc-800 translate-x-[0px]"
                 : "bg-gray-100 translate-x-[25px]  "
             } rounded-full`}

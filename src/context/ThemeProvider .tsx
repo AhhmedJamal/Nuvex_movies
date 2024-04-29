@@ -8,29 +8,29 @@ export const ThemeContext = createContext<ThemeContextType | undefined>(
   undefined
 );
 const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<string>("light");
+  const [theme, setTheme] = useState<string>("dark");
   const footer = document.querySelector("footer");
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme == "light" ? "dark" : "light"));
     localStorage.setItem("theme", theme);
-    if (theme === "dark") {
-      document.body.classList.add("dark");
-      footer?.classList.add("dark");
+    if (theme === "light") {
+      document.body.classList.add("light");
+      footer?.classList.add("light");
     } else {
-      document.body.classList.remove("dark");
-      footer?.classList.remove("dark");
+      document.body.classList.remove("light");
+      footer?.classList.remove("light");
     }
   };
   useEffect(() => {
-    const storedDarkMode = localStorage.getItem("theme");
-    setTheme(storedDarkMode || "dark");
-    if (storedDarkMode === "dark") {
-      document.body.classList.add("dark");
-      footer?.classList.add("dark");
+    if (localStorage.getItem("theme") === "light") {
+      document.body.classList.add("light");
+      footer?.classList.add("light");
+      setTheme("dark");
     } else {
-      document.body.classList.remove("dark");
-      footer?.classList.remove("dark");
+      setTheme("light");
+      document.body.classList.remove("light");
+      footer?.classList.remove("light");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
