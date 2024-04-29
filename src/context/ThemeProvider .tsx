@@ -24,8 +24,8 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   };
   useEffect(() => {
     if (localStorage.getItem("theme") === "light") {
-      document.body.classList.add("light");
-      footer?.classList.add("light");
+      document.body.classList.toggle("light");
+      footer?.classList.toggle("light");
       setTheme("dark");
     } else {
       setTheme("light");
