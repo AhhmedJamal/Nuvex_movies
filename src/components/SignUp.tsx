@@ -18,7 +18,7 @@ function SignUp({ setChoose }: SignUpProps) {
   const [passConfirmation, setPassConfirmation] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSignUp = (e: FormEvent<HTMLFormElement>) => {
+  const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     if (name && email && pass && passConfirmation) {

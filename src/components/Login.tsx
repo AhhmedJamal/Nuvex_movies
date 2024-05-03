@@ -15,7 +15,7 @@ function Login() {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useNavigate();
 
-  const handleLogin = (e: FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     if (email && pass) {

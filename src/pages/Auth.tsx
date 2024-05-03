@@ -18,7 +18,7 @@ function Auth() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="bg-[url('../public/assets/backGround.jpg')] bg-cover">
+    <div className="bg-[url('../public/assets/backGroundAuth.jpg')] bg-cover">
       <div className="flex h-screen  w-full justify-center items-center pt-16 flex-col bg-gradient-to-t from-black via-zinc-900 to-transparent">
         <h1 className=" text-[50px] font-['Righteous',_sans-serif] font-semibold not-italic text-primary mb-[20px]">
           Nuvex
