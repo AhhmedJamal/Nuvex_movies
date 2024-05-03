@@ -78,24 +78,26 @@ function SignUp({ setChoose }: SignUpProps) {
     <div className="flex h-[40vh] justify-center items-center flex-col w-full">
       <Toaster position="top-center" reverseOrder={false} />
       <form className="w-[80%] flex flex-col gap-4" onSubmit={handleSignUp}>
-        <input
-          value={name}
-          onChange={(event) => setName(event?.target.value)}
-          className="bg-zinc-700  shadow appearance-none border border-zinc-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
-          id="Name"
-          type="text"
-          placeholder="Name"
-          required
-        />
-        <input
-          value={email}
-          onChange={(event) => setEmail(event?.target.value)}
-          className="bg-zinc-700  shadow appearance-none border border-zinc-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
-          id="email"
-          type="email"
-          placeholder="Email"
-          required
-        />
+        <div className="flex gap-2">
+          <input
+            value={name}
+            onChange={(event) => setName(event?.target.value)}
+            className="bg-zinc-700  shadow appearance-none border border-zinc-500 rounded w-[35%] py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+            id="Name"
+            type="text"
+            placeholder="Name"
+            required
+          />
+          <input
+            value={email}
+            onChange={(event) => setEmail(event?.target.value)}
+            className="bg-zinc-700  shadow appearance-none border border-zinc-500 rounded w-[65%] py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+            id="email"
+            type="email"
+            placeholder="Email"
+            required
+          />
+        </div>
         <input
           value={pass}
           onChange={(event) => setPass(event?.target.value)}
