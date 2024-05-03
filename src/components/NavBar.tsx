@@ -40,7 +40,7 @@ function NavBar() {
       </nav>
       <Link
         to="/"
-        className="relative text-[27px] font-['Righteous',_sans-serif] font-semibold not-italic text-primary overflow-hidden z-10"
+        className="relative text-[27px] font-extrabold text-primary overflow-hidden z-10"
       >
         NUVEX
         <div className="absolute top-[24px] right-[-1px] bg-[#ffffff0c] [box-shadow:0_4px_30px_#00000005] backdrop-filter backdrop-blur-[2px] w-full h-[10px]"></div>

@@ -20,7 +20,7 @@ function Auth() {
   return (
     <div className="bg-[url('../public/assets/backGroundAuth.jpg')] bg-cover">
       <div className="flex h-screen  w-full justify-center items-center pt-16 flex-col bg-gradient-to-t from-black via-zinc-900 to-transparent">
-        <div className="relative w-fit text-[47px] font-['Righteous',_sans-serif] font-semibold not-italic text-primary overflow-hidden z-10">
+        <div className="relative w-fit text-[47px]  font-extrabold  text-primary overflow-hidden z-10">
           NUVEX
           <div className="absolute bottom-3 right-[-1px] bg-[#ffffff0c] [box-shadow:0_4px_30px_#00000005] backdrop-filter backdrop-blur-[2px] w-full h-[13px]"></div>
         </div>
