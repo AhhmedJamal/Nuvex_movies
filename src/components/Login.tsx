@@ -139,7 +139,7 @@ function Login() {
           type="submit"
           className="bg-primary text-white rounded-md p-2 font-bold items-center flex justify-center"
         >
-          {loading ? <LoaderButton /> : "Login"}
+          {loading ? <LoaderButton /> : "Log in"}
         </button>
       </form>
       <div className="flex justify-center gap-2 mt-[20px]">

@@ -30,7 +30,7 @@ function Auth() {
               choose && "bg-primary border-none"
             }`}
           >
-            Login
+            Log in
           </button>
           <button
             onClick={() => setChoose(false)}
