@@ -7,6 +7,7 @@ import { CardMovieProps } from "../types/CardMovieProps";
 import CardMovie from "../components/CardMovie";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
+import { IoIosArrowBack } from "react-icons/io";
 import Shimmer from "../components/Shimmer";
 import { auth, db } from "../config/firebase";
 import toast, { Toaster } from "react-hot-toast";
@@ -164,24 +165,33 @@ function MovieDetails() {
       ) : (
         <div className="relative">
           <img
+            loading="lazy"
             src={pathPhoto(movieVideo?.backdrop_path)}
             alt="backdrop_path"
-            className="w-full h-[350px] object-cover"
+            className="w-full h-[350px] object-cover "
           />
-          <div className="absolute top-0 flex pl-2 items-center justify-between  bg-gradient-to-r from-[#1c1c1c] w-full h-[100%]">
-            <img
-              src={pathPhoto(movieVideo?.poster_path)}
-              alt="poster_path"
-              className="mix-w-[30%] rounded-lg max-h-[250px]"
-            />
-            <p className="flex items-center gap-1 text-[13px] font-bold self-end py-1 px-2 m-3 bg-[#18181889] rounded-2xl">
+          <div className="absolute top-0 flex flex-c pl-2 items-center justify-between  bg-gradient-to-r from-[#1c1c1c] w-full h-[100%]">
+            <div className="flex flex-col gap-6">
+              <IoIosArrowBack
+                className=" text-white"
+                size={30}
+                onClick={() => window.history.back()}
+              />
+              <img
+                loading="lazy"
+                src={pathPhoto(movieVideo?.poster_path)}
+                alt="poster_path"
+                className="mix-w-[30%] rounded-lg max-h-[250px]"
+              />
+            </div>
+            <p className="flex items-center gap-1 text-[13px] font-bold self-end py-1 px-2 m-3 text-white bg-[#18181889] rounded-2xl">
               {movieVideo?.vote_average.toFixed(1)}{" "}
-              <FaStar className="text-primary" />
+              <FaStar className="text-primary " />
             </p>
           </div>
 
           {showModel && (
-            <div className="fixed top-0 z-10 w-full h-screen  bg-[rgba(33,_33,_33,_0.8)]">
+            <div className="fixed top-0 left-0 z-10 w-full h-screen  bg-[rgba(33,_33,_33,_0.8)]">
               <div className="p-5 w-full flex justify-end">
                 <IoCloseCircleSharp size={45} onClick={handleClickShowMovie} />
               </div>
@@ -195,10 +205,10 @@ function MovieDetails() {
         </div>
       )}
       <div className="p-2 mt-2">
-        <div className="flex justify-between ">
+        <div className="flex flex-col-reverse sm:flex-row gap-2  justify-between ">
           <button
             onClick={handleAddMyList}
-            className="border border-zinc-600 transition-all active:bg-zinc-500 w-[48%] flex justify-center items-center gap-2 py-2  rounded-md text-[12px] font-bold"
+            className="border border-zinc-600 transition-all active:bg-zinc-500 w-[98%] flex justify-center items-center gap-2 py-2  rounded-md text-[12px] font-bold"
           >
             {isMyList ? (
               <>
@@ -214,7 +224,7 @@ function MovieDetails() {
 
           <button
             onClick={handleClickShowMovie}
-            className="bg-primary active:bg-orange-300 transition-all w-[48%] flex justify-center items-center gap-2 py-2 rounded-md text-[13px] font-bold"
+            className="bg-primary active:bg-orange-300 transition-all w-[98%] flex justify-center items-center gap-2 py-2 rounded-md text-[13px] font-bold"
           >
             <FaPlay size={17} />
             Play
@@ -228,40 +238,51 @@ function MovieDetails() {
             {movieVideo?.overview}
           </p>
         </div>
-        <div className="flex justify-between items-center">
-          <div className="text-[14px] font-bold text-slate-400 mt-1">
-            Original Language:{" "}
-            <div className="font-normal ">
-              {movieVideo?.spoken_languages[0]?.english_name}
-            </div>
+        <h3 className="text-slate-400 font-bold text-[14px]">Film Genre</h3>
+        <p className="grid grid-cols-3 sm:grid-cols-5 gap-1 text-[13px] my-2">
+          {movieVideo?.genres?.map((item: { id: number; name: string }) => {
+            return (
+              <h2
+                key={item.id}
+                className="text-gray-400 flex items-center justify-center text-center bg-[#00000048] rounded-lg py-[2px]"
+              >
+                {item.name}
+              </h2>
+            );
+          })}
+        </p>
+
+        <div className="text-[14px] font-bold text-slate-400  flex justify-between items-center my-3">
+          Original Language:{" "}
+          <div className="font-normal ">
+            {movieVideo?.spoken_languages[0]?.english_name}
           </div>
-          <div className="text-slate-400 font-bold text-[14px]">
-            Release Date
-            <h3 className=" text-[12px] font-normal">{formattedDate}</h3>
-          </div>
+        </div>
+        <div className="text-slate-400 font-bold text-[14px] flex justify-between items-center">
+          Release Date
+          <h3 className=" text-[12px] font-normal">{formattedDate}</h3>
         </div>
       </div>
       <div className="bg-zinc-700 w-full h-[1px] my-3"></div>
       <h1 className="text-[14px] font-bold mb-2 pl-3">More Like This</h1>
       <div className="p-2">
         <h1 className="text-[18px] font-bold mb-2">Popular on Nuvex</h1>
-       
-          <div
-            className="flex overflow-auto gap-3"
-            onMouseDown={startDragging}
-            onMouseUp={stopDragging}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={stopDragging}
-          >
-            {popular.map((movie: CardMovieProps) => {
-              return (
-                <div key={movie.id}>
-                  <CardMovie data={movie} />
-                </div>
-              );
-            })}
-          </div>
-       
+
+        <div
+          className="flex overflow-auto gap-3"
+          onMouseDown={startDragging}
+          onMouseUp={stopDragging}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={stopDragging}
+        >
+          {popular.map((movie: CardMovieProps) => {
+            return (
+              <div key={movie.id}>
+                <CardMovie data={movie} />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

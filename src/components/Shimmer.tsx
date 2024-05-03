@@ -12,7 +12,7 @@ function Shimmer({ width, height }: ShimmerProps) {
           width: width,
           height: height,
           background:
-            "linear-gradient(-90deg, #5e5e5e 0%, grey 50%, #5e5e5e 100%)",
+            "linear-gradient(-90deg, #8c8c8c 0%, #adadad 50%, #8c8c8c 100%)",
           backgroundSize: "200% 100%",
           backgroundPosition: "90% -90%",
           animation: "shimmerAnimation 2.5s infinite",

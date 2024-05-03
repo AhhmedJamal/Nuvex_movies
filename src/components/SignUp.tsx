@@ -117,7 +117,7 @@ function SignUp({ setChoose }: SignUpProps) {
 
         <button
           type="submit"
-          className="bg-primary text-light rounded-md p-2 font-bold items-center flex justify-center mt-3"
+          className="bg-primary text-white rounded-md p-2 font-bold items-center flex justify-center mt-3"
         >
           {loading ? <LoaderButton /> : "Sign up"}
         </button>

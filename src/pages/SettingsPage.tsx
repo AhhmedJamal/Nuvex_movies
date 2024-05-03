@@ -3,6 +3,7 @@ import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeProvider ";
 import { useContext } from "react";
+import { IoIosArrowBack } from "react-icons/io";
 
 function SettingsPage() {
   const themeContext = useContext(ThemeContext);
@@ -18,8 +19,15 @@ function SettingsPage() {
   };
 
   return (
-    <section className="flex flex-col justify-between items-center h-[90%] gap-4 pt-[40px]">
-      <h1 className="font-bold text-[23px] self-start pl-3">Settings</h1>
+    <section className="flex flex-col justify-between items-center h-[90%] gap-4 p-4">
+      <div className="flex items-center self-start  mt-[5px]">
+        <IoIosArrowBack
+          className="hidden sm:block"
+          size={30}
+          onClick={() => window.history.back()}
+        />
+        <h1 className="font-bold text-[23px] self-start pl-5">Settings</h1>
+      </div>
       <div className="flex items-center justify-between gap-4 bg-[#00000067] p-3  w-[90%] font-bold rounded-xl">
         {theme == "dark" ? "Dark" : "Light"}
 

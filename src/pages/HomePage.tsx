@@ -5,6 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import MovieList from "../components/MovieList";
 import { CardMovieProps } from "../types/CardMovieProps";
+import NavBar from "../components/NavBar";
 
 export default function Home() {
   const [popular, setPopular] = useState<CardMovieProps[]>([]);
@@ -59,12 +60,13 @@ export default function Home() {
   }, []);
 
   return (
-    <section >
+    <main>
+      <NavBar />
       <CarouselMovie />
       <MovieList dataMovie={nowPlaying} title={"Now Playing"} />
       <MovieList dataMovie={popular} title={"Popular"} />
       <MovieList dataMovie={topRated} title={"Top Rated"} />
       <MovieList dataMovie={upcoming} title={"Upcoming"} />
-    </section>
+    </main>
   );
 }

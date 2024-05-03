@@ -10,6 +10,10 @@ const pathPoster = (path: string) => {
 function CardMovie({ data }: { data: CardMovieProps }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useNavigate();
+  const handleClick = () => {
+    data.poster_path !== null &&
+      router(`/movie/${data.id}-${data?.title.replace(/[\s#-]/g, "_")}`);
+  };
   useEffect(() => {
     setIsLoading(true);
     setTimeout(() => {
@@ -22,12 +26,7 @@ function CardMovie({ data }: { data: CardMovieProps }) {
         <Shimmer height={160} width={"110px"} />
       ) : (
         <button
-          onClick={() => {
-            data.poster_path !== null &&
-              router(
-                `/movie/${data.id}-${data?.title.replace(/[\s#-]/g, "_")}`
-              );
-          }}
+          onClick={handleClick}
           className="w-[110px] min-h-[160px] rounded-xl overflow-hidden relative flex flex-col justify-center items-center  border border-zinc-600 cursor-grab "
         >
           {data.poster_path !== null ? (

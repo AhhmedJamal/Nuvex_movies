@@ -137,13 +137,14 @@ function Login() {
         </Link>
         <button
           type="submit"
-          className="bg-primary text-light rounded-md p-2 font-bold items-center flex justify-center"
+          className="bg-primary text-white rounded-md p-2 font-bold items-center flex justify-center"
         >
           {loading ? <LoaderButton /> : "Login"}
         </button>
       </form>
       <div className="flex justify-center gap-2 mt-[20px]">
         <button
+          aria-label="Button Login Google"
           onClick={handleGoogle}
           type="button"
           className="bg-zinc-700 text-gray-800 text-[14px]  rounded-md p-2 font-bold items-center flex gap-2 justify-center"
@@ -151,6 +152,7 @@ function Login() {
           <FcGoogle size={24} />
         </button>
         <button
+          aria-label="Button Login Facebook"
           onClick={handleFacebook}
           type="button"
           className="bg-zinc-700 text-gray-800 text-[14px]  rounded-md p-2 font-bold items-center flex gap-2 justify-center"

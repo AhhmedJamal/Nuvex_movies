@@ -10,7 +10,6 @@ import SearchPage from "../pages/SearchPage";
 export const router = createBrowserRouter([
   {
     path: "/",
-
     element: <App />,
     children: [
       {
@@ -18,13 +17,12 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/search",
-        element: <SearchPage />,
-      },
-
-      {
         path: "/:name/:id",
         element: <MovieDetails />,
+      },
+      {
+        path: "/search",
+        element: <SearchPage />,
       },
       {
         path: "/myList",
@@ -36,6 +34,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: "auth",
     element: <Auth />,

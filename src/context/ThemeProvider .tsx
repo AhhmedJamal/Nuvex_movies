@@ -1,4 +1,4 @@
-import React, { ReactNode, createContext, useState } from "react";
+import React, { ReactNode, createContext, useEffect, useState } from "react";
 
 type ThemeContextType = {
   theme: string;
@@ -15,7 +15,7 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     localStorage.setItem("theme", theme === "light" ? "dark" : "light");
     document.body.classList.toggle("light");
   };
-
+  useEffect(() => {}, []);
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}

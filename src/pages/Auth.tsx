@@ -18,7 +18,7 @@ function Auth() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="bg-[url('../public/assets/backGroundAuth.jpg')] bg-cover">
+    <div className="bg-[url('../public/assets/backGround.jpg')] bg-cover">
       <div className="flex h-screen  w-full justify-center items-center pt-16 flex-col bg-gradient-to-t from-black via-zinc-900 to-transparent">
         <h1 className=" text-[50px] font-['Righteous',_sans-serif] font-semibold not-italic text-primary mb-[20px]">
           Nuvex
@@ -26,16 +26,16 @@ function Auth() {
         <div className="flex gap-3 font-bold justify-between w-[80%] mb-4">
           <button
             onClick={() => setChoose(true)}
-            className={`border border-zinc-500 py-1 px-3 w-[48%] ${
-              choose && "bg-primary text-white border-none"
+            className={`border border-zinc-500 py-1 px-3 w-[48%] text-white ${
+              choose && "bg-primary border-none"
             }`}
           >
             Login
           </button>
           <button
             onClick={() => setChoose(false)}
-            className={`border border-zinc-500 py-1 px-3 w-[48%] ${
-              !choose ? "bg-primary text-white border-none " : ""
+            className={`border border-zinc-500 py-1 px-3 w-[48%] text-white ${
+              !choose ? "bg-primary border-none " : ""
             }`}
           >
             Sign up

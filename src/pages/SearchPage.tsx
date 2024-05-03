@@ -3,6 +3,7 @@ import { CardMovieProps } from "../types/CardMovieProps";
 import ImageMovie from "../../public/assets/Film rolls-rafiki.svg";
 import { useState } from "react";
 import Shimmer from "../components/Shimmer";
+import { IoIosArrowBack } from "react-icons/io";
 
 function SearchPage() {
   const [search, setSearch] = useState<[]>([]);
@@ -38,9 +39,17 @@ function SearchPage() {
     fetchData();
   };
   return (
-    <div className="p-3 mt-10 ">
+    <div className="p-4">
+      <div className="flex items-center self-start mt-[5px]">
+        <IoIosArrowBack
+          className="hidden sm:block"
+          size={30}
+          onClick={() => window.history.back()}
+        />
+        <h1 className="font-bold text-[23px] self-start pl-5">Search</h1>
+      </div>
       <form
-        className="flex justify-between items-center mt-4"
+        className="flex justify-between items-center mt-6"
         onSubmit={handleSubmit}
       >
         <input
@@ -61,7 +70,7 @@ function SearchPage() {
         <h1 className="mt-4 font-bold">Results For ' {title} '</h1>
       )}
       {isLoading ? (
-        <div className="grid grid-cols-3 place-items-center gap-x-2 gap-y-1.5 mt-5 relative ">
+        <div className="grid grid-cols-3 sm:grid-cols-5  md:grid-cols-6 md:gap-y-5  place-items-center gap-x-2 gap-y-1 mt-5 relative ">
           {search.map((_, i) => {
             return (
               <div key={i} className="overflow-hidden">
@@ -71,7 +80,7 @@ function SearchPage() {
           })}
         </div>
       ) : (
-        <div className="grid grid-cols-3 sm:grid-cols-5  md:grid-cols-6 md:gap-y-5 place-items-center gap-x-2 gap-y-1.5 mt-10 relative">
+        <div className="grid grid-cols-3 sm:grid-cols-5  md:grid-cols-6 md:gap-y-5 place-items-center gap-x-3 gap-y-1 mt-5 relative">
           {search.length !== 0 ? (
             search.map((movie: CardMovieProps) => (
               <CardMovie key={movie.id} data={movie} />
@@ -81,7 +90,7 @@ function SearchPage() {
               <img
                 src={ImageMovie}
                 alt="Image not found Movies"
-                className="w-[60%] sm:w-[20%] mt-[50px] m-auto "
+                className="w-[60%] sm:w-[23%] mt-[50px]"
               />
               No results Movies !!
             </div>

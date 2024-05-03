@@ -22,6 +22,12 @@ function CardMyList({ dataMovie, getMyList }: CardMyListProps) {
     return `${hours}:${minutes}:00`;
   }
 
+  const handleClick = () => {
+    dataMovie.poster_path !== null &&
+      router(
+        `/movie/${dataMovie.id}-${dataMovie?.title.replace(/[\s#-]/g, "_")}`
+      );
+  };
   const handleDelete = async () => {
     if (user) {
       try {
@@ -51,7 +57,7 @@ function CardMyList({ dataMovie, getMyList }: CardMyListProps) {
     }, 1000);
   }, []);
   return (
-    <>
+    <section>
       {isLoading ? (
         <div className="flex gap-4 w-full h-[150px] p-3 rounded-xl bg-[#00000033]">
           <Shimmer height={125} width={"90px"} />
@@ -75,14 +81,7 @@ function CardMyList({ dataMovie, getMyList }: CardMyListProps) {
       ) : (
         <div className="flex justify-between gap-5 w-full h-[150px] bg-[#00000033] rounded-xl p-3">
           <img
-            onClick={() => {
-              router(
-                `/movie/${dataMovie.id}-${dataMovie?.title.replace(
-                  /[\s#-]/g,
-                  "_"
-                )}`
-              );
-            }}
+            onClick={handleClick}
             loading="lazy"
             src={pathPhoto()}
             alt="path photo movie"
@@ -121,7 +120,7 @@ function CardMyList({ dataMovie, getMyList }: CardMyListProps) {
           </div>
         </div>
       )}
-    </>
+    </section>
   );
 }
 

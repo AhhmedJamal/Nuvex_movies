@@ -9,7 +9,13 @@ function BottomBar() {
 
   return (
     <footer
-      className={`sm:hidden z-10 fixed bottom-[0px]  w-full  h-[70px]  flex justify-around items-center bg-[rgba(6,6,6,0.06)]  [box-shadow:0_4px_30px_rgba(0,_0,_0,_0.1)] backdrop-filter backdrop-blur-[20px] `}
+      className={`${
+        pathname !== "/" &&
+        pathname !== "/search" &&
+        pathname !== "/myList" &&
+        pathname !== "/settings" &&
+        "hidden"
+      } sm:hidden z-10 fixed bottom-[0px]  w-full  h-[70px]  flex justify-around items-center bg-[rgba(6,6,6,0.06)]  [box-shadow:0_4px_30px_rgba(0,_0,_0,_0.1)] backdrop-filter backdrop-blur-[80px] `}
     >
       <Link to={"/"} className={pathname === "/" ? "text-primary" : ""}>
         <GoHomeFill size={30} />

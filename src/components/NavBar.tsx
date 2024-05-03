@@ -14,13 +14,13 @@ function NavBar() {
     });
   }, []);
   return (
-    <header className="h-[60px] flex items-center justify-between px-4 w-full z-10  [box-shadow:0_1px_15px_#212121] border-zinc-800">
+    <header className="h-[60px] flex items-center justify-between px-4 pt-2 w-full z-10 shadow-md">
       <div className="flex justify-center items-center gap-2 ">
         {user && user.photoURL ? (
           <img
             src={user.photoURL}
             alt="photo user"
-            className="w-[35px] rounded-full"
+            className="w-[35px] rounded-lg"
           />
         ) : (
           <FaUserCircle size={30} />
@@ -33,11 +33,11 @@ function NavBar() {
         </div>
       </div>
 
-      <div className="hidden sm:flex justify-between w-[30%] font-bold text-[13px] ">
+      <nav className="hidden sm:flex justify-between w-[30%] font-bold font-mono  text-[13px] ">
         <Link to="/search">Search</Link>
         <Link to="/myList">My List</Link>
         <Link to="/settings">Settings</Link>
-      </div>
+      </nav>
       <Link
         to="/"
         className="relative text-[27px] font-['Righteous',_sans-serif] font-semibold not-italic text-primary overflow-hidden z-10"
