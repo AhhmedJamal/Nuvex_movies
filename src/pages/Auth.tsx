@@ -20,10 +20,11 @@ function Auth() {
   return (
     <div className="bg-[url('../public/assets/backGroundAuth.jpg')] bg-cover">
       <div className="flex h-screen  w-full justify-center items-center pt-16 flex-col bg-gradient-to-t from-black via-zinc-900 to-transparent">
-        <h1 className=" text-[50px] font-['Righteous',_sans-serif] font-semibold not-italic text-primary mb-[20px]">
-          Nuvex
-        </h1>
-        <div className="flex gap-3 font-bold justify-between w-[80%] mb-4">
+        <div className="relative w-fit text-[47px] font-['Righteous',_sans-serif] font-semibold not-italic text-primary overflow-hidden z-10">
+          NUVEX
+          <div className="absolute bottom-3 right-[-1px] bg-[#ffffff0c] [box-shadow:0_4px_30px_#00000005] backdrop-filter backdrop-blur-[2px] w-full h-[13px]"></div>
+        </div>
+        <div className="flex gap-3 font-bold justify-between w-[80%] my-4">
           <button
             onClick={() => setChoose(true)}
             className={`border border-zinc-500 py-1 px-3 w-[48%] text-white ${
@@ -35,7 +36,7 @@ function Auth() {
           <button
             onClick={() => setChoose(false)}
             className={`border border-zinc-500 py-1 px-3 w-[48%] text-white ${
-              !choose ? "bg-primary border-none " : ""
+              !choose ? "bg-primary border-none text-black" : ""
             }`}
           >
             Sign up
