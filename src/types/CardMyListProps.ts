@@ -1,3 +1,5 @@
+import { UserData } from "./UserData";
+
 export interface CardMyListProps {
   dataMovie: {
     id: number;
@@ -7,5 +9,5 @@ export interface CardMyListProps {
     genres: { id: number; name: string }[];
     vote_average: number;
   };
-  getMyList: () => Promise<void>;
+  getDataUser: (user: UserData) => void;
 }

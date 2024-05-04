@@ -1,17 +1,21 @@
 import { MdOutlineDelete } from "react-icons/md";
 import { CardMyListProps } from "../types/CardMyListProps";
 import { useNavigate } from "react-router-dom";
-import { auth, db } from "../config/firebase";
+import { db } from "../config/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { FaStar } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { AppContext } from "../context/ThemeProvider ";
 
-function CardMyList({ dataMovie, getMyList }: CardMyListProps) {
+function CardMyList({ dataMovie, getDataUser }: CardMyListProps) {
   const { poster_path, title, genres, runtime, id, vote_average } = dataMovie;
   const [isLoading, setIsLoading] = useState(false);
+  const Context = useContext(AppContext);
+  if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
+  const { user } = Context;
   const router = useNavigate();
-  const user = auth.currentUser;
+
   const pathPhoto = () => {
     return `https://image.tmdb.org/t/p/original${poster_path}`;
   };
@@ -48,7 +52,7 @@ function CardMyList({ dataMovie, getMyList }: CardMyListProps) {
     } else {
       console.log("User not logged in");
     }
-    getMyList();
+    getDataUser(user);
   };
   useEffect(() => {
     setIsLoading(true);

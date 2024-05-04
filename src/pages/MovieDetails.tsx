@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MovieProps } from "../types/MovieDetailsProps";
 import { BsBookmarkPlus } from "react-icons/bs";
@@ -9,15 +9,10 @@ import { IoCloseCircleSharp } from "react-icons/io5";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
 import Shimmer from "../components/Shimmer";
-import { auth, db } from "../config/firebase";
+import { db } from "../config/firebase";
 import toast, { Toaster } from "react-hot-toast";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  updateDoc,
-} from "firebase/firestore";
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import { AppContext } from "../context/ThemeProvider ";
 
 function MovieDetails() {
   const [movieVideo, setMovieVideo] = useState<MovieProps | null>(null);
@@ -33,7 +28,9 @@ function MovieDetails() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isMyList, setIsMyList] = useState<boolean>(false);
   const collectionsRef = collection(db, "users");
-  const user = auth.currentUser;
+  const Context = useContext(AppContext);
+  if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
+  const { user } = Context;
 
   const startDragging = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setMouseDown(true);
@@ -102,7 +99,6 @@ function MovieDetails() {
     setShowModel((pre) => !pre);
   };
   const handleAddMyList = async () => {
-    const user = auth.currentUser;
     if (user) {
       try {
         const dataFromCollection = await getDocs(collectionsRef);
@@ -113,7 +109,6 @@ function MovieDetails() {
           const newMovies = {
             myList: [...filteredData.myList, movieVideo],
           };
-
           await updateDoc(docRef, newMovies)
             .then(() => {
               console.log("updateDoc successfully");
@@ -131,30 +126,27 @@ function MovieDetails() {
     toast.success("Done Add To List");
   };
   const getMyList = async () => {
-    try {
-      if (user) {
-        const docRef = doc(db, "users", user.email || "");
-        const docSnapshot = await getDoc(docRef);
-        const userData = docSnapshot.data() ?? {};
-        userData.myList.map((item: { id: number | undefined }) => {
-          item.id === movieVideo?.id && setIsMyList(true);
-        });
-      } else {
-        console.log("User is not authenticated");
-      }
-    } catch (error) {
-      console.error("Error fetching document:", error);
+    if (user) {
+      // setIsMyList(true)
+      console.log(user.myList[2].id);
+      console.log(movieVideo?.id);
+      user.myList?.forEach(async (item: MovieProps) => {
+        item.id === movieVideo?.id
+          ? console.log("done")
+          : console.log("not done");
+      });
+    } else {
+      console.log("User is not authenticated");
     }
   };
   useEffect(() => {
-    getMyList();
-    SuggestedMovies();
     fetchDataVideo();
+    SuggestedMovies();
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-
+    getMyList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Params]);
   return (

@@ -142,22 +142,24 @@ function Login() {
           {loading ? <LoaderButton /> : "Log in"}
         </button>
       </form>
-      <div className="flex justify-center gap-2 mt-[20px]">
+      <div className="flex flex-col justify-center gap-2 mt-[20px] w-full">
         <button
           aria-label="Button Login Google"
           onClick={handleGoogle}
           type="button"
-          className="bg-zinc-700 text-gray-800 text-[14px]  rounded-md p-2 font-bold items-center flex gap-2 justify-center"
+          className="bg-slate-100 text-gray-800 text-[14px] active:bg-gray-300  rounded-md p-1 font-bold items-center flex gap-2 justify-center"
         >
+          Login with
           <FcGoogle size={24} />
         </button>
         <button
           aria-label="Button Login Facebook"
           onClick={handleFacebook}
           type="button"
-          className="bg-zinc-700 text-gray-800 text-[14px]  rounded-md p-2 font-bold items-center flex gap-2 justify-center"
+          className="bg-slate-100 text-gray-800 text-[14px] active:bg-gray-300  rounded-md p-1 font-bold items-center flex gap-2 justify-center"
         >
-          <SiFacebook size={24} className="text-sky-500" />
+          Login with
+          <SiFacebook size={24} className="text-sky-500 " />
         </button>
       </div>
     </div>

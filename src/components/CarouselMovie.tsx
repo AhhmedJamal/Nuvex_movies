@@ -67,7 +67,7 @@ function CarouselMovie() {
                   className="h-[250px] sm:h-[300px] object-cover overflow-hidden"
                 />
                 <div className="absolute font-['Madimi_One',_sans-serif] font-normal not-italic  text-neutral-200 bottom-[-2px] h-[250px] w-full flex items-end justify-between bg-gradient-to-t p-2 from-[#1c1c1c]">
-                  <p className="w-[67%] text-[22px] text-left">{data.title}</p>
+                  <p className="w-[67%] text-[22px] md:text-[30px] text-left">{data.title}</p>
 
                   <div className="bg-primary  flex items-center justify-center gap-2 w-[30%]  h-7 rounded-md text-[#000000d8]">
                     <FaPlay size={18} onClick={() => handleClick(data)} />
