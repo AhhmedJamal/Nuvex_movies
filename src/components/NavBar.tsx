@@ -38,12 +38,9 @@ function NavBar() {
         <Link to="/myList">My List</Link>
         <Link to="/settings">Settings</Link>
       </nav>
-      <Link
-        to="/"
-        className="relative text-[27px]  font-extrabold  text-primary overflow-hidden z-10"
-      >
-        NUVEX
-        <div className="absolute top-[24px] right-[-1px] bg-[#ffffff0c] [box-shadow:0_4px_30px_#00000005] backdrop-filter backdrop-blur-[2px] w-full h-[10px]"></div>
+      <Link to="/" className="relative overflow-hidden z-10">
+        <img src="../../public/assets/nuvex.png " className="w-[90px]" alt="" />
+        <div className="absolute top-[16px] right-[0px] bg-[#ffffff0c] [box-shadow:0_4px_30px_#00000005] backdrop-filter backdrop-blur-[2px] w-full h-[10px]"></div>
       </Link>
     </header>
   );

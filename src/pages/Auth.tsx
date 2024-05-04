@@ -19,29 +19,32 @@ function Auth() {
   }, []);
   return (
     <div className="bg-[url('../public/assets/backGroundAuth.jpg')] bg-cover">
-      <div className="flex h-screen  w-full justify-center items-center pt-16 flex-col bg-gradient-to-t from-black via-zinc-900 to-transparent">
-        <div className="relative w-fit text-[47px]  font-bold  text-primary overflow-hidden z-10">
-          NUVEX
+      <div className="relative w-fit text-[47px] pl-4 pt-6  font-bold  text-primary overflow-hidden z-10 self-start">
+        <img src="../../public/assets/nuvex.png" className="w-[130px]" alt="" />
+        <div className="absolute bottom-0 right-[0px] bg-[#ffffff0c] [box-shadow:0_4px_30px_#00000005] backdrop-filter backdrop-blur-[2px] w-full h-[11px]"></div>
+      </div>
+      <div className="flex h-screen  w-full items-center justify-center flex-col bg-gradient-to-t from-black via-zinc-900 to-transparent">
+        <div className="flex flex-col  font-bold justify-between w-[80%] lg:w-[50%] my-4">
+          <div className=" flex gap-3">
+            <button
+              onClick={() => setChoose(true)}
+              className={`border border-zinc-500 py-1 px-3 w-[48%] text-white ${
+                choose && "bg-primary border-none"
+              }`}
+            >
+              Log in
+            </button>
+            <button
+              onClick={() => setChoose(false)}
+              className={`border border-zinc-500 py-1 px-3 w-[48%] text-white ${
+                !choose ? "bg-primary border-none" : ""
+              }`}
+            >
+              Sign up
+            </button>
+          </div>
+          {choose ? <Login /> : <SignUp setChoose={setChoose} />}
         </div>
-        <div className="flex gap-3 font-bold justify-between w-[80%] my-4">
-          <button
-            onClick={() => setChoose(true)}
-            className={`border border-zinc-500 py-1 px-3 w-[48%] text-white ${
-              choose && "bg-primary border-none"
-            }`}
-          >
-            Log in
-          </button>
-          <button
-            onClick={() => setChoose(false)}
-            className={`border border-zinc-500 py-1 px-3 w-[48%] text-white ${
-              !choose ? "bg-primary border-none" : ""
-            }`}
-          >
-            Sign up
-          </button>
-        </div>
-        {choose ? <Login /> : <SignUp setChoose={setChoose} />}
       </div>
     </div>
   );

@@ -108,9 +108,9 @@ function Login() {
   };
 
   return (
-    <div className="flex h-[40vh] justify-center items-center flex-col overflow-hidden w-full">
+    <div className="flex h-[300px]  justify-center items-center flex-col overflow-hidden w-full">
       <Toaster position="top-center" reverseOrder={false} />
-      <form className="w-[80%] flex flex-col gap-3" onSubmit={handleLogin}>
+      <form className="w-full flex flex-col gap-3" onSubmit={handleLogin}>
         <input
           className="bg-zinc-700 shadow appearance-none border border-zinc-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
           id="email"

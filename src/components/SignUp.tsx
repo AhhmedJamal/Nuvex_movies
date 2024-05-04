@@ -75,9 +75,9 @@ function SignUp({ setChoose }: SignUpProps) {
   };
 
   return (
-    <div className="flex h-[40vh] justify-center items-center flex-col w-full">
+    <div className="flex h-[300px] justify-center items-center flex-col w-full">
       <Toaster position="top-center" reverseOrder={false} />
-      <form className="w-[80%] flex flex-col gap-4" onSubmit={handleSignUp}>
+      <form className="w-full flex flex-col gap-4" onSubmit={handleSignUp}>
         <div className="flex gap-2">
           <input
             value={name}
