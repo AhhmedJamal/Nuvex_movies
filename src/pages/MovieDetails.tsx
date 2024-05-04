@@ -11,7 +11,13 @@ import { IoIosArrowBack } from "react-icons/io";
 import Shimmer from "../components/Shimmer";
 import { db } from "../config/firebase";
 import toast, { Toaster } from "react-hot-toast";
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import { AppContext } from "../context/ThemeProvider ";
 
 function MovieDetails() {
@@ -72,6 +78,7 @@ function MovieDetails() {
     );
     const data = await response.json();
     setMovieVideo(data);
+    getMyList(data.id);
   };
   function getRandomNumber() {
     // Generate a random decimal between 0 and 1
@@ -103,7 +110,7 @@ function MovieDetails() {
       try {
         const dataFromCollection = await getDocs(collectionsRef);
         const data = dataFromCollection.docs.map((doc) => doc.data());
-        const filteredData = data.find((item) => item.id === user.uid);
+        const filteredData = data.find((item) => item.uid === user.uid);
         if (filteredData) {
           const docRef = doc(db, "users", user.email || "");
           const newMovies = {
@@ -111,6 +118,7 @@ function MovieDetails() {
           };
           await updateDoc(docRef, newMovies)
             .then(() => {
+              setIsMyList(true);
               console.log("updateDoc successfully");
             })
             .catch((error) => {
@@ -125,15 +133,37 @@ function MovieDetails() {
     }
     toast.success("Done Add To List");
   };
-  const getMyList = async () => {
+  const handleRemoveMyList = async () => {
     if (user) {
-      // setIsMyList(true)
-      console.log(user.myList[2].id);
-      console.log(movieVideo?.id);
+      try {
+        const docRef = doc(db, "users", user.email || "");
+        const docSnapshot = await getDoc(docRef);
+        if (docSnapshot.exists()) {
+          const userData = docSnapshot.data();
+          const oldMyList = userData.myList || []; // Handle case where myList might be undefined
+          const updatedMyList = oldMyList.filter(
+            (item: { id: number | undefined }) => item.id !== movieVideo?.id
+          );
+          if (updatedMyList.length !== oldMyList.length) {
+            await updateDoc(docRef, { myList: updatedMyList });
+            setIsMyList(false); // Assuming you want to set setIsMyList(false) when an item is removed
+          } else {
+            console.log("Item not found in myList");
+          }
+        } else {
+          console.log("User document does not exist");
+        }
+      } catch (error) {
+        console.error("Error deleting favorite:", error);
+      }
+    } else {
+      console.log("User not logged in");
+    }
+  };
+  const getMyList = async (id: number) => {
+    if (user) {
       user.myList?.forEach(async (item: MovieProps) => {
-        item.id === movieVideo?.id
-          ? console.log("done")
-          : console.log("not done");
+        item.id === id && setIsMyList(true);
       });
     } else {
       console.log("User is not authenticated");
@@ -146,7 +176,6 @@ function MovieDetails() {
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-    getMyList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Params]);
   return (
@@ -199,7 +228,7 @@ function MovieDetails() {
       <div className="p-2 mt-2">
         <div className="flex flex-col-reverse sm:flex-row gap-2  justify-between ">
           <button
-            onClick={handleAddMyList}
+            onClick={isMyList ? handleRemoveMyList : handleAddMyList}
             className="border border-zinc-600 transition-all active:bg-zinc-500 w-[98%] flex justify-center items-center gap-2 py-2  rounded-md text-[12px] font-bold"
           >
             {isMyList ? (
