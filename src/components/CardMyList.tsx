@@ -94,12 +94,12 @@ function CardMyList({ dataMovie, getDataUser }: CardMyListProps) {
           <div className="w-full text-left ">
             <h1 className="font-bold text-[16px] h-[45px]">{title}</h1>
             <div className="flex flex-col justify-between h-[65%] ">
-              <p className="grid grid-cols-3 gap-1 text-[11px] mt-2">
+              <p className="grid grid-cols-3 gap-1 text-[10px] mt-2">
                 {genres?.map((item: { id: number; name: string }) => {
                   return (
                     <h2
                       key={item.id}
-                      className="text-gray-400 flex items-center justify-center text-center bg-[#00000048] rounded-lg py-[2px]"
+                      className=" flex items-center justify-center text-center bg-[#00000048] rounded-lg py-[2px]"
                     >
                       {item.name}
                     </h2>
@@ -107,7 +107,7 @@ function CardMyList({ dataMovie, getDataUser }: CardMyListProps) {
                 })}
               </p>
               <div className="flex justify-between items-end">
-                <p className="text-gray-400 text-[13px]">
+                <p className="text-zinc-500 text-[13px]">
                   {formatMovieDuration(runtime)}
                 </p>
                 <p className="flex items-center gap-1 text-[13px] font-bold">

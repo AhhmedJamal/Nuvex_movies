@@ -259,13 +259,13 @@ function MovieDetails() {
             {movieVideo?.overview}
           </p>
         </div>
-        <h3 className="text-slate-400 font-bold text-[14px]">Film Genre</h3>
+        <h3 className="text-slate-500 font-bold text-[14px]">Film Genre</h3>
         <p className="grid grid-cols-3 sm:grid-cols-5 gap-1 text-[13px] my-2">
           {movieVideo?.genres?.map((item: { id: number; name: string }) => {
             return (
               <h2
                 key={item.id}
-                className="text-gray-400 flex items-center justify-center text-center bg-[#00000048] rounded-lg py-[2px]"
+                className="flex items-center justify-center  text-center bg-[#00000048] rounded-lg py-[2px]"
               >
                 {item.name}
               </h2>
@@ -273,13 +273,13 @@ function MovieDetails() {
           })}
         </p>
 
-        <div className="text-[14px] font-bold text-slate-400  flex justify-between items-center my-3">
+        <div className="text-[14px] font-bold text-slate-500  flex justify-between items-center my-3">
           Original Language:{" "}
           <div className="font-normal ">
             {movieVideo?.spoken_languages[0]?.english_name}
           </div>
         </div>
-        <div className="text-slate-400 font-bold text-[14px] flex justify-between items-center">
+        <div className="text-slate-500 font-bold text-[14px] flex justify-between items-center">
           Release Date
           <h3 className=" text-[12px] font-normal">{formattedDate}</h3>
         </div>
