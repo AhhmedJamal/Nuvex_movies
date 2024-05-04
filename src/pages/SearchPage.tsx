@@ -42,11 +42,11 @@ function SearchPage() {
     <div className="p-4">
       <div className="flex items-center self-start mt-[5px]">
         <IoIosArrowBack
-          className="hidden sm:block"
+          className="hidden sm:block mr-5"
           size={30}
           onClick={() => window.history.back()}
         />
-        <h1 className="font-bold text-[23px] self-start pl-5">Search</h1>
+        <h1 className="font-bold text-[23px] self-start">Search</h1>
       </div>
       <form
         className="flex justify-between items-center mt-6"

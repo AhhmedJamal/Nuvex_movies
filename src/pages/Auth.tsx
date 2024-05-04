@@ -21,9 +21,9 @@ function Auth() {
     <div className="bg-[url('../public/assets/backGroundAuth.jpg')] bg-cover">
       <div className="relative w-fit text-[33px] font-[700] text-primary overflow-hidden z-10 pt-4 ml-3">
         NUVEX
-        <div className="absolute bottom-2 right-[0px] bg-[#ffffff0c] [box-shadow:0_4px_30px_#00000005] backdrop-filter backdrop-blur-[2px] w-full h-[11px]"></div>
+        <div className="absolute bottom-2 right-[0px] bg-[#ffffff0c] [box-shadow:0_4px_30px_#00000005] backdrop-filter backdrop-blur-[2px] w-full h-[13px]"></div>
       </div>
-      <div className="flex h-screen  w-full items-center justify-center flex-col bg-gradient-to-t from-black via-zinc-900 to-transparent">
+      <div className="flex h-screen  w-full items-center justify-center flex-col bg-gradient-to-t from-black via-zinc-950 to-transparent">
         <div className="flex flex-col  font-bold justify-between w-[80%] lg:w-[50%] my-4">
           <div className=" flex gap-3">
             <button

@@ -39,12 +39,12 @@ function MyListPage() {
     <div className="p-4">
       <div className="flex items-center self-start  mt-[5px]">
         <IoIosArrowBack
-          className="hidden sm:block"
+          className="hidden sm:block mr-5"
           size={30}
           onClick={() => window.history.back()}
         />
 
-        <h1 className="font-bold text-[23px] self-start ml-5 flex items-center gap-2  ">
+        <h1 className="font-bold text-[23px] self-start flex items-center gap-2  ">
           My List
           <TbMovie size={24} />
         </h1>
