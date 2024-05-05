@@ -8,11 +8,10 @@ function Shimmer({ width, height }: ShimmerProps) {
       } `}
     >
       <div
+        className="bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-shimmer  dark:from-zinc-600 dark:via-zinc-700 dark:to-zinc-600"
         style={{
           width: width,
           height: height,
-          background:
-            "linear-gradient(-90deg, #8c8c8c 0%, #adadad 50%, #8c8c8c 100%)",
           backgroundSize: "200% 100%",
           backgroundPosition: "90% -90%",
           animation: "shimmerAnimation 2s infinite",

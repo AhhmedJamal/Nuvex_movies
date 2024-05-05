@@ -5,7 +5,7 @@ import { UserData } from "../types/UserData";
 import { doc, getDoc } from "firebase/firestore";
 
 type ThemeContextType = {
-  theme: string;
+  theme: boolean;
   toggleTheme: () => void;
   user: UserData;
   getDataUser: (user: UserData) => void;
@@ -14,13 +14,13 @@ export const AppContext = createContext<ThemeContextType | undefined>(
   undefined
 );
 const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<string>("dark");
+  const [theme, setTheme] = useState<boolean>(false);
   const [user, setUser] = useState<UserData>({});
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-    localStorage.setItem("theme", theme === "light" ? "dark" : "light");
-    document.body.classList.toggle("light");
+    setTheme((prevTheme) => !prevTheme);
+    localStorage.setItem("theme", theme ? "light" : "dark");
+    document.documentElement.classList.toggle("dark");
   };
 
   const getDataUser = async (user: UserData) => {
@@ -42,6 +42,14 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }
   };
   useEffect(() => {
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") {
+      setTheme(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      setTheme(false);
+      document.documentElement.classList.remove("dark");
+    }
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         getDataUser(user);

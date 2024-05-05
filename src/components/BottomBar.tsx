@@ -15,7 +15,7 @@ function BottomBar() {
         pathname !== "/myList" &&
         pathname !== "/settings" &&
         "hidden"
-      } sm:hidden z-10 fixed bottom-[0px]  w-full  h-[70px]  flex justify-around items-center bg-[rgba(6,6,6,0.06)]  [box-shadow:0_4px_30px_rgba(0,_0,_0,_0.1)] backdrop-filter backdrop-blur-[80px] `}
+      } sm:hidden z-10 fixed bottom-[0px]  w-full  h-[70px]  flex justify-around items-center  bg-white dark:bg-[#131313]   border-t border-zinc-200 dark:border-zinc-800`}
     >
       <Link to={"/"} className={pathname === "/" ? "text-primary" : ""}>
         <GoHomeFill size={30} />
@@ -44,3 +44,4 @@ function BottomBar() {
 }
 
 export default BottomBar;
+// bg-[rgba(6,6,6,0.06)] backdrop-filter backdrop-blur-[80px]

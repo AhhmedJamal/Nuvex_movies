@@ -255,7 +255,7 @@ function MovieDetails() {
           <h1 className="font-bold text-[22px] text-primary">
             {movieVideo?.title}
           </h1>
-          <p className={`text-zinc-400 text-[12px] mt-3`}>
+          <p className={`text-zinc-600 dark:text-zinc-400 text-[13px] md:text-[16px] mt-2`}>
             {movieVideo?.overview}
           </p>
         </div>

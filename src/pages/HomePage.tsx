@@ -60,7 +60,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
+    <main className="pb-[60px]">
       <NavBar />
       <CarouselMovie />
       <MovieList dataMovie={nowPlaying} title={"Now Playing"} />

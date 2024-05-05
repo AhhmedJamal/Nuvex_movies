@@ -41,17 +41,17 @@ function SettingsPage() {
       </div>
       <div className=" w-[90%] md:w-[50%] flex flex-col gap-3">
         <div className="flex items-center justify-between gap-4 bg-[#00000057] p-3  font-bold rounded-xl active:bg-[#3333334d]">
-          {theme == "dark" ? "Dark" : "Light"}
+          {theme ? "Dark" : "Light"}
 
           <div
             onClick={toggleTheme}
             className={`w-11 h-6 transition-all ${
-              theme !== "dark" ? "bg-gray-100" : "bg-zinc-800"
+              theme ? "bg-gray-100" : "bg-zinc-800"
             } rounded-2xl flex items-center p-1`}
           >
             <span
               className={`w-3 h-3 transition-all ${
-                theme !== "dark"
+                theme
                   ? "bg-zinc-800 translate-x-[0px]"
                   : "bg-gray-100 translate-x-[25px]  "
               } rounded-full`}

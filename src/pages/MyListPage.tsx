@@ -32,7 +32,7 @@ function MyListPage() {
       </div>
 
       <div
-        className={`grid grid-cols-1 sm:grid-cols-2 flex-col gap-5  mt-5 relative`}
+        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 flex-col gap-5  mt-5 relative`}
       >
         {user.myList?.length == 0 ? (
           <div className="flex flex-col justify-center items-center mt-[105px] absolute w-full ">

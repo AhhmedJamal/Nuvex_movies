@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import BottomBar from "./components/BottomBar";
 import { useEffect, useState } from "react";
+import BottomBar from "./components/BottomBar";
 import SplashScreen from "./components/SplashScreen";
 
 function App() {
@@ -16,7 +16,9 @@ function App() {
       {start ? (
         <SplashScreen />
       ) : (
-        <div className="container m-auto overflow-y-scroll sm-h-[90vh] h-screen px-0 sm:px-8 pb-[70px] sm:pb-0">
+        <div
+          className={`container m-auto overflow-y-scroll sm-h-[90vh] h-screen px-0 sm:px-8 pb-4 bg-white text-[#131313] dark:bg-[#131313] dark:text-white`}
+        >
           <Outlet />
           <BottomBar />
         </div>

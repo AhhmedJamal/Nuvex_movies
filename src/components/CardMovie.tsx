@@ -27,7 +27,7 @@ function CardMovie({ data }: { data: CardMovieProps }) {
       ) : (
         <button
           onClick={handleClick}
-          className="w-[110px] min-h-[160px] rounded-xl overflow-hidden relative flex flex-col justify-center items-center  border border-zinc-600 cursor-grab "
+          className="w-[110px] min-h-[160px] rounded-xl overflow-hidden relative flex flex-col justify-center items-center  border border-zinc-400 dark:border-zinc-700 cursor-grab "
         >
           {data.poster_path !== null ? (
             <img

@@ -22,23 +22,7 @@
   display: none;
 }
 
-html,
-body {
-  background-color: #131313;
-  color: white;
-  transition: all 0.3s;
-}
-
-.light {
-  background-color: #e0e0e0;
-  color: #1b1b1b;
-}
-.footer {
-  background-color: #1b1b1b;
-  color: white;
-}
-
-/* animation for button */
+/* animation for button Log in and Sign up*/
 @keyframes grow {
   0%,
   100% {
@@ -50,7 +34,7 @@ body {
   }
 }
 
-/* sor shimmer */
+/* for shimmer */
 @keyframes shimmerAnimation {
   0% {
     background-position: 200% 0;
