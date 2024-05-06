@@ -1,6 +1,6 @@
 import CardMovie from "../components/CardMovie";
 import { CardMovieProps } from "../types/CardMovieProps";
-import ImageSearch from "../../public/assets/emptySearch.svg";
+import ImageSearch from "/assets/emptySearch.svg";
 import { useState } from "react";
 import Shimmer from "../components/Shimmer";
 import { IoIosArrowBack } from "react-icons/io";

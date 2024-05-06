@@ -2,6 +2,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AppContext } from "../context/ThemeProvider ";
 import { useContext } from "react";
+import Logo from "./Logo";
 
 function NavBar() {
   const Context = useContext(AppContext);
@@ -34,10 +35,9 @@ function NavBar() {
       </nav>
       <Link
         to="/"
-        className="relative text-[27px] font-[700] text-primary overflow-hidden z-10"
+        className="relative text-[28px] font-[700] text-primary overflow-hidden z-10"
       >
-        NUVEX
-        <div className="absolute top-[24px] right-[-1px] bg-[#ffffff0c] [box-shadow:0_4px_30px_#00000005] backdrop-filter backdrop-blur-[2px] w-full h-[10px]"></div>
+        <Logo fontSize="text-[27px]" heightBlur="h-[8px]" bottom="bottom-2" />
       </Link>
     </header>
   );

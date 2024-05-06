@@ -2,10 +2,10 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import BottomBar from "./components/BottomBar";
 import SplashScreen from "./pages/SplashScreen";
-import OnBoarding from "./pages/OnBoarding";
 
 function App() {
   const [start, setStart] = useState<boolean>(false);
+
   useEffect(() => {
     setStart(true);
     setTimeout(() => {
@@ -14,7 +14,7 @@ function App() {
   }, []);
   return (
     <div className="bg-neutral-100 text-[#131313] dark:bg-neutral-950 dark:text-white transition-all">
-      {/* {start ? (
+      {start ? (
         <SplashScreen />
       ) : (
         <div
@@ -23,8 +23,7 @@ function App() {
           <Outlet />
           <BottomBar />
         </div>
-      )} */}
-      <OnBoarding/>
+      )}
     </div>
   );
 }

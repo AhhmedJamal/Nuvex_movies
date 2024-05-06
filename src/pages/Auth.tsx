@@ -4,6 +4,7 @@ import SignUp from "../components/SignUp";
 import { useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
+import Logo from "../components/Logo";
 
 function Auth() {
   const [choose, setChoose] = useState<boolean>(true);
@@ -19,13 +20,14 @@ function Auth() {
   }, []);
   return (
     <div className="bg-[url('/assets/backGroundAuth.jpg')] bg-cover">
-      <div className="relative w-fit text-[35px] font-[700] text-primary overflow-hidden z-10 pt-4 ml-3">
-        NUVEX
-        <div className="absolute bottom-[9px] right-[0px] bg-[#ffffff0c] [box-shadow:0_4px_30px_#00000005] backdrop-filter backdrop-blur-[2px] w-full h-[13px]"></div>
-      </div>
       <div className="flex h-screen  w-full items-center justify-center flex-col bg-gradient-to-t from-black via-zinc-950 to-transparent">
-        <div className="flex flex-col  font-bold justify-between w-[80%] sm:w-[400px] my-4">
-          <div className=" flex gap-3">
+        <div className="flex flex-col  font-bold justify-between items-center w-[80%] sm:w-[400px] my-4">
+          <Logo
+            fontSize="text-[50px]"
+            heightBlur="h-[14px]"
+            bottom="bottom-4"
+          />
+          <div className=" flex gap-3 w-full mt-4">
             <button
               onClick={() => setChoose(true)}
               className={`border border-zinc-500 py-1 px-3 w-[48%] text-white ${

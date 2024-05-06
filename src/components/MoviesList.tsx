@@ -1,13 +1,9 @@
 import { useState } from "react";
-
 import CardMovie from "./CardMovie";
 import { CardMovieProps } from "../types/CardMovieProps";
+import { MovieListProps } from "../types/MoviesListProps";
 
-interface MovieListProps {
-  title: string;
-  dataMovie: CardMovieProps[];
-}
-function MovieList({ dataMovie, title }: MovieListProps) {
+function MoviesList({ dataMovie, title }: MovieListProps) {
   const [mouseDown, setMouseDown] = useState<boolean>(false);
   const [startX, setStartX] = useState<number>(0);
   const [scrollLeft, setScrollLeft] = useState<number>(0);
@@ -56,4 +52,4 @@ function MovieList({ dataMovie, title }: MovieListProps) {
   );
 }
 
-export default MovieList;
+export default MoviesList;

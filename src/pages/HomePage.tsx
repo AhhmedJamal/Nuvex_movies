@@ -3,7 +3,7 @@ import CarouselMovie from "../components/CarouselMovie";
 import { auth } from "../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import MovieList from "../components/MovieList";
+import MoviesList from "../components/MoviesList";
 import { CardMovieProps } from "../types/CardMovieProps";
 import NavBar from "../components/NavBar";
 
@@ -12,6 +12,7 @@ export default function Home() {
   const [topRated, setTopRated] = useState<CardMovieProps[]>([]);
   const [upcoming, setUpcoming] = useState<CardMovieProps[]>([]);
   const [nowPlaying, setNowPlaying] = useState<CardMovieProps[]>([]);
+
   const router = useNavigate();
 
   function getRandomNumber() {
@@ -63,10 +64,10 @@ export default function Home() {
     <main className="pb-[60px]">
       <NavBar />
       <CarouselMovie />
-      <MovieList dataMovie={nowPlaying} title={"Now Playing"} />
-      <MovieList dataMovie={popular} title={"Popular"} />
-      <MovieList dataMovie={topRated} title={"Top Rated"} />
-      <MovieList dataMovie={upcoming} title={"Upcoming"} />
+      <MoviesList dataMovie={nowPlaying} title={"Now Playing"} />
+      <MoviesList dataMovie={popular} title={"Popular"} />
+      <MoviesList dataMovie={topRated} title={"Top Rated"} />
+      <MoviesList dataMovie={upcoming} title={"Upcoming"} />
     </main>
   );
 }

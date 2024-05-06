@@ -36,6 +36,7 @@ function SignUp({ setChoose }: SignUpProps) {
                       id: user?.uid,
                       name: name,
                       email: user?.email,
+                      onBarding: false,
                       myList: [],
                     });
                   } catch (e) {

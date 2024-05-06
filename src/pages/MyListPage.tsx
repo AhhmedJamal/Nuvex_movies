@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import CardMyList from "../components/CardMyList";
 import { MovieProps } from "../types/MovieDetailsProps";
 import { TbMovie } from "react-icons/tb";
-import ImageMyList from "../../public/assets/emptyMyList.svg";
+import ImageMyList from "/assets/emptyMyList.svg";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { AppContext } from "../context/ThemeProvider ";
