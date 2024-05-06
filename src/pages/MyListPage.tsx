@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import CardMyList from "../components/CardMyList";
 import { MovieProps } from "../types/MovieDetailsProps";
 import { TbMovie } from "react-icons/tb";
-import ImageMovie from "../../public/assets/Videotape-rafiki.svg";
+import ImageMyList from "../../public/assets/emptyMyList.svg";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { AppContext } from "../context/ThemeProvider ";
@@ -36,7 +36,7 @@ function MyListPage() {
       >
         {user.myList?.length == 0 ? (
           <div className="flex flex-col justify-center items-center mt-[105px] absolute w-full ">
-            <img src={ImageMovie} alt="" className="w-[60%] sm:w-[23%]" />
+            <img src={ImageMyList} alt="" className="w-[60%] sm:w-[23%]" />
             <h2 className="text-[16px] font-bold ">Your Not Add Any Movie</h2>
             <Link to="/" className="bg-primary font-bold px-3 rounded-lg mt-3">
               Browser Movie{" "}

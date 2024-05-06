@@ -14,7 +14,7 @@ function Shimmer({ width, height }: ShimmerProps) {
           height: height,
           backgroundSize: "200% 100%",
           backgroundPosition: "90% -90%",
-          animation: "shimmerAnimation 2s infinite",
+          animation: "shimmerAnimation 3.5s infinite",
         }}
       />
     </div>

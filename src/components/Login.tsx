@@ -86,8 +86,7 @@ function Login() {
               name: user.displayName,
               email: user.email,
               photoURL: user.photoURL,
-              favorite: [],
-              cart: [],
+              myList: [],
             });
 
             console.log("Document added successfully");
@@ -137,12 +136,12 @@ function Login() {
         </Link>
         <button
           type="submit"
-          className="bg-primary text-white rounded-md p-2 font-bold items-center flex justify-center"
+          className="bg-primary text-black rounded-md p-2 font-bold items-center flex justify-center"
         >
           {loading ? <LoaderButton /> : "Log in"}
         </button>
       </form>
-      <div className="flex flex-col justify-center gap-2 mt-[20px] w-full">
+      <div className="flex flex-col justify-center gap-2 mt-[20px] w-full ">
         <button
           aria-label="Button Login Google"
           onClick={handleGoogle}

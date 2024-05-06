@@ -15,7 +15,7 @@ function BottomBar() {
         pathname !== "/myList" &&
         pathname !== "/settings" &&
         "hidden"
-      } sm:hidden z-10 fixed bottom-[0px]  w-full  h-[70px]  flex justify-around items-center  bg-white dark:bg-[#131313]   border-t border-zinc-200 dark:border-zinc-800`}
+      } sm:hidden z-10 fixed bottom-[0px]  w-full  h-[70px]  flex justify-around items-center bg-white dark:bg-[#131313]   border-t border-zinc-200 dark:border-zinc-800 transition-all`}
     >
       <Link to={"/"} className={pathname === "/" ? "text-primary" : ""}>
         <GoHomeFill size={30} />

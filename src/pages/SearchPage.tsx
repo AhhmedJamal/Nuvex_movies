@@ -1,6 +1,6 @@
 import CardMovie from "../components/CardMovie";
 import { CardMovieProps } from "../types/CardMovieProps";
-import ImageMovie from "../../public/assets/Film rolls-rafiki.svg";
+import ImageSearch from "../../public/assets/emptySearch.svg";
 import { useState } from "react";
 import Shimmer from "../components/Shimmer";
 import { IoIosArrowBack } from "react-icons/io";
@@ -88,7 +88,7 @@ function SearchPage() {
           ) : (
             <div className="flex flex-col justify-center items-center w-full top-0 absolute font-bold">
               <img
-                src={ImageMovie}
+                src={ImageSearch}
                 alt="Image not found Movies"
                 className="w-[60%] sm:w-[23%] mt-[50px]"
               />

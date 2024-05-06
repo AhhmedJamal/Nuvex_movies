@@ -1,20 +1,15 @@
 import { FaUserCircle } from "react-icons/fa";
-import { auth } from "../config/firebase";
-import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { UserData } from "../types/UserData";
 import { Link } from "react-router-dom";
+import { AppContext } from "../context/ThemeProvider ";
+import { useContext } from "react";
 
 function NavBar() {
-  const [user, setUser] = useState<UserData | null>({});
+  const Context = useContext(AppContext);
+  if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
+  const { user } = Context;
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setUser(user);
-    });
-  }, []);
   return (
-    <header className="h-[60px] flex items-center justify-between px-4 pt-2 w-full z-10    [box-shadow:0_2px_8px_rgba(20,_20,_20,_0.1)] dark:[box-shadow:0_2px_8px_rgba(90,_90,_90,_0.1)]">
+    <header className="h-[60px] flex items-center justify-between px-4 pt-2 w-full z-10 [box-shadow:0_2px_8px_rgba(20,_20,_20,_0.1)] dark:[box-shadow:0_2px_8px_rgba(90,_90,_90,_0.1)]">
       <div className="flex justify-center items-center gap-2 ">
         {user && user.photoURL ? (
           <img
@@ -25,9 +20,8 @@ function NavBar() {
         ) : (
           <FaUserCircle size={30} />
         )}
-
         <div className="text-[10px] font-bold">
-          <div>Hi, {user ? user.displayName || "Guest" : "Guest"}</div>
+          <div>Hi, {user ? user.name || "Guest" : "Guest"}</div>
           {/* Handle null or empty displayName */}
           <div>Welcome Back</div>
         </div>
