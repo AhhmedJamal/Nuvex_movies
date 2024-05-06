@@ -55,6 +55,9 @@ function CarouselMovie() {
           showIndicators={false}
           showStatus={false}
           showArrows={false}
+          stopOnHover={true}
+          centerMode={true}
+          centerSlidePercentage={20}
           interval={3000}
         >
           {dataMovie.map((data) => {
