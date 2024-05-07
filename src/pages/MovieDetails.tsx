@@ -5,7 +5,7 @@ import { BsBookmarkPlus } from "react-icons/bs";
 import { FaPlay, FaStar } from "react-icons/fa";
 import { CardMovieProps } from "../types/CardMovieProps";
 import CardMovie from "../components/CardMovie";
-import { IoCloseCircleSharp } from "react-icons/io5";
+import { IoMdClose } from "react-icons/io";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
 import Shimmer from "../components/Shimmer";
@@ -213,8 +213,11 @@ function MovieDetails() {
 
           {showModel && (
             <div className="fixed top-0 left-0 z-10 w-full h-screen  bg-[rgba(33,_33,_33,_0.8)]">
-              <div className="p-5 w-full flex justify-end">
-                <IoCloseCircleSharp size={45} onClick={handleClickShowMovie} />
+              <div className="p-5 w-full flex justify-end text-white dark:text-black ">
+                <IoMdClose
+                  onClick={handleClickShowMovie}
+                  className="text-[35px] bg-primary p-1"
+                />
               </div>
               <iframe
                 src={`https://www.youtube.com/embed/${movieVideo?.videos.results[0]?.key}`}
@@ -255,7 +258,9 @@ function MovieDetails() {
           <h1 className="font-bold text-[22px] text-primary">
             {movieVideo?.title}
           </h1>
-          <p className={`text-zinc-600 dark:text-zinc-400 text-[13px] md:text-[16px] mt-2`}>
+          <p
+            className={`text-zinc-600 dark:text-zinc-400 text-[13px] md:text-[16px] mt-2`}
+          >
             {movieVideo?.overview}
           </p>
         </div>

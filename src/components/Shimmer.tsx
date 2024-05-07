@@ -8,7 +8,7 @@ function Shimmer({ width, height }: ShimmerProps) {
       } `}
     >
       <div
-        className="bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-shimmer  dark:from-zinc-600 dark:via-zinc-700 dark:to-zinc-600"
+        className="bg-gradient-to-r from-neutral-200 via-[#a4a4a480]  to-neutral-200 animate-shimmer  dark:from-neutral-700 dark:via-neutral-800 dark:to-neutral-700"
         style={{
           width: width,
           height: height,

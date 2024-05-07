@@ -19,12 +19,25 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const toggleTheme = () => {
     setTheme((prevTheme) => !prevTheme);
-    localStorage.setItem("theme", theme ? "light" : "dark");
+    localStorage.setItem(
+      "theme",
+      theme ? `light-${user.uid}` : `dark-${user.uid}`
+    );
+
     document.documentElement.classList.toggle("dark");
   };
 
   const getDataUser = async (user: UserData) => {
     try {
+      const theme = localStorage.getItem("theme");
+
+      if (theme === `dark-${user.uid}`) {
+        setTheme(true);
+        document.documentElement.classList.add("dark");
+      } else {
+        setTheme(false);
+        document.documentElement.classList.remove("dark");
+      }
       if (user) {
         const docRef = doc(db, "users", user.email || "");
         const docSnapshot = await getDoc(docRef);
@@ -42,14 +55,6 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }
   };
   useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    if (theme === "dark") {
-      setTheme(true);
-      document.documentElement.classList.add("dark");
-    } else {
-      setTheme(false);
-      document.documentElement.classList.remove("dark");
-    }
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         getDataUser(user);

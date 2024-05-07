@@ -7,7 +7,11 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 
 function Auth() {
-  const [choose, setChoose] = useState<boolean>(true);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const toggleChecked = (title: string) => {
+    title === "login" ? setIsChecked(false) : setIsChecked(true);
+  };
   const router = useNavigate();
   useEffect(() => {
     // Check if a user is found
@@ -27,8 +31,39 @@ function Auth() {
             heightBlur="h-[14px]"
             bottom="bottom-4"
           />
-          <div className=" flex gap-3 w-full mt-4">
-            <button
+          <div className=" flex flex-cols  justify-around gap-3 w-full mt-4">
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="default-checkbox"
+                className="size-6 accent-primary bg-gray-100 rounded-full"
+                checked={!isChecked}
+                onChange={() => toggleChecked("login")}
+              />
+              <label
+                htmlFor="default-checkbox"
+                className="ml-2 text-[18px] font-bold text-gray-100 dark:text-gray-300"
+              >
+                Log in
+              </label>
+            </div>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="checked-checkbox"
+                className=" size-6 accent-primary bg-gray-100  rounded-full"
+                checked={isChecked}
+                onChange={() => toggleChecked("create account")}
+              />
+              <label
+                htmlFor="checked-checkbox"
+                className="ml-2 text-[18px] font-bold text-gray-100 dark:text-gray-300"
+              >
+                Sign up
+              </label>
+            </div>
+
+            {/* <button
               onClick={() => setChoose(true)}
               className={`border border-zinc-500 py-1 px-3 w-[48%] text-white ${
                 choose && "bg-primary border-none text-black"
@@ -43,9 +78,9 @@ function Auth() {
               }`}
             >
               Sign up
-            </button>
+            </button> */}
           </div>
-          {choose ? <Login /> : <SignUp setChoose={setChoose} />}
+          {isChecked ? <Login /> : <SignUp setChoose={setIsChecked} />}
         </div>
       </div>
     </div>
@@ -53,30 +88,3 @@ function Auth() {
 }
 
 export default Auth;
-
-/*
-  const addFavorite = async () => {
-    const user = auth.currentUser;
-    if (user) {
-      try {
-        const dataFromCollection = await getDocs(collectionsRef);
-        const data = dataFromCollection.docs.map((doc) => doc.data());
-        const filteredData = data.find((item) => item.id === user.uid) || [];
-        const docRef = doc(db, "users", user.email);
-        const newFavorites = {
-          favorite: [...filteredData.favorite, { ...product, favorite: true }],
-        };
-        await updateDoc(docRef, newFavorites)
-          .then(() => {
-            console.log("updateDoc successfully");
-          })
-          .catch((error) => {
-            console.error("Error updateDoc document:", error);
-          });
-      } catch (error) {
-        console.error("Error getting or updateDoc document:", error);
-      }
-    }
-    getBooleanIconFavorite();
-  };
- */

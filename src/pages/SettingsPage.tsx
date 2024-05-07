@@ -7,6 +7,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { MdArrowForwardIos } from "react-icons/md";
 import { MdNotificationsActive } from "react-icons/md";
 import { IoMdHelpCircle } from "react-icons/io";
+import { FaUserCircle } from "react-icons/fa";
 
 function SettingsPage() {
   const Context = useContext(AppContext);
@@ -30,11 +31,15 @@ function SettingsPage() {
         <h1 className="font-bold text-[23px] self-start ">Settings</h1>
       </div>
       <div className="flex flex-col items-center gap-3 justify-center">
-        <img
-          src={user.photoURL || ""}
-          className="w-[80px] rounded-lg"
-          alt="image user"
-        />
+        {user.photoURL ? (
+          <img
+            src={user.photoURL || ""}
+            alt="photo user"
+            className="w-[65px] rounded-lg"
+          />
+        ) : (
+          <FaUserCircle size={60} />
+        )}
         <div className="flex items-center justify-between  bg-[#00000057] px-3  font-bold rounded-md">
           {user?.name}
         </div>
