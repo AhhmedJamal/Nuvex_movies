@@ -36,7 +36,7 @@ function MovieDetails() {
   const collectionsRef = collection(db, "users");
   const Context = useContext(AppContext);
   if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
-  const { user } = Context;
+  const { userData } = Context;
 
   const startDragging = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setMouseDown(true);
@@ -106,13 +106,13 @@ function MovieDetails() {
     setShowModel((pre) => !pre);
   };
   const handleAddMyList = async () => {
-    if (user) {
+    if (userData) {
       try {
         const dataFromCollection = await getDocs(collectionsRef);
         const data = dataFromCollection.docs.map((doc) => doc.data());
-        const filteredData = data.find((item) => item.uid === user.uid);
+        const filteredData = data.find((item) => item.uid === userData.id);
         if (filteredData) {
-          const docRef = doc(db, "users", user.email || "");
+          const docRef = doc(db, "users", userData.email || "");
           const newMovies = {
             myList: [...filteredData.myList, movieVideo],
           };
@@ -134,9 +134,9 @@ function MovieDetails() {
     toast.success("Done Add To List");
   };
   const handleRemoveMyList = async () => {
-    if (user) {
+    if (userData) {
       try {
-        const docRef = doc(db, "users", user.email || "");
+        const docRef = doc(db, "users", userData.email || "");
         const docSnapshot = await getDoc(docRef);
         if (docSnapshot.exists()) {
           const userData = docSnapshot.data();
@@ -161,8 +161,8 @@ function MovieDetails() {
     }
   };
   const getMyList = async (id: number) => {
-    if (user) {
-      user.myList?.forEach(async (item: MovieProps) => {
+    if (userData) {
+      userData.myList?.forEach(async (item: MovieProps) => {
         item.id === id && setIsMyList(true);
       });
     } else {
