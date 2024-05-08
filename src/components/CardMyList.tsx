@@ -13,7 +13,7 @@ function CardMyList({ dataMovie, getDataUser }: CardMyListProps) {
   const [isLoading, setIsLoading] = useState(false);
   const Context = useContext(AppContext);
   if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
-  const { user } = Context;
+  const { userData } = Context;
   const router = useNavigate();
 
   const pathPhoto = () => {
@@ -33,9 +33,9 @@ function CardMyList({ dataMovie, getDataUser }: CardMyListProps) {
       );
   };
   const handleDelete = async () => {
-    if (user) {
+    if (userData) {
       try {
-        const docRef = doc(db, "users", user.email || "");
+        const docRef = doc(db, "users", userData.email || "");
         const docSnapshot = await getDoc(docRef);
         if (docSnapshot.exists()) {
           const userData = docSnapshot.data();
@@ -52,7 +52,7 @@ function CardMyList({ dataMovie, getDataUser }: CardMyListProps) {
     } else {
       console.log("User not logged in");
     }
-    getDataUser(user);
+    getDataUser(userData);
   };
   useEffect(() => {
     setIsLoading(true);
