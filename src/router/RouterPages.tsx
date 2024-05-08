@@ -6,6 +6,7 @@ import MyListPage from "../pages/MyListPage";
 import { createBrowserRouter } from "react-router-dom";
 import SettingsPage from "../pages/SettingsPage";
 import SearchPage from "../pages/SearchPage";
+import Forget from "../pages/Forget";
 
 export const router = createBrowserRouter([
   {
@@ -38,5 +39,9 @@ export const router = createBrowserRouter([
   {
     path: "auth",
     element: <Auth />,
+  },
+  {
+    path: "/forget",
+    element: <Forget />,
   },
 ]);

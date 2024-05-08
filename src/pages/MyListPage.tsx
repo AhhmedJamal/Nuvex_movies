@@ -10,10 +10,10 @@ import { AppContext } from "../context/ThemeProvider ";
 function MyListPage() {
   const Context = useContext(AppContext);
   if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
-  const { user, getDataUser } = Context;
+  const { userData, getDataUser } = Context;
 
   useEffect(() => {
-    getDataUser(user);
+    getDataUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -34,7 +34,7 @@ function MyListPage() {
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 flex-col gap-5  mt-5 relative`}
       >
-        {user.myList?.length == 0 ? (
+        {userData.myList?.length == 0 ? (
           <div className="flex flex-col justify-center items-center mt-[105px] absolute w-full ">
             <img src={ImageMyList} alt="" className="w-[60%] sm:w-[23%]" />
             <h2 className="text-[16px] font-bold ">Your Not Add Any Movie</h2>
@@ -44,7 +44,7 @@ function MyListPage() {
           </div>
         ) : (
           <>
-            {user.myList?.map((movie: MovieProps) => {
+            {userData.myList?.map((movie: MovieProps) => {
               return (
                 <CardMyList
                   key={movie.id}

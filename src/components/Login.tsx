@@ -109,7 +109,10 @@ function Login() {
   return (
     <div className="flex h-[300px]  justify-center items-center flex-col overflow-hidden w-full">
       <Toaster position="top-center" reverseOrder={false} />
-      <form className="w-full flex flex-col gap-3 text-white" onSubmit={handleLogin}>
+      <form
+        className="w-full flex flex-col gap-3 text-white"
+        onSubmit={handleLogin}
+      >
         <input
           className="bg-zinc-700 shadow appearance-none border border-zinc-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
           id="email"
@@ -130,7 +133,7 @@ function Login() {
         />
         <Link
           to="/forget"
-          className="text-gray-400 font-bold rounded-md p-1 text-[12px] underline text-end"
+          className="text-neutral-600 font-bold rounded-md p-1 text-[12px] underline text-end"
         >
           Forgot Password?
         </Link>
@@ -146,7 +149,7 @@ function Login() {
           aria-label="Button Login Google"
           onClick={handleGoogle}
           type="button"
-          className="bg-slate-100 text-gray-800 text-[14px] active:bg-gray-300  rounded-md p-1 font-bold items-center flex gap-2 justify-center"
+          className="bg-neutral-200 dark:bg-neutral-200  text-neutral-800 text-[14px] active:bg-gray-300  rounded-md p-1 font-bold items-center flex gap-2 justify-center"
         >
           Login with
           <FcGoogle size={24} />
@@ -155,7 +158,7 @@ function Login() {
           aria-label="Button Login Facebook"
           onClick={handleFacebook}
           type="button"
-          className="bg-slate-100 text-gray-800 text-[14px] active:bg-gray-300  rounded-md p-1 font-bold items-center flex gap-2 justify-center"
+          className="bg-neutral-200 dark:bg-neutral-200 text-neutral-800 text-[14px] active:bg-gray-300  rounded-md p-1 font-bold items-center flex gap-2 justify-center"
         >
           Login with
           <SiFacebook size={24} className="text-sky-500 " />

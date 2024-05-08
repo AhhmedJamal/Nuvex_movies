@@ -11,7 +11,7 @@ function SplashScreen() {
   }, []);
   return (
     <div
-      className={`flex justify-center items-center h-screen transition-all ${
+      className={`flex justify-center items-center h-screen transition-all   ${
         start ? "opacity-100" : "opacity-0 translate-y-4"
       }`}
     >

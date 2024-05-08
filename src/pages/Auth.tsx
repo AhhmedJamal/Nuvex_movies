@@ -23,64 +23,54 @@ function Auth() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="bg-[url('/assets/backGroundAuth.jpg')] bg-cover">
-      <div className="flex h-screen  w-full items-center justify-center flex-col bg-gradient-to-t from-black via-zinc-950 to-transparent">
-        <div className="flex flex-col  font-bold justify-between items-center w-[80%] sm:w-[400px] my-4">
-          <Logo
-            fontSize="text-[50px]"
-            heightBlur="h-[14px]"
-            bottom="bottom-4"
-          />
-          <div className=" flex flex-cols  justify-around gap-3 w-full mt-4">
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="default-checkbox"
-                className="size-6 accent-primary bg-gray-100 rounded-full"
-                checked={!isChecked}
-                onChange={() => toggleChecked("login")}
-              />
-              <label
-                htmlFor="default-checkbox"
-                className="ml-2 text-[18px] font-bold text-gray-100 dark:text-gray-300"
-              >
-                Log in
-              </label>
+    <div className="">
+      <div className="flex flex-col h-screen w-full items-center justify-evenly ">
+        <div className="flex flex-col  font-bold justify-between w-[80%] sm:w-[400px] my-4">
+          <div className=" flex flex-col gap-11 w-full">
+            <h1 className=" flex font-bold text-[30px] dark:text-neutral-100">
+              Welcome in
+              <div className="ml-3">
+                <Logo
+                  fontSize="text-[30px]"
+                  heightBlur="h-[11px]"
+                  bottom="bottom-2"
+                />
+              </div>
+            </h1>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="default-checkbox"
+                  className="size-5  align-middle border border-neutral-400 appearance-none outline-[none]  cursor-pointer checked:[appearance:auto] checked:accent-primary checked:border-none"
+                  checked={!isChecked}
+                  onChange={() => toggleChecked("login")}
+                />
+                <label
+                  htmlFor="default-checkbox"
+                  className="ml-2 text-[18px] font-bold text-neutral-800 dark:text-neutral-200"
+                >
+                  Log in
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="checked-checkbox"
+                  className="size-5  align-middle border border-neutral-400 appearance-none outline-[none] cursor-pointer checked:[appearance:auto] checked:accent-primary checked:border-none"
+                  checked={isChecked}
+                  onChange={() => toggleChecked("create account")}
+                />
+                <label
+                  htmlFor="checked-checkbox"
+                  className="ml-2 text-[18px] font-bold text-neutral-800 dark:text-neutral-200"
+                >
+                  Create Account
+                </label>
+              </div>
             </div>
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="checked-checkbox"
-                className=" size-6 accent-primary bg-gray-100  rounded-full"
-                checked={isChecked}
-                onChange={() => toggleChecked("create account")}
-              />
-              <label
-                htmlFor="checked-checkbox"
-                className="ml-2 text-[18px] font-bold text-gray-100 dark:text-gray-300"
-              >
-                Sign up
-              </label>
-            </div>
-
-            {/* <button
-              onClick={() => setChoose(true)}
-              className={`border border-zinc-500 py-1 px-3 w-[48%] text-white ${
-                choose && "bg-primary border-none text-black"
-              }`}
-            >
-              Log in
-            </button>
-            <button
-              onClick={() => setChoose(false)}
-              className={`border border-zinc-500 py-1 px-3 w-[48%] text-white ${
-                !choose ? "bg-primary border-none text-black" : ""
-              }`}
-            >
-              Sign up
-            </button> */}
           </div>
-          {isChecked ? <Login /> : <SignUp setChoose={setIsChecked} />}
+          {!isChecked ? <Login /> : <SignUp setChoose={setIsChecked} />}
         </div>
       </div>
     </div>

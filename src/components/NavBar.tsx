@@ -7,14 +7,18 @@ import Logo from "./Logo";
 function NavBar() {
   const Context = useContext(AppContext);
   if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
-  const { user } = Context;
+  const { userData } = Context;
+  console.log(userData.photoURL);
 
   return (
     <header className="h-[60px] flex items-center justify-between px-4 pt-2 w-full z-10 [box-shadow:0_2px_8px_rgba(20,_20,_20,_0.1)] dark:[box-shadow:0_2px_8px_rgba(90,_90,_90,_0.1)]">
       <div className="flex justify-center items-center gap-2 ">
-        {user.photoURL ? (
+        {userData.photoURL !== "" ? (
           <img
-            src={user.photoURL || ""}
+            src={
+              "https://lh3.googleusercontent.com/a/ACg8ocIjL-DSkifEP44aRBxsNIPWR0JSfXizznFVgMD-v-mJ-nh263s=s96-c" ||
+              ""
+            }
             alt="photo user"
             className="w-[35px] rounded-lg"
           />
@@ -22,7 +26,7 @@ function NavBar() {
           <FaUserCircle size={30} />
         )}
         <div className="text-[10px] font-bold">
-          <div>Hi, {user ? user.name || "Guest" : "Guest"}</div>
+          <div>Hi, {userData ? userData.name || "Guest" : "Guest"}</div>
           {/* Handle null or empty displayName */}
           <div>Welcome Back</div>
         </div>

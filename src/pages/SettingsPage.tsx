@@ -12,7 +12,7 @@ import { FaUserCircle } from "react-icons/fa";
 function SettingsPage() {
   const Context = useContext(AppContext);
   if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
-  const { user, theme, toggleTheme } = Context;
+  const { userData, theme, toggleTheme } = Context;
   const router = useNavigate();
 
   const handleLogOut = () => {
@@ -31,9 +31,9 @@ function SettingsPage() {
         <h1 className="font-bold text-[23px] self-start ">Settings</h1>
       </div>
       <div className="flex flex-col items-center gap-3 justify-center">
-        {user.photoURL ? (
+        {userData.photoURL !== "" ? (
           <img
-            src={user.photoURL || ""}
+            src={userData.photoURL || ""}
             alt="photo user"
             className="w-[65px] rounded-lg"
           />
@@ -41,7 +41,7 @@ function SettingsPage() {
           <FaUserCircle size={60} />
         )}
         <div className="flex items-center justify-between  bg-[#00000057] px-3  font-bold rounded-md">
-          {user?.name}
+          {userData?.name}
         </div>
       </div>
       <div className=" w-[90%] md:w-[50%] flex flex-col gap-3">
