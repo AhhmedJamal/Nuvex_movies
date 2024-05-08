@@ -13,7 +13,7 @@ function MyListPage() {
   const { userData, getDataUser } = Context;
 
   useEffect(() => {
-    getDataUser();
+    getDataUser(userData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
