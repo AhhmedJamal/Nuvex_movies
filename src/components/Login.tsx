@@ -54,7 +54,7 @@ function Login() {
       } else {
         // User doesn't exist, create a new document for the user
         await setDoc(userDocRef, {
-          id: user?.uid,
+          uid: user?.uid,
           name: user?.displayName,
           email: user?.email,
           photoURL: user?.photoURL,
@@ -82,7 +82,7 @@ function Login() {
         if (!signInMethods) {
           try {
             await setDoc(doc(db, "users", user?.email || ""), {
-              id: user.uid,
+              uid: user.uid,
               name: user.displayName,
               email: user.email,
               photoURL: user.photoURL,

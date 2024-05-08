@@ -32,11 +32,11 @@ function SignUp({ setChoose }: SignUpProps) {
                 } else {
                   try {
                     await setDoc(doc(db, "users", user.email || ""), {
-                      photoURL: "",
-                      id: user?.uid,
+                      uid: user?.uid,
                       name: name,
                       email: user?.email,
                       myList: [],
+                      photoURL: "",
                     });
                   } catch (e) {
                     console.error("Error adding document: ", e);

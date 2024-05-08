@@ -8,7 +8,7 @@ type ThemeContextType = {
   theme: boolean;
   toggleTheme: () => void;
   userData: UserData;
-  getDataUser: () => void;
+  getDataUser: (user: UserData) => void;
 };
 export const AppContext = createContext<ThemeContextType | undefined>(
   undefined
@@ -21,14 +21,32 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     setTheme((prevTheme) => !prevTheme);
     localStorage.setItem(
       "theme",
-      theme ? `light-${userData.id}` : `dark-${userData.id}`
+      theme ? `light-${userData.uid}` : `dark-${userData.uid}`
     );
 
     document.documentElement.classList.toggle("dark");
   };
 
-  const getDataUser = () => {
-    onAuthStateChanged(auth, async (user) => {
+  const getDataUser = async (user: UserData) => {
+    try {
+      if (user) {
+        const docRef = doc(db, "users", user.email || "");
+        const docSnapshot = await getDoc(docRef);
+        const userData = docSnapshot.data();
+        if (userData) {
+          setUserData(userData);
+        } else {
+          console.log("User data is undefined");
+        }
+      } else {
+        console.log("User is not authenticated");
+      }
+    } catch (error) {
+      console.error("Error fetching document:", error);
+    }
+  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       const theme = localStorage.getItem("theme");
       if (theme === `dark-${user?.uid}`) {
         setTheme(true);
@@ -37,27 +55,12 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         setTheme(false);
         document.documentElement.classList.remove("dark");
       }
-      try {
-        if (user) {
-          const docRef = doc(db, "users", user.email || "");
-          const docSnapshot = await getDoc(docRef);
-          const userDataF = docSnapshot.data();
-          if (userDataF) {
-            setUserData(userDataF);
-          } else {
-            console.log("User data is undefined");
-          }
-        } else {
-          console.log("User is not authenticated");
-        }
-      } catch (error) {
-        console.error("Error fetching document:", error);
+      if (user) {
+        getDataUser(user);
       }
     });
-  };
 
-  useEffect(() => {
-    getDataUser();
+    return () => unsubscribe();
   }, []);
   return (
     <AppContext.Provider value={{ userData, getDataUser, theme, toggleTheme }}>

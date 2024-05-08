@@ -110,7 +110,7 @@ function MovieDetails() {
       try {
         const dataFromCollection = await getDocs(collectionsRef);
         const data = dataFromCollection.docs.map((doc) => doc.data());
-        const filteredData = data.find((item) => item.uid === userData.id);
+        const filteredData = data.find((item) => item.uid === userData.uid);
         if (filteredData) {
           const docRef = doc(db, "users", userData.email || "");
           const newMovies = {

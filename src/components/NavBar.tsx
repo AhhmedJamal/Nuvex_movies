@@ -8,7 +8,6 @@ function NavBar() {
   const Context = useContext(AppContext);
   if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
   const { userData } = Context;
-  console.log(userData.photoURL);
 
   return (
     <header className="h-[60px] flex items-center justify-between px-4 pt-2 w-full z-10 [box-shadow:0_2px_8px_rgba(20,_20,_20,_0.1)] dark:[box-shadow:0_2px_8px_rgba(90,_90,_90,_0.1)]">
