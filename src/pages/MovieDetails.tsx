@@ -267,7 +267,7 @@ function MovieDetails() {
             <Link
               to={`https://www.imdb.com/title/${movieVideo?.imdb_id}`}
               target="_blank"
-              className="bg-neutral-300 dark:bg-neutral-600 text-neutral-800 dark:text-neutral-200 active:bg-[#f5c51893] dark:active:bg-[#ffd53bc0]  transition-all w-[50%] flex justify-center items-center gap-2 py-2 rounded-md text-[13px] font-bold"
+              className="bg-neutral-800 dark:bg-neutral-200 text-neutral-200 dark:text-neutral-800 active:bg-[#f5c51893] dark:active:bg-[#ffd53bc0]  transition-all w-[50%] flex justify-center items-center gap-2 py-2 rounded-md text-[13px] font-bold"
             >
               <FaExternalLinkAlt size={18} />
               IMDB
