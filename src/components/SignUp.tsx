@@ -118,12 +118,12 @@ function SignUp({ setChoose }: SignUpProps) {
             {isEye ? (
               <AiOutlineEyeInvisible
                 size={23}
-                className="absolute right-2 top-2 text-neutral-300 "
+                className="absolute right-2 top-2 text-neutral-500 dark:text-neutral-300 "
               />
             ) : (
               <AiOutlineEye
                 size={23}
-                className="absolute right-2 top-2 text-neutral-300 "
+                className="absolute right-2 top-2 text-neutral-500 dark:text-neutral-300 "
               />
             )}
           </div>
@@ -142,12 +142,12 @@ function SignUp({ setChoose }: SignUpProps) {
             {isEyeConfirmation ? (
               <AiOutlineEyeInvisible
                 size={23}
-                className="absolute right-2 top-2 text-neutral-300 "
+                className="absolute right-2 top-2 text-neutral-500 dark:text-neutral-300 "
               />
             ) : (
               <AiOutlineEye
                 size={23}
-                className="absolute right-2 top-2 text-neutral-300 "
+                className="absolute right-2 top-2 text-neutral-500 dark:text-neutral-300 "
               />
             )}
           </div>

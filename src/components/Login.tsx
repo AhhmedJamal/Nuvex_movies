@@ -137,12 +137,12 @@ function Login() {
             {isEye ? (
               <AiOutlineEyeInvisible
                 size={23}
-                className="absolute right-2 top-2 text-neutral-300 "
+                className="absolute right-2 top-2 text-neutral-500 dark:text-neutral-300"
               />
             ) : (
               <AiOutlineEye
                 size={23}
-                className="absolute right-2 top-2 text-neutral-300 "
+                className="absolute right-2 top-2 text-neutral-500 dark:text-neutral-300"
               />
             )}
           </div>
