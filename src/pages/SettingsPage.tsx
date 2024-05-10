@@ -24,7 +24,7 @@ function SettingsPage() {
     <section className="flex flex-col justify-between items-center h-[90%] gap-4 p-4">
       <div className="flex items-center self-start  mt-[5px] ">
         <IoIosArrowBack
-          className="hidden sm:block mr-5"
+          className="hidden sm:block mr-5 cursor-pointer"
           size={30}
           onClick={() => window.history.back()}
         />

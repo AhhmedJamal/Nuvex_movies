@@ -35,7 +35,7 @@ function CarouselMovie() {
   const pathPoster = (path: string) => {
     return `https://image.tmdb.org/t/p/original${path}`;
   };
-  const handleClick = (data: CardMovieProps) => {
+  const handleClickPlay = (data: CardMovieProps) => {
     data.poster_path !== null &&
       router(`/movie/${data.id}-${data?.title.replace(/[\s#-]/g, "_")}`);
   };
@@ -46,7 +46,7 @@ function CarouselMovie() {
   return (
     <div className=" h-[250px] w-full sm:mb-[60px] px-2 mb-[20px] mt-2">
       {dataMovie.length == 0 ? (
-        <Shimmer height={250} width={"100%"} />
+        <Shimmer height={"250px"} width={"100%"} />
       ) : (
         <Carousel
           autoPlay={true}
@@ -72,8 +72,11 @@ function CarouselMovie() {
                     {data.title}
                   </p>
 
-                  <div className="bg-primary  flex items-center justify-center gap-2 w-[30%]  h-7 rounded-md text-[#000000d8]">
-                    <FaPlay size={18} onClick={() => handleClick(data)} />
+                  <div
+                    onClick={() => handleClickPlay(data)}
+                    className="bg-primary cursor-pointer flex items-center justify-center gap-2 w-[30%]  h-7 rounded-md text-[#000000d8]"
+                  >
+                    <FaPlay size={18} />
                     Play
                   </div>
                 </div>

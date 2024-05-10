@@ -23,7 +23,7 @@ function CardMovie({ data }: { data: CardMovieProps }) {
   return (
     <>
       {isLoading ? (
-        <Shimmer height={160} width={"110px"} />
+        <Shimmer height={"160px"} width={"110px"} />
       ) : (
         <button
           onClick={handleClick}

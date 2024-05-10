@@ -1,6 +1,6 @@
 import { CardMovieProps } from "./CardMovieProps";
 
-export interface MovieListProps {
+export type MovieListProps = {
     title: string;
     dataMovie: CardMovieProps[];
   }

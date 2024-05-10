@@ -85,7 +85,7 @@ function SignUp({ setChoose }: SignUpProps) {
           <input
             value={name}
             onChange={(event) => setName(event?.target.value)}
-            className="bg-zinc-700  shadow appearance-none border border-zinc-500 rounded w-[35%] py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+            className="bg-neutral-300 dark:bg-zinc-700 shadow appearance-none border border-neutral-400 dark:border-neutral-500 placeholder:text-neutral-500  rounded w-[35%] py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
             id="Name"
             type="text"
             placeholder="Name"
@@ -94,7 +94,7 @@ function SignUp({ setChoose }: SignUpProps) {
           <input
             value={email}
             onChange={(event) => setEmail(event?.target.value)}
-            className="bg-zinc-700  shadow appearance-none border border-zinc-500 rounded w-[65%] py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+            className="bg-neutral-300 dark:bg-zinc-700 shadow appearance-none border border-neutral-400 dark:border-neutral-500 placeholder:text-neutral-500  rounded w-[65%] py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
             placeholder="Email"
@@ -104,7 +104,7 @@ function SignUp({ setChoose }: SignUpProps) {
         <input
           value={pass}
           onChange={(event) => setPass(event?.target.value)}
-          className="bg-zinc-700 shadow appearance-none border border-zinc-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+          className="bg-neutral-300 dark:bg-zinc-700 shadow appearance-none border border-neutral-400 dark:border-neutral-500 placeholder:text-neutral-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
           id="pass"
           type="password"
           placeholder="Password"
@@ -113,7 +113,7 @@ function SignUp({ setChoose }: SignUpProps) {
         <input
           value={passConfirmation}
           onChange={(event) => setPassConfirmation(event?.target.value)}
-          className="bg-zinc-700 shadow appearance-none border border-zinc-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+          className="bg-neutral-300 dark:bg-zinc-700 shadow appearance-none border border-neutral-400 dark:border-neutral-500 placeholder:text-neutral-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
           id="passConfirmation"
           type="password"
           placeholder="Password Confirmation"
@@ -124,7 +124,7 @@ function SignUp({ setChoose }: SignUpProps) {
           type="submit"
           className="bg-primary text-black rounded-md p-2 font-bold items-center flex justify-center mt-3"
         >
-          {loading ? <LoaderButton /> : "Sign up"}
+          {loading ? <LoaderButton /> : "Sign Up"}
         </button>
       </form>
     </div>

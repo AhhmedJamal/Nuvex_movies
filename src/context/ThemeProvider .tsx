@@ -3,14 +3,9 @@ import React, { ReactNode, createContext, useEffect, useState } from "react";
 import { auth, db } from "../config/firebase";
 import { UserData } from "../types/UserData";
 import { doc, getDoc } from "firebase/firestore";
+import { ThemeContextTypeProps } from "../types/ThemeContextProps";
 
-type ThemeContextType = {
-  theme: boolean;
-  toggleTheme: () => void;
-  userData: UserData;
-  getDataUser: (user: UserData) => void;
-};
-export const AppContext = createContext<ThemeContextType | undefined>(
+export const AppContext = createContext<ThemeContextTypeProps | undefined>(
   undefined
 );
 const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -45,16 +40,21 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       console.error("Error fetching document:", error);
     }
   };
+  // Check Theme Mode
+  const checkThemeMode = (id: string) => {
+    const theme = localStorage.getItem("theme");
+    if (theme === `dark-${id}`) {
+      setTheme(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      setTheme(false);
+      document.documentElement.classList.remove("dark");
+    }
+  };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      const theme = localStorage.getItem("theme");
-      if (theme === `dark-${user?.uid}`) {
-        setTheme(true);
-        document.documentElement.classList.add("dark");
-      } else {
-        setTheme(false);
-        document.documentElement.classList.remove("dark");
-      }
+      checkThemeMode(user?.uid || "");
+      // Get Date User
       if (user) {
         getDataUser(user);
       }
@@ -63,8 +63,12 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     return () => unsubscribe();
   }, []);
   return (
-    <AppContext.Provider value={{ userData, getDataUser, theme, toggleTheme }}>
-      {children}
+    <AppContext.Provider
+      value={{ userData, getDataUser, theme, toggleTheme, checkThemeMode }}
+    >
+      <div className="bg-neutral-100 text-[#131313] dark:bg-neutral-950 dark:text-white transition-all">
+        {children}
+      </div>
     </AppContext.Provider>
   );
 };

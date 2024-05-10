@@ -42,7 +42,7 @@ function SearchPage() {
     <div className="p-4">
       <div className="flex items-center self-start mt-[5px]">
         <IoIosArrowBack
-          className="hidden sm:block mr-5"
+          className="hidden sm:block mr-5 cursor-pointer"
           size={30}
           onClick={() => window.history.back()}
         />
@@ -56,7 +56,7 @@ function SearchPage() {
           type="text"
           value={title}
           placeholder="Type Name Movie..."
-          className="h-8 w-[70%] bg-zinc-300 outline-none  font-bold pl-2 placeholder:text-zinc-700 "
+          className="h-8 w-[70%] bg-zinc-300 dark:bg-neutral-700 outline-none  font-bold pl-2 placeholder:text-neutral-700 dark:placeholder:text-neutral-200"
           required
           onChange={(e) => {
             setTitle(e.target.value);
@@ -74,7 +74,7 @@ function SearchPage() {
           {search.map((_, i) => {
             return (
               <div key={i} className="overflow-hidden">
-                <Shimmer width={"110px"} height={160} />
+                <Shimmer width={"110px"} height={"160px"} />
               </div>
             );
           })}

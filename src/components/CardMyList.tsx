@@ -22,8 +22,9 @@ function CardMyList({ dataMovie, getDataUser }: CardMyListProps) {
   function formatMovieDuration(duration: number): string {
     const hours = Math.floor(duration / 60);
     const minutes = duration % 60;
-    // return `${hours} hours and ${minutes} minutes`;
-    return `${hours}:${minutes}:00`;
+    const formattedHours = hours.toString().padStart(2, "0");
+    const formattedMinutes = minutes.toString().padStart(2, "0");
+    return `${formattedHours}:${formattedMinutes}:00`;
   }
 
   const handleClick = () => {
@@ -57,33 +58,33 @@ function CardMyList({ dataMovie, getDataUser }: CardMyListProps) {
   useEffect(() => {
     setIsLoading(true);
     setTimeout(() => {
-      setIsLoading(false);
+    setIsLoading(false);
     }, 1000);
   }, []);
   return (
     <section>
       {isLoading ? (
-        <div className="flex gap-4 w-full h-[150px] p-3 rounded-xl bg-[#00000033]">
-          <Shimmer height={125} width={"90px"} />
+        <div className="flex gap-5 w-full h-[160px] p-3 rounded-xl bg-neutral-200 dark:bg-neutral-800">
+          <Shimmer height={"140px"} width={"90px"} />
           <div className="flex flex-col justify-between items-start w-[65%] pt-1 ">
-            <Shimmer height={25} width={"100px"} />
+            <Shimmer height={"25px"} width={"100px"} />
             <div className="flex justify-between w-full">
-              <Shimmer height={20} width={"55px"} />
-              <Shimmer height={20} width={"55px"} />
-              <Shimmer height={20} width={"55px"} />
+              <Shimmer height={"20px"} width={"55px"} />
+              <Shimmer height={"20px"} width={"55px"} />
+              <Shimmer height={"20px"} width={"55px"} />
             </div>
 
             <div className="flex w-full justify-between items-end">
               <div className="flex gap-6 h-fit">
-                <Shimmer height={20} width={"55px"} />
-                <Shimmer height={20} width={"35px"} />
+                <Shimmer height={"20px"} width={"55px"} />
+                <Shimmer height={"20px"} width={"35px"} />
               </div>
-              <Shimmer height={30} width={"35px"} />
+              <Shimmer height={"30px"} width={"35px"} />
             </div>
           </div>
         </div>
       ) : (
-        <div className="flex justify-between gap-5 w-full h-[150px] bg-[#00000033] rounded-xl p-3">
+        <div className="flex justify-between gap-5 w-full h-[160px] bg-neutral-200 dark:bg-neutral-800 rounded-xl p-3">
           <img
             onClick={handleClick}
             loading="lazy"
@@ -99,7 +100,7 @@ function CardMyList({ dataMovie, getDataUser }: CardMyListProps) {
                   return (
                     <h2
                       key={item.id}
-                      className=" flex items-center justify-center text-center bg-[#00000048] rounded-lg py-[2px]"
+                      className=" flex items-center justify-center text-center bg-neutral-300 dark:bg-neutral-900 rounded-lg py-[2px]"
                     >
                       {item.name}
                     </h2>

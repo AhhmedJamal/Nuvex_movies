@@ -1,6 +1,6 @@
 import { UserData } from "./UserData";
 
-export interface CardMyListProps {
+export type CardMyListProps = {
   dataMovie: {
     id: number;
     poster_path: string | null;

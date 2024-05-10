@@ -1,4 +1,4 @@
-export interface ShimmerProps {
+export type ShimmerProps = {
   width: string;
-  height: number;
+  height: string;
 }

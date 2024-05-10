@@ -14,10 +14,7 @@ function NavBar() {
       <div className="flex justify-center items-center gap-2 ">
         {userData.photoURL !== "" ? (
           <img
-            src={
-              "https://lh3.googleusercontent.com/a/ACg8ocIjL-DSkifEP44aRBxsNIPWR0JSfXizznFVgMD-v-mJ-nh263s=s96-c" ||
-              ""
-            }
+            src={userData.photoURL || ""}
             alt="photo user"
             className="w-[35px] rounded-lg"
           />

@@ -13,7 +13,7 @@ function App() {
     }, 2000);
   }, []);
   return (
-    <div className="bg-neutral-100 text-[#131313] dark:bg-neutral-950 dark:text-white transition-all">
+    <div className="bg-neutral-100 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-100 transition-colors">
       {start ? (
         <SplashScreen />
       ) : (

@@ -1,4 +1,4 @@
-export interface CardMovieProps {
+export type CardMovieProps = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];

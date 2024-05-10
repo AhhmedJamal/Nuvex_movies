@@ -109,12 +109,9 @@ function Login() {
   return (
     <div className="flex h-[300px]  justify-center items-center flex-col overflow-hidden w-full">
       <Toaster position="top-center" reverseOrder={false} />
-      <form
-        className="w-full flex flex-col gap-3 text-white"
-        onSubmit={handleLogin}
-      >
+      <form className="w-full flex flex-col gap-3 " onSubmit={handleLogin}>
         <input
-          className="bg-zinc-700 shadow appearance-none border border-zinc-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+          className="bg-neutral-300 dark:bg-zinc-700 shadow appearance-none border border-neutral-400 dark:border-neutral-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline placeholder:text-neutral-500"
           id="email"
           type="email"
           placeholder="Email"
@@ -123,7 +120,7 @@ function Login() {
           required
         />
         <input
-          className="bg-zinc-700 shadow appearance-none border border-zinc-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+          className="bg-neutral-300 dark:bg-zinc-700 shadow appearance-none border border-neutral-400 dark:border-neutral-500   rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline placeholder:text-neutral-500"
           id="pass"
           type="password"
           placeholder="Password"
@@ -133,7 +130,7 @@ function Login() {
         />
         <Link
           to="/forget"
-          className="text-neutral-600 font-bold rounded-md p-1 text-[12px] underline text-end"
+          className="text-neutral-400 font-bold rounded-md p-1 text-[12px] underline text-end"
         >
           Forgot Password?
         </Link>
@@ -141,7 +138,7 @@ function Login() {
           type="submit"
           className="bg-primary text-black rounded-md p-2 font-bold items-center flex justify-center"
         >
-          {loading ? <LoaderButton /> : "Log in"}
+          {loading ? <LoaderButton /> : "Sign In"}
         </button>
       </form>
       <div className="flex flex-col justify-center gap-2 mt-[20px] w-full ">

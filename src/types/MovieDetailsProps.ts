@@ -1,4 +1,4 @@
-export interface MovieProps {
+export type MovieProps = {
   adult: boolean;
   backdrop_path: string | null;
   belongs_to_collection: unknown; 

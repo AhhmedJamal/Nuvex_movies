@@ -182,7 +182,7 @@ function MovieDetails() {
     <div className="w-full overflow-hidden pb-s2">
       <Toaster position="top-center" reverseOrder={false} />
       {isLoading ? (
-        <Shimmer width={"100%"} height={350} />
+        <Shimmer width={"100%"} height={"350px"} />
       ) : (
         <div className="relative">
           <img
