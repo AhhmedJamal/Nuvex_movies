@@ -130,7 +130,7 @@ function Login() {
         />
         <Link
           to="/forget"
-          className="text-neutral-400 font-bold rounded-md p-1 text-[12px] underline text-end"
+          className="text-neutral-400 font-bold rounded-md p-1 text-[12px] underline text-end w-fit self-end"
         >
           Forgot Password?
         </Link>

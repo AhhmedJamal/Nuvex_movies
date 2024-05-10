@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
-import { AppContext } from "../context/ThemeProvider ";
+import { AppContext } from "../context/ThemeProvider";
 
 function Auth() {
   const Context = useContext(AppContext);

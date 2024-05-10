@@ -28,11 +28,11 @@ const ForgotPassword = () => {
   return (
     <div className="bg-neutral-100 dark:bg-neutral-950 min-h-screen flex flex-col gap-[90px] items-center">
       <IoIosArrowBack
-        className=" text-white self-start bg-primary m-5 pr-1 cursor-pointer"
+        className=" text-white  self-start bg-primary m-5 pr-1 cursor-pointer"
         size={30}
         onClick={() => window.history.back()}
       />
-      <div className="bg-neutral-100 dark:bg-neutral-800 p-8 rounded shadow-md  w-[80%] md:w-[50%]">
+      <div className="bg-neutral-200 dark:bg-neutral-800 p-8 rounded shadow-md  w-[80%] md:w-[50%]">
         <h1 className="text-2xl font-semibold mb-4">Forgot Password</h1>
         {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
         {successMessage && (
@@ -55,7 +55,7 @@ const ForgotPassword = () => {
               required
               autoComplete="email"
               placeholder="Enter your email"
-              className=" px-2 py-1 mt-1  border-gray-300 bg-neutral-100 w-full  shadow-sm outline-none sm:text-sm"
+              className=" px-2 py-1 mt-1  border-gray-300 bg-neutral-100  w-full  shadow-sm outline-none sm:text-sm"
             />
           </div>
           <div>

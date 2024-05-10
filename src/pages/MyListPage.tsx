@@ -5,7 +5,7 @@ import { TbMovie } from "react-icons/tb";
 import ImageMyList from "/assets/emptyMyList.svg";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { AppContext } from "../context/ThemeProvider ";
+import { AppContext } from "../context/ThemeProvider";
 
 function MyListPage() {
   const Context = useContext(AppContext);

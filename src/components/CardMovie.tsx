@@ -27,14 +27,14 @@ function CardMovie({ data }: { data: CardMovieProps }) {
       ) : (
         <button
           onClick={handleClick}
-          className="w-[110px] min-h-[160px] rounded-xl overflow-hidden relative flex flex-col justify-center items-center  border border-zinc-400 dark:border-zinc-700 cursor-grab "
+          className="w-[110px] min-h-[160px] rounded-xl overflow-hidden relative flex flex-col justify-center items-center  border border-zinc-400 dark:border-zinc-700 cursor-grab group  "
         >
           {data.poster_path !== null ? (
             <img
               loading="lazy"
               src={pathPoster(data.poster_path)}
               alt="movie-poster"
-              className="object-cover w-[110px] h-[160px]"
+              className="object-cover w-[110px] h-[160px] group-hover:opacity-65 transition-all group-hover:scale-105"
             />
           ) : (
             <>

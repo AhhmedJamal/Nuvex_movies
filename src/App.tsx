@@ -10,7 +10,7 @@ function App() {
     setStart(true);
     setTimeout(() => {
       setStart(false);
-    }, 2000);
+    }, 2800);
   }, []);
   return (
     <div className="bg-neutral-100 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-100 transition-colors">

@@ -1,6 +1,6 @@
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { AppContext } from "../context/ThemeProvider ";
+import { AppContext } from "../context/ThemeProvider";
 import { useContext } from "react";
 import Logo from "./Logo";
 

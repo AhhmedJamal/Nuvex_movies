@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { MovieProps } from "../types/MovieDetailsProps";
 import { BsBookmarkPlus } from "react-icons/bs";
@@ -7,13 +7,13 @@ import { CardMovieProps } from "../types/CardMovieProps";
 import CardMovie from "../components/CardMovie";
 import { IoMdClose } from "react-icons/io";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
-import { FaImdb } from "react-icons/fa";
-import { LiaImdb } from "react-icons/lia";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import Shimmer from "../components/Shimmer";
 import { db } from "../config/firebase";
 import toast, { Toaster } from "react-hot-toast";
+import NotificationDelete from "/audio/deleteMovie.mp3";
+import NotificationAdd from "/audio/addMovie.mp3";
 import {
   collection,
   doc,
@@ -21,7 +21,7 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
-import { AppContext } from "../context/ThemeProvider ";
+import { AppContext } from "../context/ThemeProvider";
 
 function MovieDetails() {
   const [movieVideo, setMovieVideo] = useState<MovieProps | null>(null);
@@ -40,7 +40,15 @@ function MovieDetails() {
   const Context = useContext(AppContext);
   if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
   const { userData } = Context;
+  const MovieRefAdd = useRef<HTMLAudioElement>(null);
+  const MovieRefDelete = useRef<HTMLAudioElement>(null);
 
+  const playAudioAdd = () => {
+    MovieRefAdd.current?.play();
+  };
+  const playAudioDelete = () => {
+    MovieRefDelete.current?.play();
+  };
   const startDragging = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setMouseDown(true);
     setStartX(e.pageX - (e.currentTarget.offsetLeft || 0));
@@ -122,6 +130,8 @@ function MovieDetails() {
           await updateDoc(docRef, newMovies)
             .then(() => {
               setIsMyList(true);
+              playAudioAdd();
+              toast.success("Done Add To List");
               console.log("updateDoc successfully");
             })
             .catch((error) => {
@@ -134,7 +144,6 @@ function MovieDetails() {
         console.error("An error occurred:", error);
       }
     }
-    toast.success("Done Add To List");
   };
   const handleRemoveMyList = async () => {
     if (userData) {
@@ -143,13 +152,17 @@ function MovieDetails() {
         const docSnapshot = await getDoc(docRef);
         if (docSnapshot.exists()) {
           const userData = docSnapshot.data();
-          const oldMyList = userData.myList || []; // Handle case where myList might be undefined
+          const oldMyList = userData.myList || [];
           const updatedMyList = oldMyList.filter(
             (item: { id: number | undefined }) => item.id !== movieVideo?.id
           );
           if (updatedMyList.length !== oldMyList.length) {
             await updateDoc(docRef, { myList: updatedMyList });
-            setIsMyList(false); // Assuming you want to set setIsMyList(false) when an item is removed
+            setIsMyList(false);
+            playAudioDelete();
+            toast("Done Remove From List", {
+              icon: "🥺",
+            });
           } else {
             console.log("Item not found in myList");
           }
@@ -238,6 +251,8 @@ function MovieDetails() {
               onClick={isMyList ? handleRemoveMyList : handleAddMyList}
               className="border border-neutral-400  transition-all active:bg-neutral-300 dark:active:bg-neutral-700 w-[50%] flex justify-center items-center gap-2 py-2  rounded-md text-[13px] font-bold"
             >
+              <audio ref={MovieRefAdd} src={NotificationAdd} />
+              <audio ref={MovieRefDelete} src={NotificationDelete} />
               {isMyList ? (
                 <>
                   <BsFillBookmarkCheckFill size={17} />
@@ -249,11 +264,10 @@ function MovieDetails() {
                 </>
               )}
             </button>
-
             <Link
               to={`https://www.imdb.com/title/${movieVideo?.imdb_id}`}
               target="_blank"
-              className="bg-orange-500 text-neutral-100 active:bg-neutral-300 dark:active:bg-neutral-700  transition-all w-[50%] flex justify-center items-center gap-2 py-2 rounded-md text-[13px] font-bold"
+              className="bg-neutral-300 dark:bg-neutral-600 text-neutral-800 dark:text-neutral-200 active:bg-[#f5c51893] dark:active:bg-[#ffd53bc0]  transition-all w-[50%] flex justify-center items-center gap-2 py-2 rounded-md text-[13px] font-bold"
             >
               <FaExternalLinkAlt size={18} />
               IMDB
@@ -261,7 +275,7 @@ function MovieDetails() {
           </div>
           <button
             onClick={handleClickShowMovie}
-            className="bg-primary active:bg-orange-300 transition-all w-full flex justify-center items-center gap-2 py-2 rounded-md text-[15px] font-bold"
+            className="bg-primary text-neutral-200 dark:text-neutral-900 active:bg-neutral-400 transition-all w-full flex justify-center items-center gap-2 py-2 rounded-md text-[15px] font-bold"
           >
             <FaPlay size={17} />
             Play
@@ -283,7 +297,7 @@ function MovieDetails() {
             return (
               <h2
                 key={item.id}
-                className="flex items-center justify-center  text-center bg-[#00000048] rounded-lg py-[2px]"
+                className="flex items-center justify-center  text-center bg-neutral-300 dark:bg-neutral-700 rounded-lg py-[2px]"
               >
                 {item.name}
               </h2>

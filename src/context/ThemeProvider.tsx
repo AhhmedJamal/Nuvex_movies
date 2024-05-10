@@ -9,7 +9,7 @@ export const AppContext = createContext<ThemeContextTypeProps | undefined>(
   undefined
 );
 const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<boolean>(false);
+  const [theme, setTheme] = useState<boolean>(true);
   const [userData, setUserData] = useState<UserData>({});
 
   const toggleTheme = () => {
@@ -46,9 +46,11 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     if (theme === `dark-${id}`) {
       setTheme(true);
       document.documentElement.classList.add("dark");
-    } else {
+    } else if (theme === `light-${id}`) {
       setTheme(false);
       document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
     }
   };
   useEffect(() => {
