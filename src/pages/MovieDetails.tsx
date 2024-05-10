@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { MovieProps } from "../types/MovieDetailsProps";
 import { BsBookmarkPlus } from "react-icons/bs";
 import { FaPlay, FaStar } from "react-icons/fa";
@@ -7,6 +7,9 @@ import { CardMovieProps } from "../types/CardMovieProps";
 import CardMovie from "../components/CardMovie";
 import { IoMdClose } from "react-icons/io";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
+import { FaImdb } from "react-icons/fa";
+import { LiaImdb } from "react-icons/lia";
+import { FaExternalLinkAlt } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import Shimmer from "../components/Shimmer";
 import { db } from "../config/firebase";
@@ -229,26 +232,36 @@ function MovieDetails() {
         </div>
       )}
       <div className="p-2 mt-2">
-        <div className="flex flex-col-reverse sm:flex-row gap-2  justify-between ">
-          <button
-            onClick={isMyList ? handleRemoveMyList : handleAddMyList}
-            className="border border-zinc-600 transition-all active:bg-zinc-500 w-[98%] flex justify-center items-center gap-2 py-2  rounded-md text-[12px] font-bold"
-          >
-            {isMyList ? (
-              <>
-                <BsFillBookmarkCheckFill size={17} />
-                Remove From List
-              </>
-            ) : (
-              <>
-                <BsBookmarkPlus size={17} /> My List
-              </>
-            )}
-          </button>
+        <div className="flex flex-col-reverse sm:flex-row gap-2  justify-between items-center ">
+          <div className="flex w-full gap-3">
+            <button
+              onClick={isMyList ? handleRemoveMyList : handleAddMyList}
+              className="border border-neutral-400  transition-all active:bg-neutral-300 dark:active:bg-neutral-700 w-[50%] flex justify-center items-center gap-2 py-2  rounded-md text-[13px] font-bold"
+            >
+              {isMyList ? (
+                <>
+                  <BsFillBookmarkCheckFill size={17} />
+                  Remove From List
+                </>
+              ) : (
+                <>
+                  <BsBookmarkPlus size={17} /> My List
+                </>
+              )}
+            </button>
 
+            <Link
+              to={`https://www.imdb.com/title/${movieVideo?.imdb_id}`}
+              target="_blank"
+              className="bg-orange-500 text-neutral-100 active:bg-neutral-300 dark:active:bg-neutral-700  transition-all w-[50%] flex justify-center items-center gap-2 py-2 rounded-md text-[13px] font-bold"
+            >
+              <FaExternalLinkAlt size={18} />
+              IMDB
+            </Link>
+          </div>
           <button
             onClick={handleClickShowMovie}
-            className="bg-primary active:bg-orange-300 transition-all w-[98%] flex justify-center items-center gap-2 py-2 rounded-md text-[13px] font-bold"
+            className="bg-primary active:bg-orange-300 transition-all w-full flex justify-center items-center gap-2 py-2 rounded-md text-[15px] font-bold"
           >
             <FaPlay size={17} />
             Play

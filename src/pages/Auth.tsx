@@ -32,13 +32,13 @@ function Auth() {
     <div className="flex flex-col h-screen w-full items-center justify-evenly ">
       <div className="flex flex-col  font-bold justify-between w-[80%] sm:w-[400px] my-4">
         <div className=" flex flex-col gap-11 w-full">
-          <h1 className=" flex font-bold text-[30px] ">
-            Welcome in
-            <div className="ml-3">
+          <h1 className=" flex flex-col  font-bold text-[35px] ">
+            Welcome to
+            <div className="ml-">
               <Logo
-                fontSize="text-[30px]"
-                heightBlur="h-[0px]"
-                bottom="bottom-0"
+                fontSize="text-[35px]"
+                heightBlur="h-[10px]"
+                bottom="bottom-3"
               />
             </div>
           </h1>
