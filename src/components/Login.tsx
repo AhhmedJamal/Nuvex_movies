@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { auth, db, facebookProvider, googleProvider } from "../config/firebase";
 import { fetchSignInMethodsForEmail, signInWithPopup } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -13,6 +14,7 @@ function Login() {
   const [email, setEmail] = useState<string>("");
   const [pass, setPass] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [isEye, setIsEye] = useState<boolean>(false);
   const router = useNavigate();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
@@ -105,7 +107,9 @@ function Login() {
       }
     }
   };
-
+  const handleEyePassword = () => {
+    setIsEye(!isEye);
+  };
   return (
     <div className="flex h-[300px]  justify-center items-center flex-col overflow-hidden w-full">
       <Toaster position="top-center" reverseOrder={false} />
@@ -119,15 +123,30 @@ function Login() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <input
-          className="bg-neutral-300 dark:bg-zinc-700 shadow appearance-none border border-neutral-400 dark:border-neutral-500   rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline placeholder:text-neutral-500"
-          id="pass"
-          type="password"
-          placeholder="Password"
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-          required
-        />
+        <div className="relative flex">
+          <input
+            className="bg-neutral-300 dark:bg-zinc-700 shadow appearance-none border border-neutral-400 dark:border-neutral-500   rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline placeholder:text-neutral-500"
+            id="pass"
+            type={isEye ? "password" : "text"}
+            placeholder="Password"
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
+            required
+          />
+          <div onClick={handleEyePassword}>
+            {isEye ? (
+              <AiOutlineEyeInvisible
+                size={23}
+                className="absolute right-2 top-2 text-neutral-300 "
+              />
+            ) : (
+              <AiOutlineEye
+                size={23}
+                className="absolute right-2 top-2 text-neutral-300 "
+              />
+            )}
+          </div>
+        </div>
         <Link
           to="/forget"
           className="text-neutral-400 font-bold rounded-md p-1 text-[12px] underline text-end w-fit self-end"

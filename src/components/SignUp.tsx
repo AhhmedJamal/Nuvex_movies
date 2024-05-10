@@ -7,6 +7,7 @@ import {
   fetchSignInMethodsForEmail,
 } from "firebase/auth";
 import LoaderButton from "./LoaderButton";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 interface SignUpProps {
   setChoose: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,7 +18,8 @@ function SignUp({ setChoose }: SignUpProps) {
   const [pass, setPass] = useState<string>("");
   const [passConfirmation, setPassConfirmation] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [isEye, setIsEye] = useState<boolean>(false);
+  const [isEyeConfirmation, setIsEyeConfirmation] = useState<boolean>(false);
   const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -49,14 +51,13 @@ function SignUp({ setChoose }: SignUpProps) {
             toast.success("Successfully Create Account");
             setTimeout(() => {
               // Navigate to the home page
-              setChoose(true);
-            }, 1500);
-
-            // Reset email and password fields
-            setName("");
-            setEmail("");
-            setPass("");
-            setPassConfirmation("");
+              setChoose(false);
+              // Reset name and  email and password fields
+              setName("");
+              setEmail("");
+              setPass("");
+              setPassConfirmation("");
+            }, 1000);
           })
           .catch(() => {
             toast.error("This didn't work.");
@@ -73,11 +74,16 @@ function SignUp({ setChoose }: SignUpProps) {
       setLoading(false);
     }
   };
-
+  const handleEyePassword = () => {
+    setIsEye(!isEye);
+  };
+  const handleEyePasswordConfirmation = () => {
+    setIsEyeConfirmation(!isEyeConfirmation);
+  };
   return (
     <div className="flex h-[300px] justify-center items-center flex-col w-full">
       <Toaster position="top-center" reverseOrder={false} />
-      <form className="w-full flex flex-col gap-4" onSubmit={handleSignUp}>
+      <form className="w-full flex flex-col gap-4 " onSubmit={handleSignUp}>
         <div className="flex gap-2">
           <input
             value={name}
@@ -98,24 +104,54 @@ function SignUp({ setChoose }: SignUpProps) {
             required
           />
         </div>
-        <input
-          value={pass}
-          onChange={(event) => setPass(event?.target.value)}
-          className="bg-neutral-300 dark:bg-zinc-700 shadow appearance-none border border-neutral-400 dark:border-neutral-500 placeholder:text-neutral-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
-          id="pass"
-          type="password"
-          placeholder="Password"
-          required
-        />
-        <input
-          value={passConfirmation}
-          onChange={(event) => setPassConfirmation(event?.target.value)}
-          className="bg-neutral-300 dark:bg-zinc-700 shadow appearance-none border border-neutral-400 dark:border-neutral-500 placeholder:text-neutral-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
-          id="passConfirmation"
-          type="password"
-          placeholder="Password Confirmation"
-          required
-        />
+        <div className="relative flex">
+          <input
+            className="bg-neutral-300 dark:bg-zinc-700 shadow appearance-none border border-neutral-400 dark:border-neutral-500   rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline placeholder:text-neutral-500"
+            id="pass"
+            type={isEye ? "text" : "password"}
+            placeholder="Password"
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
+            required
+          />
+          <div onClick={handleEyePassword}>
+            {isEye ? (
+              <AiOutlineEyeInvisible
+                size={23}
+                className="absolute right-2 top-2 text-neutral-300 "
+              />
+            ) : (
+              <AiOutlineEye
+                size={23}
+                className="absolute right-2 top-2 text-neutral-300 "
+              />
+            )}
+          </div>
+        </div>
+        <div className="relative flex">
+          <input
+            value={passConfirmation}
+            onChange={(event) => setPassConfirmation(event?.target.value)}
+            className="bg-neutral-300 dark:bg-zinc-700 shadow appearance-none border border-neutral-400 dark:border-neutral-500 placeholder:text-neutral-500 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+            id="passConfirmation"
+            type={isEyeConfirmation ? "text" : "password"}
+            placeholder="Password Confirmation"
+            required
+          />
+          <div onClick={handleEyePasswordConfirmation}>
+            {isEyeConfirmation ? (
+              <AiOutlineEyeInvisible
+                size={23}
+                className="absolute right-2 top-2 text-neutral-300 "
+              />
+            ) : (
+              <AiOutlineEye
+                size={23}
+                className="absolute right-2 top-2 text-neutral-300 "
+              />
+            )}
+          </div>
+        </div>
 
         <button
           type="submit"
