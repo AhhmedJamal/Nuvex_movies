@@ -33,7 +33,7 @@ function Auth() {
       <div className="flex flex-col  font-bold justify-between w-[80%] sm:w-[400px] my-4">
         <div className=" flex flex-col gap-11 w-full">
           <h1 className=" flex flex-col ">
-            <p className=" font-bold text-[35px]">Welcome to</p>
+            <p className="text-[30px] font-serif">Welcome to</p>
             <Logo
               fontSize="text-[35px]"
               heightBlur="h-[0px]"
@@ -51,7 +51,7 @@ function Auth() {
               />
               <label
                 htmlFor="default-checkbox"
-                className="ml-2 text-[18px] font-bold "
+                className="ml-2 text-[18px] font-bold font-serif"
               >
                 Sign-In
               </label>
@@ -66,7 +66,7 @@ function Auth() {
               />
               <label
                 htmlFor="checked-checkbox"
-                className="ml-2 text-[18px] font-bold "
+                className="ml-2 text-[18px] font-bold font-serif"
               >
                 Create Account
               </label>
