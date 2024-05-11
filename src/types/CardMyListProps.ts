@@ -10,4 +10,4 @@ export type CardMyListProps = {
     vote_average: number;
   };
   getDataUser: (user: UserData) => void;
-}
+};

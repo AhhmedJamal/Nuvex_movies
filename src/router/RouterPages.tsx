@@ -1,6 +1,6 @@
 import App from "../App";
 import Auth from "../pages/Auth";
-import Home from "../pages/HomePage";
+import HomePage from "../pages/HomePage";
 import MovieDetails from "../pages/MovieDetails";
 import MyListPage from "../pages/MyListPage";
 import { createBrowserRouter } from "react-router-dom";
@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <HomePage />,
       },
       {
         path: "/:name/:id",
@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
   },
 
   {
-    path: "auth",
+    path: "authentication",
     element: <Auth />,
   },
   {

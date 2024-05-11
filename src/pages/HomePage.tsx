@@ -7,7 +7,7 @@ import MoviesList from "../components/MoviesList";
 import { CardMovieProps } from "../types/CardMovieProps";
 import NavBar from "../components/NavBar";
 
-export default function Home() {
+export default function HomePage() {
   const [popular, setPopular] = useState<CardMovieProps[]>([]);
   const [topRated, setTopRated] = useState<CardMovieProps[]>([]);
   const [upcoming, setUpcoming] = useState<CardMovieProps[]>([]);
@@ -44,7 +44,7 @@ export default function Home() {
     // Check if a user is found
     onAuthStateChanged(auth, (user) => {
       if (localStorage.getItem(`token=${user?.uid}`) !== user?.uid) {
-        router("/auth");
+        router("/authentication");
       }
     });
 

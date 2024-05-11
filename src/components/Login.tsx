@@ -3,12 +3,13 @@ import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { auth, db, facebookProvider, googleProvider } from "../config/firebase";
-import { fetchSignInMethodsForEmail, signInWithPopup } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import LoaderButton from "./LoaderButton";
+import { UserData } from "../types/UserData";
 
 function Login() {
   const [email, setEmail] = useState<string>("");
@@ -25,7 +26,7 @@ function Login() {
       signInWithEmailAndPassword(auth, email, pass)
         .then(async ({ user }) => {
           // Store user token in local storage
-          localStorage.setItem(`token=${user?.uid}`, user.uid);
+          localStorage.setItem(`token-${user?.uid}`, user.uid);
           // Navigate to the home page
           router("/", { replace: true });
           // Reset email and password fields
@@ -47,27 +48,9 @@ function Login() {
   const handleGoogle = async () => {
     try {
       const { user } = await signInWithPopup(auth, googleProvider);
-      const userDocRef = doc(db, "users", user.email || "");
-      const userDocSnapshot = await getDoc(userDocRef);
-      if (userDocSnapshot.exists()) {
-        // User exists, do something (e.g., set user info in local storage)
-        localStorage.setItem(`token=${user.uid}`, user.uid);
-        router("/", { replace: true }); // Assuming you have 'router' imported and it's used for navigation
-      } else {
-        // User doesn't exist, create a new document for the user
-        await setDoc(userDocRef, {
-          uid: user?.uid,
-          name: user?.displayName,
-          email: user?.email,
-          photoURL: user?.photoURL,
-          myList: [],
-        });
-        localStorage.setItem("token", user.uid);
-        console.log("New user added successfully");
-        router("/", { replace: true }); // Navigate to a different route after creating the user document
-      }
+      await handleUserAuth(user);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -75,35 +58,34 @@ function Login() {
     try {
       const result = await signInWithPopup(auth, facebookProvider);
       const user = result.user;
-      try {
-        const signInMethods = await fetchSignInMethodsForEmail(
-          auth,
-          user.email || ""
-        );
-
-        if (!signInMethods) {
-          try {
-            await setDoc(doc(db, "users", user?.email || ""), {
-              uid: user.uid,
-              name: user.displayName,
-              email: user.email,
-              photoURL: user.photoURL,
-              myList: [],
-            });
-
-            console.log("Document added successfully");
-          } catch (e) {
-            console.error("Error adding document: ", e);
-          }
-        }
-      } catch (error) {
-        console.error(error);
-      }
+      await handleUserAuth(user);
     } catch (error) {
-      if (error instanceof Error) {
-        console.error(error.message);
-      } else {
-        console.error("An unknown error occurred");
+      console.error(error);
+    }
+  };
+
+  const handleUserAuth = async (user: UserData) => {
+    const userDocRef = doc(db, "users", user.email || "");
+    const userDocSnapshot = await getDoc(userDocRef);
+    if (userDocSnapshot.exists()) {
+      // User exists, do something (e.g., set user info in local storage)
+      localStorage.setItem(`token-${user.uid}`, user.uid || "");
+      router("/", { replace: true }); // Assuming you have 'router' imported and it's used for navigation
+    } else {
+      // User doesn't exist, create a new document for the user
+      try {
+        await setDoc(userDocRef, {
+          uid: user?.uid,
+          name: user?.displayName,
+          email: user?.email,
+          photoURL: user?.photoURL,
+          myList: [],
+        });
+        localStorage.setItem("token", user.uid || "");
+        console.log("New user added successfully");
+        router("/", { replace: true }); // Navigate to a different route after creating the user document
+      } catch (e) {
+        console.error("Error adding document: ", e);
       }
     }
   };

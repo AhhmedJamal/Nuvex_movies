@@ -33,6 +33,7 @@ function SignUp({ setChoose }: SignUpProps) {
                   console.log(signInMethods);
                 } else {
                   try {
+                    toast.success("Successfully Create Account");
                     await setDoc(doc(db, "users", user.email || ""), {
                       uid: user?.uid,
                       name: name,
@@ -40,24 +41,22 @@ function SignUp({ setChoose }: SignUpProps) {
                       myList: [],
                       photoURL: "",
                     });
+
+                    setTimeout(() => {
+                      // Navigate to the home page
+                      setChoose(false);
+                      // Reset name and  email and password fields
+                      setName("");
+                      setEmail("");
+                      setPass("");
+                      setPassConfirmation("");
+                    }, 1000);
                   } catch (e) {
                     console.error("Error adding document: ", e);
                   }
                 }
               })
               .catch((err) => console.log("error: " + err));
-
-            // localStorage.setItem(`token=${user?.uid}`, user?.uid || "");
-            toast.success("Successfully Create Account");
-            setTimeout(() => {
-              // Navigate to the home page
-              setChoose(false);
-              // Reset name and  email and password fields
-              setName("");
-              setEmail("");
-              setPass("");
-              setPassConfirmation("");
-            }, 1000);
           })
           .catch(() => {
             toast.error("This didn't work.");

@@ -17,7 +17,7 @@ function SettingsPage() {
 
   const handleLogOut = () => {
     signOut(auth);
-    router("/auth", { replace: true });
+    router("/authentication", { replace: true });
   };
 
   return (
@@ -31,7 +31,7 @@ function SettingsPage() {
         <h1 className="font-bold text-[23px] self-start ">Settings</h1>
       </div>
       <div className="flex flex-col items-center gap-3 justify-center">
-        {userData.photoURL !== "" ? (
+        {userData.photoURL !== undefined ? (
           <img
             src={userData.photoURL || ""}
             alt="photo user"
@@ -41,7 +41,7 @@ function SettingsPage() {
           <FaUserCircle size={60} />
         )}
         <div className="flex items-center justify-between  bg-neutral-300 dark:bg-neutral-800 px-3  font-bold rounded-md">
-          {userData?.name}
+          {userData?.displayName}
         </div>
       </div>
       <div className=" w-[90%] md:w-[50%] flex flex-col gap-3">
@@ -82,7 +82,7 @@ function SettingsPage() {
         onClick={handleLogOut}
         className="bg-primary p-2 font-bold rounded-md w-[200px]"
       >
-        LogOut
+        {userData.email !== undefined ? " LogOut" : "Register now"}
       </button>
     </section>
   );
