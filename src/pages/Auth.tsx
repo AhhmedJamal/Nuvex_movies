@@ -33,7 +33,7 @@ function Auth() {
       <div className="flex flex-col  font-bold justify-between w-[80%] sm:w-[400px] my-4">
         <div className=" flex flex-col gap-11 w-full">
           <h1 className=" flex flex-col ">
-            <h1 className="text-[25px] ">Welcome to</h1>
+            <h2 className="text-[30px] ">Welcome to</h2>
             <Logo
               fontSize="text-[30px]"
               heightBlur="h-[10px]"
