@@ -6,18 +6,23 @@ import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import { AppContext } from "../context/ThemeProvider";
-
+import { RiLoader3Fill } from "react-icons/ri";
 function Auth() {
   const Context = useContext(AppContext);
   if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
   const { userData, checkThemeMode } = Context;
   const [isChecked, setIsChecked] = useState(false);
+  const [loader, setIsLoader] = useState(false);
 
   const toggleChecked = (title: string) => {
     title === "signIn" ? setIsChecked(false) : setIsChecked(true);
   };
   const router = useNavigate();
   useEffect(() => {
+    setIsLoader(true);
+    setTimeout(() => {
+      setIsLoader(false);
+    }, 2000);
     // Check Theme Mode
     checkThemeMode(userData?.uid || "");
     // Check if a user is found
@@ -29,53 +34,61 @@ function Auth() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="flex flex-col h-screen w-full items-center justify-evenly ">
-      <div className="flex flex-col  font-bold justify-between w-[80%] sm:w-[400px] my-4">
-        <div className=" flex flex-col gap-11 w-full">
-          <h1 className=" flex flex-col ">
-            <p className="text-[10px] ">Welcome to</p>
-            <Logo
-              fontSize="text-[35px]"
-              heightBlur="h-[0px]"
-              bottom="bottom-0"
-            />
-          </h1>
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="default-checkbox"
-                className="size-5  align-middle border border-neutral-400 appearance-none outline-[none]  cursor-pointer checked:[appearance:auto] checked:accent-primary checked:border-none"
-                checked={!isChecked}
-                onChange={() => toggleChecked("signIn")}
-              />
-              <label
-                htmlFor="default-checkbox"
-                className="ml-2 text-[18px] font-bold "
-              >
-                Sign-In
-              </label>
+    <>
+      {loader ? (
+        <div className="h-screen flex flex-col justify-center items-center">
+          <RiLoader3Fill size={80}  className="animate-spin"/>
+        </div>
+      ) : (
+        <div className="flex flex-col h-screen w-full items-center justify-evenly ">
+          <div className="flex flex-col  font-bold justify-between w-[80%] sm:w-[400px] my-4">
+            <div className=" flex flex-col gap-11 w-full">
+              <h1 className=" flex flex-col ">
+                <p className="text-[20px] ">Welcome to</p>
+                <Logo
+                  fontSize="text-[25px]"
+                  heightBlur="h-[0px]"
+                  bottom="bottom-0"
+                />
+              </h1>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="default-checkbox"
+                    className="size-5  align-middle border border-neutral-400 appearance-none outline-[none]  cursor-pointer checked:[appearance:auto] checked:accent-primary checked:border-none"
+                    checked={!isChecked}
+                    onChange={() => toggleChecked("signIn")}
+                  />
+                  <label
+                    htmlFor="default-checkbox"
+                    className="ml-2 text-[18px] font-bold "
+                  >
+                    Sign-In
+                  </label>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="checked-checkbox"
+                    className="size-5  align-middle border border-neutral-400 appearance-none outline-[none] cursor-pointer checked:[appearance:auto] checked:accent-primary checked:border-none"
+                    checked={isChecked}
+                    onChange={() => toggleChecked("create account")}
+                  />
+                  <label
+                    htmlFor="checked-checkbox"
+                    className="ml-2 text-[18px] font-bold "
+                  >
+                    Create Account
+                  </label>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="checked-checkbox"
-                className="size-5  align-middle border border-neutral-400 appearance-none outline-[none] cursor-pointer checked:[appearance:auto] checked:accent-primary checked:border-none"
-                checked={isChecked}
-                onChange={() => toggleChecked("create account")}
-              />
-              <label
-                htmlFor="checked-checkbox"
-                className="ml-2 text-[18px] font-bold "
-              >
-                Create Account
-              </label>
-            </div>
+            {!isChecked ? <Login /> : <SignUp setChoose={setIsChecked} />}
           </div>
         </div>
-        {!isChecked ? <Login /> : <SignUp setChoose={setIsChecked} />}
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 
