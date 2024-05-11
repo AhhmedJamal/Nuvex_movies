@@ -37,16 +37,16 @@ function Auth() {
     <>
       {loader ? (
         <div className="h-screen flex flex-col justify-center items-center">
-          <RiLoader3Fill size={80}  className="animate-spin"/>
+          <RiLoader3Fill size={80} className="animate-spin" />
         </div>
       ) : (
         <div className="flex flex-col h-screen w-full items-center justify-evenly ">
           <div className="flex flex-col  font-bold justify-between w-[80%] sm:w-[400px] my-4">
             <div className=" flex flex-col gap-11 w-full">
               <h1 className=" flex flex-col ">
-                <p className="text-[20px] ">Welcome to</p>
+                <p className="text-[25px] ">Welcome to</p>
                 <Logo
-                  fontSize="text-[25px]"
+                  fontSize="text-[30px]"
                   heightBlur="h-[0px]"
                   bottom="bottom-0"
                 />
@@ -60,10 +60,7 @@ function Auth() {
                     checked={!isChecked}
                     onChange={() => toggleChecked("signIn")}
                   />
-                  <label
-                    htmlFor="default-checkbox"
-                    className="ml-2 text-[18px] font-bold "
-                  >
+                  <label htmlFor="default-checkbox" className="ml-2">
                     Sign-In
                   </label>
                 </div>
@@ -75,10 +72,7 @@ function Auth() {
                     checked={isChecked}
                     onChange={() => toggleChecked("create account")}
                   />
-                  <label
-                    htmlFor="checked-checkbox"
-                    className="ml-2 text-[18px] font-bold "
-                  >
+                  <label htmlFor="checked-checkbox" className="ml-2">
                     Create Account
                   </label>
                 </div>
