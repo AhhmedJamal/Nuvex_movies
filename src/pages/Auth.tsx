@@ -4,7 +4,7 @@ import SignUp from "../components/SignUp";
 import { useContext, useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
-// import Logo from "../components/Logo";
+import Logo from "../components/Logo";
 import { AppContext } from "../context/ThemeProvider";
 
 function Auth() {
@@ -32,14 +32,14 @@ function Auth() {
     <div className="flex flex-col h-screen w-full items-center justify-evenly ">
       <div className="flex flex-col  font-bold justify-between w-[80%] sm:w-[400px] my-4">
         <div className=" flex flex-col gap-11 w-full">
-          {/* <div className=" flex flex-col">
+          <div className=" flex flex-col">
             <h2 className="text-[30px] ">Welcome to</h2>
             <Logo
               fontSize="text-[40px]"
               heightBlur="h-[0px]"
               bottom="bottom-0"
             />
-          </div> */}
+          </div>
           <div className="flex flex-col gap-2">
             <div className="flex items-center">
               <input
