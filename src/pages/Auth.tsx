@@ -32,14 +32,14 @@ function Auth() {
     <div className="flex flex-col h-screen w-full items-center justify-evenly ">
       <div className="flex flex-col  font-bold justify-between w-[80%] sm:w-[400px] my-4">
         <div className=" flex flex-col gap-11 w-full">
-          <h1 className=" flex flex-col ">
+          <div className=" flex flex-col">
             <h2 className="text-[30px] ">Welcome to</h2>
             <Logo
-              fontSize="text-[30px]"
-              heightBlur="h-[10px]"
-              bottom="bottom-2"
+              fontSize="text-[40px]"
+              heightBlur="h-[0px]"
+              bottom="bottom-0"
             />
-          </h1>
+          </div>
           <div className="flex flex-col gap-2">
             <div className="flex items-center">
               <input
