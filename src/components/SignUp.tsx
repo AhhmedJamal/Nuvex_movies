@@ -36,7 +36,7 @@ function SignUp({ setChoose }: SignUpProps) {
                     toast.success("Successfully Create Account");
                     await setDoc(doc(db, "users", user.email || ""), {
                       uid: user?.uid,
-                      name: name,
+                      displayName: name,
                       email: user?.email,
                       myList: [],
                       photoURL: "",
@@ -50,7 +50,7 @@ function SignUp({ setChoose }: SignUpProps) {
                       setEmail("");
                       setPass("");
                       setPassConfirmation("");
-                    }, 1000);
+                    }, 500);
                   } catch (e) {
                     console.error("Error adding document: ", e);
                   }

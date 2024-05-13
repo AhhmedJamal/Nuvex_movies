@@ -76,7 +76,7 @@ function Login() {
       try {
         await setDoc(userDocRef, {
           uid: user?.uid,
-          name: user?.displayName,
+          displayName: user?.displayName,
           email: user?.email,
           photoURL: user?.photoURL,
           myList: [],
