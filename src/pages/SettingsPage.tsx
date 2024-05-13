@@ -31,7 +31,7 @@ function SettingsPage() {
         <h1 className="font-bold text-[23px] self-start ">Settings</h1>
       </div>
       <div className="flex flex-col items-center gap-3 justify-center">
-        {userData.photoURL !== undefined ? (
+        {userData.photoURL !== "" && userData.photoURL !== undefined ? (
           <img
             src={userData.photoURL || ""}
             alt="photo user"

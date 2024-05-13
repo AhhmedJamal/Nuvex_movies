@@ -65,8 +65,10 @@ function SignUp({ setChoose }: SignUpProps) {
             setLoading(false);
           });
       } else {
-        toast.error("The password does not match !");
-        setLoading(false);
+        setTimeout(() => {
+          toast.error("The password does not match !");
+          setLoading(false);
+        }, 1000);
       }
     } else {
       toast.error("Check Email address or Password");
@@ -154,7 +156,7 @@ function SignUp({ setChoose }: SignUpProps) {
 
         <button
           type="submit"
-          className="bg-primary text-black rounded-md p-2 font-bold items-center flex justify-center mt-3"
+          className="bg-primary rounded-md p-2 font-bold items-center flex justify-center mt-3"
         >
           {loading ? <LoaderButton /> : "Sign Up"}
         </button>

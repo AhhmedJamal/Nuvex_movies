@@ -81,7 +81,7 @@ function Login() {
           photoURL: user?.photoURL,
           myList: [],
         });
-        localStorage.setItem("token", user.uid || "");
+        localStorage.setItem(`token-${user.uid}`, user.uid || "");
         console.log("New user added successfully");
         router("/", { replace: true }); // Navigate to a different route after creating the user document
       } catch (e) {
@@ -109,7 +109,7 @@ function Login() {
           <input
             className="bg-neutral-300 dark:bg-zinc-700 shadow appearance-none border border-neutral-400 dark:border-neutral-500   rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline placeholder:text-neutral-500"
             id="pass"
-            type={isEye ? "password" : "text"}
+            type={isEye ? "text" : "password"}
             placeholder="Password"
             value={pass}
             onChange={(e) => setPass(e.target.value)}

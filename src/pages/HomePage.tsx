@@ -43,7 +43,7 @@ export default function HomePage() {
 
     // Check if a user is found
     onAuthStateChanged(auth, (user) => {
-      if (localStorage.getItem(`token=${user?.uid}`) !== user?.uid) {
+      if (localStorage.getItem(`token-${user?.uid}`) !== user?.uid) {
         router("/authentication");
       }
     });
