@@ -12,7 +12,6 @@ import { IoIosArrowBack } from "react-icons/io";
 import Shimmer from "../components/Shimmer";
 import { db } from "../config/firebase";
 import toast, { Toaster } from "react-hot-toast";
-import NotificationDelete from "/audio/deleteMovie.mp3";
 import NotificationAdd from "/audio/addMovie.mp3";
 import {
   collection,
@@ -41,14 +40,11 @@ function MovieDetails() {
   if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
   const { userData } = Context;
   const MovieRefAdd = useRef<HTMLAudioElement>(null);
-  const MovieRefDelete = useRef<HTMLAudioElement>(null);
 
   const playAudioAdd = () => {
     MovieRefAdd.current?.play();
   };
-  const playAudioDelete = () => {
-    MovieRefDelete.current?.play();
-  };
+
   const startDragging = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setMouseDown(true);
     setStartX(e.pageX - (e.currentTarget.offsetLeft || 0));
@@ -159,7 +155,7 @@ function MovieDetails() {
           if (updatedMyList.length !== oldMyList.length) {
             await updateDoc(docRef, { myList: updatedMyList });
             setIsMyList(false);
-            playAudioDelete();
+
             toast("Done Remove From List", {
               icon: "🥺",
             });
@@ -252,7 +248,6 @@ function MovieDetails() {
               className="border border-neutral-400  transition-all active:bg-neutral-300 dark:active:bg-neutral-700 w-[50%] flex justify-center items-center gap-2 py-2  rounded-md text-[13px] font-bold"
             >
               <audio ref={MovieRefAdd} src={NotificationAdd} />
-              <audio ref={MovieRefDelete} src={NotificationDelete} />
               {isMyList ? (
                 <>
                   <BsFillBookmarkCheckFill size={17} />

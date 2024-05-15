@@ -98,7 +98,8 @@ function SettingsPage() {
                   if (user) {
                     await user.delete();
                     deleteDoc(doc(db, "users", userData.email || ""));
-                    toast.error("Done Delete Account");
+                    localStorage.removeItem(`token-${userData?.uid}`);
+                    toast.success("Done Delete Account");
                     router("/authentication", { replace: true });
                   }
                 } catch (error) {

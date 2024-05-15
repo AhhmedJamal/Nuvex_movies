@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../config/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { FaStar } from "react-icons/fa";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { AppContext } from "../context/ThemeProvider";
-import NotificationSound from "/audio/deleteMovie.mp3";
 
 function CardMyList({ dataMovie, getDataUser }: CardMyListProps) {
   const { poster_path, title, genres, runtime, id, vote_average } = dataMovie;
@@ -16,11 +15,7 @@ function CardMyList({ dataMovie, getDataUser }: CardMyListProps) {
   if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
   const { userData } = Context;
   const router = useNavigate();
-  const deleteMovie = useRef<HTMLAudioElement>(null);
 
-  const playAudio = () => {
-    deleteMovie.current?.play();
-  };
   const pathPhoto = () => {
     return `https://image.tmdb.org/t/p/original${poster_path}`;
   };
@@ -59,7 +54,6 @@ function CardMyList({ dataMovie, getDataUser }: CardMyListProps) {
       console.log("User not logged in");
     }
     getDataUser(userData);
-    playAudio();
   };
   useEffect(() => {
     setIsLoading(true);
@@ -124,7 +118,6 @@ function CardMyList({ dataMovie, getDataUser }: CardMyListProps) {
                   onClick={handleDelete}
                   className="bg-primary p-2 rounded-lg "
                 >
-                  <audio ref={deleteMovie} src={NotificationSound} />
                   <MdOutlineDelete size={20} />
                 </button>
               </div>
