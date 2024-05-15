@@ -22,7 +22,6 @@
   display: none;
 }
 
-
 /* animation for button Log in and Sign up*/
 @keyframes grow {
   0%,
@@ -43,4 +42,12 @@
   100% {
     background-position: -200% 0;
   }
+}
+
+.react-confirm-alert-overlay {
+  background-color: #3d3c3d79;
+}
+.react-confirm-alert-body {
+  background-color: #3f3f3f;
+  color: white;
 }

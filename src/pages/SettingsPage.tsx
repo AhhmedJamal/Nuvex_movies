@@ -3,16 +3,25 @@ import { auth, db, storage } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/ThemeProvider";
 import { useContext, useRef } from "react";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack, IoIosLogOut } from "react-icons/io";
 import { MdArrowForwardIos } from "react-icons/md";
 import { MdNotificationsActive } from "react-icons/md";
 import { IoMdHelpCircle } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import NotificationAdd from "/audio/addMovie.mp3";
 import toast, { Toaster } from "react-hot-toast";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { MdDelete } from "react-icons/md";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 function SettingsPage() {
   const imageRef = useRef<HTMLInputElement>(null);
@@ -68,6 +77,44 @@ function SettingsPage() {
   const playAudioAdd = () => {
     imageRefEffect.current?.play();
   };
+  const handleDeleteUser = async () => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="bg-neutral-200 text-neutral-800 dark:bg-neutral-900 p-8 font-bold dark:text-neutral-100  rounded-xl">
+            <h1>Are you sure !</h1>
+            <p className="mb-7">You want to delete account ?</p>
+            <button
+              className="bg-neutral-200 px-3 text-black rounded-lg mr-4 "
+              onClick={onClose}
+            >
+              No
+            </button>
+            <button
+              className="bg-primary px-3 text-white rounded-lg"
+              onClick={async () => {
+                try {
+                  const user = auth.currentUser;
+                  if (user) {
+                    await user.delete();
+                    deleteDoc(doc(db, "users", userData.email || ""));
+                    toast.error("Done Delete Account");
+                    router("/authentication", { replace: true });
+                  }
+                } catch (error) {
+                  console.error("Error deleting user:", error);
+                }
+                onClose();
+              }}
+            >
+              Yes, Delete it!
+            </button>
+          </div>
+        );
+      },
+    });
+  };
+
   return (
     <section className="flex flex-col justify-between items-center h-[80%] gap-4 p-4">
       <Toaster position="top-center" reverseOrder={false} />
@@ -142,14 +189,21 @@ function SettingsPage() {
           </div>
           <MdArrowForwardIos size={20} />
         </div>
+        <div
+          onClick={handleLogOut}
+          className="flex items-center gap-3 bg-neutral-300 dark:bg-neutral-800 p-3  font-bold rounded-xl active:bg-[#3333334d]"
+        >
+          <IoIosLogOut size={20} />
+          {userData.email !== undefined ? " LogOut" : "Register now"}
+        </div>{" "}
+        <div
+          onClick={handleDeleteUser}
+          className="flex items-center gap-3 bg-primary p-3 text-white  font-bold rounded-xl active:bg-[#ffce3de0]"
+        >
+          <MdDelete size={20} />
+          Delete Account
+        </div>
       </div>
-
-      <button
-        onClick={handleLogOut}
-        className="bg-primary p-2 font-bold rounded-md w-[200px]"
-      >
-        {userData.email !== undefined ? " LogOut" : "Register now"}
-      </button>
     </section>
   );
 }
