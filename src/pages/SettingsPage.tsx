@@ -16,7 +16,6 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
-import NotificationAdd from "/audio/addMovie.mp3";
 import toast, { Toaster } from "react-hot-toast";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { MdDelete } from "react-icons/md";
@@ -25,7 +24,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 
 function SettingsPage() {
   const imageRef = useRef<HTMLInputElement>(null);
-  const imageRefEffect = useRef<HTMLAudioElement>(null);
+
   const Context = useContext(AppContext);
   if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
   const { userData, theme, toggleTheme, getDataUser } = Context;
@@ -60,7 +59,6 @@ function SettingsPage() {
             //update variables to cloud store firebase
             await updateDoc(docRef, newPhoto)
               .then(() => {
-                playAudioAdd();
                 toast.success("Done update Photo");
                 console.log("updateDoc successfully");
               })
@@ -68,15 +66,13 @@ function SettingsPage() {
                 console.error("Error updating document:", error);
               });
           }
-          playAudioAdd();
+
           getDataUser(userData);
         })
       );
     }
   };
-  const playAudioAdd = () => {
-    imageRefEffect.current?.play();
-  };
+
   const handleDeleteUser = async () => {
     confirmAlert({
       customUI: ({ onClose }) => {
@@ -117,9 +113,8 @@ function SettingsPage() {
   };
 
   return (
-    <section className="flex flex-col justify-between items-center h-[80%] gap-4 p-4">
+    <section className="flex flex-col justify-between items-center h-[85%] gap-4 p-4">
       <Toaster position="top-center" reverseOrder={false} />
-      <audio ref={imageRefEffect} src={NotificationAdd} />
       <div className="flex items-center self-start  mt-[5px] ">
         <IoIosArrowBack
           className="hidden sm:block mr-5 cursor-pointer"
@@ -142,7 +137,7 @@ function SettingsPage() {
           <div className="relative">
             <FaPlus
               size={22}
-              className="absolute bottom-1 left-4 bg-primary rounded-full p-[2px] active:bg-amber-600 transition-colors"
+              className="absolute bottom-1 left-6 bg-primary rounded-full p-[2px] active:bg-amber-600 transition-colors"
               onClick={handleClick}
             />
             <input
@@ -195,11 +190,11 @@ function SettingsPage() {
           className="flex items-center gap-3 bg-neutral-300 dark:bg-neutral-800 p-3  font-bold rounded-xl active:bg-[#3333334d]"
         >
           <IoIosLogOut size={20} />
-          {userData.email !== undefined ? " LogOut" : "Register now"}
+          {userData.email !== undefined ? " Exit" : "Register now"}
         </div>{" "}
         <div
           onClick={handleDeleteUser}
-          className="flex items-center gap-3 bg-primary p-3 text-white  font-bold rounded-xl active:bg-[#ffce3de0]"
+          className="flex items-center gap-3 bg-primary p-3 text-white mt-9 font-bold rounded-xl active:bg-[#ffce3de0]"
         >
           <MdDelete size={20} />
           Delete Account
