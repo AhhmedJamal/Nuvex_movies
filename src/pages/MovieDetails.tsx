@@ -182,6 +182,7 @@ function MovieDetails() {
     }
   };
   useEffect(() => {
+    setIsMyList(false);
     fetchDataVideo();
     SuggestedMovies();
     setIsLoading(true);
