@@ -16,7 +16,7 @@ function NavBar() {
           <img
             src={userData.photoURL || ""}
             alt="photo user"
-            className="w-[35px] rounded-lg"
+            className="size-[35px] object-cover rounded-lg"
           />
         ) : (
           <FaUserCircle size={30} />
