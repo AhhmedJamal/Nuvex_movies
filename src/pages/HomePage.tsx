@@ -61,7 +61,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="pb-[60px]">
+    <main>
       <NavBar />
       <CarouselMovie />
       <MoviesList dataMovie={nowPlaying} title={"Now Playing"} />
