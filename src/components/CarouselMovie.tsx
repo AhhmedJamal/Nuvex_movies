@@ -55,12 +55,16 @@ function CarouselMovie() {
           showIndicators={false}
           showStatus={false}
           showArrows={false}
+          dynamicHeight={true}
           stopOnHover={true}
-          interval={3000}
+          interval={2300}
+          emulateTouch={true}
         >
           {dataMovie.map((data) => {
+            console.log();
+
             return (
-              <div key={data.id} className="relative mx-1">
+              <div key={data.id} className="relative mx-1 select-none">
                 <img
                   loading="lazy"
                   src={pathPoster(data.backdrop_path)}

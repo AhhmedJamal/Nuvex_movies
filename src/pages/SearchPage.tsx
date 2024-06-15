@@ -62,7 +62,7 @@ function SearchPage() {
             setTitle(e.target.value);
           }}
         />
-        <button type="submit" className="bg-primary font-bold h-8 w-[28%]  ">
+        <button type="submit" className="bg-primary font-bold h-8 w-[28%]" aria-label="button search">
           Search
         </button>
       </form>

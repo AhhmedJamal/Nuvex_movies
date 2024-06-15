@@ -26,6 +26,7 @@ function CardMovie({ data }: { data: CardMovieProps }) {
         <Shimmer height={"160px"} width={"110px"} />
       ) : (
         <button
+          aria-label="card movie"
           onClick={handleClick}
           className="w-[110px] min-h-[160px] rounded-xl overflow-hidden relative flex flex-col justify-center items-center  border border-zinc-400 dark:border-zinc-700 cursor-grab group  "
         >
