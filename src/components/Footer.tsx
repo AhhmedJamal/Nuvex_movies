@@ -5,7 +5,7 @@ import { FaTwitter } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 const Footer = () => {
   return (
-    <div className="bg-neutral-300 dark:bg-neutral-900 flex justify-between items-center px-6  mt-4 rounded-md">
+    <div className="bg-neutral-300 dark:bg-neutral-900 flex gap-2  justify-evenly items-center px-6 pt-5 md:pt-0 md:flex-row flex-col mt-4 rounded-md">
      <div className="grid grid-cols-2  justify-center gap-7 items-start ">
           <div>
             <p className="font-bold ">About Us</p>
@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
       <div className="flex justify-between gap-4  py-4 shadow-[0_0px_1px_-1px_rgb(0,0,0,0.1)]">
      
-          <div className="flex items-center flex-col gap-3">
+          <div className="flex items-center flex-row md:flex-col gap-3">
             <FaFacebook size={22} className="cursor-pointer hover:text-primary" />
             <FaTwitter size={22} className="cursor-pointer hover:text-primary"/>
             <RiInstagramFill size={22} className="cursor-pointer hover:text-primary" />
