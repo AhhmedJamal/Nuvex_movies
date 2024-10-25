@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { MovieProps } from "../types/MovieDetailsProps";
 import { BsBookmarkPlus } from "react-icons/bs";
 import { FaPlay, FaStar } from "react-icons/fa";
@@ -21,6 +21,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { AppContext } from "../context/ThemeProvider";
+import { confirmAlert } from "react-confirm-alert";
 
 function MovieDetails() {
   const [movieVideo, setMovieVideo] = useState<MovieProps | null>(null);
@@ -37,6 +38,7 @@ function MovieDetails() {
   const [isMyList, setIsMyList] = useState<boolean>(false);
   const collectionsRef = collection(db, "users");
   const Context = useContext(AppContext);
+  const router = useNavigate();
   if (!Context) throw new Error("useTheme must be used within a ThemeProvider");
   const { userData } = Context;
   const MovieRefAdd = useRef<HTMLAudioElement>(null);
@@ -134,6 +136,38 @@ function MovieDetails() {
               console.error("Error updating document:", error);
             });
         } else {
+          confirmAlert({
+            customUI: ({ onClose }) => {
+              return (
+                <div className="bg-neutral-200 text-neutral-800 dark:bg-neutral-900 p-8 font-bold dark:text-neutral-100  rounded-xl flex justify-center flex-col gap-3">
+                  <h1>Should You have account</h1>
+                  <p className="mb-4"> You need to login to add movie to your list</p>
+                  <button
+                    className="bg-neutral-200 px-3 text-black rounded-lg "
+                    onClick={onClose}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="bg-primary px-3 text-white rounded-lg"
+                    onClick={async () => {
+                      try {
+                     
+                       
+                          router("/authentication", { replace: true });
+                        
+                      } catch (error) {
+                        console.error("Error deleting user:", error);
+                      }
+                      onClose();
+                    }}
+                  >
+                    Login
+                  </button>
+                </div>
+              );
+            },
+          })
           console.log("No matching data found.");
         }
       } catch (error) {

@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import CarouselMovie from "../components/CarouselMovie";
-import { auth } from "../config/firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import MoviesList from "../components/MoviesList";
 import { CardMovieProps } from "../types/CardMovieProps";
-import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
+
 
 export default function HomePage() {
   const [popular, setPopular] = useState<CardMovieProps[]>([]);
@@ -13,7 +11,7 @@ export default function HomePage() {
   const [upcoming, setUpcoming] = useState<CardMovieProps[]>([]);
   const [nowPlaying, setNowPlaying] = useState<CardMovieProps[]>([]);
 
-  const router = useNavigate();
+  // const router = useNavigate();
 
   function getRandomNumber() {
     // Generate a random decimal between 0 and 1
@@ -42,11 +40,11 @@ export default function HomePage() {
     window.addEventListener("popstate", handleBackButton);
 
     // Check if a user is found
-    onAuthStateChanged(auth, (user) => {
-      if (localStorage.getItem(`token-${user?.uid}`) !== user?.uid) {
-        router("/authentication");
-      }
-    });
+    // onAuthStateChanged(auth, (user) => {
+    //   if (localStorage.getItem(`token-${user?.uid}`) !== user?.uid) {
+    //     router("/authentication");
+    //   }
+    // });
 
     getDataMovie("now_playing");
     getDataMovie("popular");
@@ -61,13 +59,13 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main>
-      <NavBar />
+    <main  className="p-2 lg:px-10 2xl:px-0">
       <CarouselMovie />
       <MoviesList dataMovie={nowPlaying} title={"Now Playing"} />
       <MoviesList dataMovie={popular} title={"Popular"} />
       <MoviesList dataMovie={topRated} title={"Top Rated"} />
       <MoviesList dataMovie={upcoming} title={"Upcoming"} />
+      <Footer />
     </main>
   );
 }

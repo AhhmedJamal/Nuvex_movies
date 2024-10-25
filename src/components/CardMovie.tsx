@@ -18,7 +18,7 @@ function CardMovie({ data }: { data: CardMovieProps }) {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 1000);
   }, []);
   return (
     <>

@@ -3,7 +3,7 @@ import { CardMovieProps } from "../types/CardMovieProps";
 import ImageSearch from "/assets/emptySearch.svg";
 import { useState } from "react";
 import Shimmer from "../components/Shimmer";
-import { IoIosArrowBack } from "react-icons/io";
+
 
 function SearchPage() {
   const [search, setSearch] = useState<[]>([]);
@@ -40,14 +40,6 @@ function SearchPage() {
   };
   return (
     <div className="p-4">
-      <div className="flex items-center self-start mt-[5px]">
-        <IoIosArrowBack
-          className="hidden sm:block mr-5 cursor-pointer"
-          size={30}
-          onClick={() => window.history.back()}
-        />
-        <h1 className="font-bold text-[23px] self-start">Search</h1>
-      </div>
       <form
         className="flex justify-between items-center mt-6"
         onSubmit={handleSubmit}

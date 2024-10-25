@@ -27,7 +27,7 @@ function CarouselMovie() {
       .then((response) => {
         setTimeout(() => {
           setDataMovie(response.results);
-        }, 1500);
+        }, 1000);
       })
       .catch((err) => console.error(err));
   };
