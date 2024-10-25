@@ -20,17 +20,11 @@
 
 # I used technology
 
+
 <img src="https://github.com/AhhmedJamal/Nuvex/assets/81833844/7326d8bf-0f51-497c-acab-ffe00b6ea301" alt="Image 1" style="width: 80px;">
-<<<<<<< HEAD
-<img src="https://github.com/AhhmedJamal/Nuvex/assets/81833844/6997e15c-9de6-46be-a3f4-6117b56f7bc7" alt="Image 2" style="width: 70px;">
-<img src="https://github.com/AhhmedJamal/Nuvex/assets/81833844/27ae7a07-66c0-49e2-8f0b-5579640c3b2e" alt="Image 3" style="width: 90px;">
-<img src="https://github.com/AhhmedJamal/Nuvex/assets/81833844/5628774a-c404-48db-b1c2-b1605f67d8a4" alt="Image 4" style="width: 80px;">
-=======
 <img src="https://github.com/AhhmedJamal/Nuvex/assets/81833844/6997e15c-9de6-46be-a3f4-6117b56f7bc7" alt="Image 5" style="width: 70px;">
-<img src="https://github.com/AhhmedJamal/Nuvex_movies/assets/81833844/5f2dafe6-4d30-41f7-927d-c42d2e70a90a" alt="Image 2" style="width: 70px;">
 <img src="https://github.com/AhhmedJamal/Nuvex/assets/81833844/27ae7a07-66c0-49e2-8f0b-5579640c3b2e" alt="Image 2" style="width: 90px;">
 <img src="https://github.com/AhhmedJamal/Nuvex/assets/81833844/5628774a-c404-48db-b1c2-b1605f67d8a4" alt="Image 3" style="width: 80px;">
->>>>>>> 4ff821ff61d6e2d23bb9543cf7e60f76a4cff119
 <img src="https://github.com/AhhmedJamal/Nuvex/assets/81833844/d125a6bc-b1f9-4d3e-ac29-3a8f31cee2af" alt="Image 5" style="width: 70px;">
 
 ##
